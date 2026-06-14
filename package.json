@@ -50,6 +50,7 @@
     "./helpers/mysql": "./dist/helpers/mysql.js",
     "./helpers/postgres": "./dist/helpers/postgres.js",
     "./helpers/sqlite": "./dist/helpers/sqlite.js",
+    "./component": "./dist/component/index.js",
     "./migration": "./dist/migration/index.js",
     "./readonly": "./dist/readonly/index.js"
   },
@@ -60,7 +61,7 @@
     "test": "pnpm build && pnpm test:node:build && pnpm test:node:run && pnpm test:typings && pnpm test:esmimports && pnpm test:exports",
     "test:node:build": "tsc -p test/node",
     "test:node": "pnpm build && pnpm test:node:build && pnpm test:node:run",
-    "test:node:run": "mocha --timeout 15000 test/node/dist/**/*.test.js",
+    "test:node:run": "NODE_OPTIONS='--unhandled-rejections=warn' mocha --timeout 15000 test/node/dist/**/*.test.js",
     "test:browser:build": "rm -rf test/browser/bundle.js && esbuild test/browser/main.ts --bundle --outfile=test/browser/bundle.js",
     "test:browser": "pnpm build && pnpm test:browser:build && node test/browser/test.js",
     "test:bun": "pnpm build && bun link && cd test/bun && bun install && bun run test",

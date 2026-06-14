@@ -5,7 +5,9 @@
 
 import type { KyselyTypeError } from './util/type-error.js'
 
-export * from './kysely.js'
+export { Kysely } from './component/api.js'
+export type { KyselyProps, KyselyConfig } from './kysely.js'
+export { isKyselyProps, Transaction, ConnectionBuilder, TransactionBuilder, ControlledTransactionBuilder, ControlledTransaction, Command } from './kysely.js'
 export * from './query-creator.js'
 export * from './query-finalizer.js'
 

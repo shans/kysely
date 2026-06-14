@@ -6,7 +6,7 @@ import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { CreateViewNode } from '../operation-node/create-view-node.js'
 import { parseColumnName } from '../parser/reference-parser.js'
-import { ImmediateValuePlugin } from '../plugin/immediate-value/immediate-value-plugin.js'
+import { ImmediateValueTransformer } from '../plugin/immediate-value/immediate-value-transformer.js'
 import type { RawBuilder } from '../raw-builder/raw-builder.js'
 import type { SelectQueryBuilder } from '../query-builder/select-query-builder.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
@@ -83,9 +83,9 @@ export class CreateViewBuilder implements OperationNodeSource, Compilable {
   as(
     query: SelectQueryBuilder<any, any, any> | RawBuilder<any>,
   ): CreateViewBuilder {
-    const queryNode = query
-      .withPlugin(new ImmediateValuePlugin())
-      .toOperationNode()
+    const queryNode = new ImmediateValueTransformer().transformNode(
+      query.toOperationNode() as any,
+    )
 
     return new CreateViewBuilder({
       ...this.#props,
