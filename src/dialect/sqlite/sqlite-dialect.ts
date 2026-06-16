@@ -1,5 +1,5 @@
 import type { Driver } from '../../driver/driver.js'
-import type { Kysely } from '../../kysely.js'
+import type { Kysely } from '../../transaction-types.js'
 import type { QueryCompiler } from '../../query-compiler/query-compiler.js'
 import type { Dialect } from '../dialect.js'
 import type { DatabaseIntrospector } from '../database-introspector.js'

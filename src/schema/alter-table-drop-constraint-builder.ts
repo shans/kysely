@@ -1,15 +1,12 @@
 import { AlterTableNode } from '../operation-node/alter-table-node.js'
 import { DropConstraintNode } from '../operation-node/drop-constraint-node.js'
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
-import type { Compilable } from '../util/compilable.js'
 import { freeze } from '../util/object-utils.js'
-import type { QueryId } from '../util/query-id.js'
+import type { Compilable } from '../util/compilable.js'
+import type { AbortableQueryOptions } from '../util/abort.js'
 
 export class AlterTableDropConstraintBuilder
-  implements OperationNodeSource, Compilable
+  implements OperationNodeSource
 {
   readonly #props: AlterTableDropConstraintBuilderProps
 
@@ -68,26 +65,16 @@ export class AlterTableDropConstraintBuilder
   }
 
   toOperationNode(): AlterTableNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface AlterTableDropConstraintBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: AlterTableNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface AlterTableDropConstraintBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

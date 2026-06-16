@@ -20,7 +20,7 @@ import { asStreamingFunction } from '../channels/channel_util.js'
 import { createQueryId } from '../util/query-id.js'
 import { assertNotAborted, throwReasonWithTiming } from '../util/abort.js'
 import type { AbortableOperationOptions } from '../util/abort.js'
-import type { Kysely as KyselyPublicType } from '../kysely.js'
+import type { Kysely as KyselyPublicType } from '../transaction-types.js'
 import { NoResultError, isNoResultErrorConstructor } from '../query-builder/no-result-error.js'
 import { KyselyBuilder } from '../kysely-builder.js'
 import { WithSchemaPlugin } from '../plugin/with-schema/with-schema-plugin.js'
@@ -96,14 +96,13 @@ interface ApiContext {
   connEnd:             (connId: string) => Promise<void>
 }
 
-// Returns true for Kysely query builders (objects with both toOperationNode and
-// execute) — distinguishes them from expression fragments like DynamicReferenceBuilder.
+// Returns true for Kysely query builders — distinguishes them from expression
+// fragments like DynamicReferenceBuilder (which lack toOperationNode).
 function isExecutableBuilder(value: unknown): boolean {
   return (
     value != null &&
     typeof value === 'object' &&
-    typeof (value as any).toOperationNode === 'function' &&
-    typeof (value as any).execute === 'function'
+    typeof (value as any).toOperationNode === 'function'
   )
 }
 
@@ -319,6 +318,21 @@ function wrapBuilder(builder: any, ctx: ApiContext, extraTags?: Set<string>): an
 function wrapModule(module: any, ctx: ApiContext, extraTags?: Set<string>): any {
   return new Proxy(module, {
     get(target: any, prop: string | symbol) {
+      // Plugin methods on modules (e.g. SchemaModule.withPlugin) must update the
+      // execution context — route them through withExtraPlugins rather than
+      // letting the module's stub return value determine the new context.
+      if (prop === 'withPlugin') {
+        return (plugin: KyselyPlugin) => wrapModule(target, withExtraPlugins(ctx, [plugin]), extraTags)
+      }
+      if (prop === 'withPlugins') {
+        return (plugins: ReadonlyArray<KyselyPlugin>) => wrapModule(target, withExtraPlugins(ctx, plugins), extraTags)
+      }
+      if (prop === 'withoutPlugins') {
+        return () => wrapModule(target, withExtraPlugins(ctx, []), extraTags)
+      }
+      if (prop === 'withSchema') {
+        return (schema: string) => wrapModule(target, withExtraPlugins(ctx, [new WithSchemaPlugin(schema)]), extraTags)
+      }
       // Proxy invariant: non-configurable, non-writable data properties must
       // return the exact target value. Check before dispatching to avoid the
       // "did not return its actual value" TypeError (e.g. frozen operation nodes).

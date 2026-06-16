@@ -1,8 +1,6 @@
 import { AddValueNode } from '../operation-node/add-value-node.js'
 import { ValueNode } from '../operation-node/value-node.js'
 import { AlterTypeNode } from '../operation-node/alter-type-node.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { QueryFinalizer } from '../query-finalizer.js'
 
 export class AlterTypeAddValueBuilder<
@@ -64,7 +62,5 @@ export class AlterTypeAddValueBuilder<
 }
 
 export interface AlterTypeAddValueBuilderProps {
-  readonly executor: QueryExecutor
   readonly node: AlterTypeNode
-  readonly queryId: QueryId
 }

@@ -1,17 +1,14 @@
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { CreateViewNode } from '../operation-node/create-view-node.js'
 import { parseColumnName } from '../parser/reference-parser.js'
 import { ImmediateValueTransformer } from '../plugin/immediate-value/immediate-value-transformer.js'
 import type { RawBuilder } from '../raw-builder/raw-builder.js'
 import type { SelectQueryBuilder } from '../query-builder/select-query-builder.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
-export class CreateViewBuilder implements OperationNodeSource, Compilable {
+export class CreateViewBuilder implements OperationNodeSource {
   readonly #props: CreateViewBuilderProps
 
   constructor(props: CreateViewBuilderProps) {
@@ -104,26 +101,16 @@ export class CreateViewBuilder implements OperationNodeSource, Compilable {
   }
 
   toOperationNode(): CreateViewNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface CreateViewBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: CreateViewNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface CreateViewBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

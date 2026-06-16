@@ -8,7 +8,6 @@ import {
   type TableExpressionOrList,
   parseTable,
 } from '../parser/table-parser.js'
-import { createQueryId } from '../util/query-id.js'
 import {
   createFunctionModule,
   type FunctionModule,
@@ -22,7 +21,6 @@ import {
   type SimpleReferenceExpression,
   type StringReference,
 } from '../parser/reference-parser.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
 import {
   type BinaryOperatorExpression,
   type FilterObject,
@@ -49,7 +47,6 @@ import {
   parseSafeImmediateValue,
   parseValueExpression,
 } from '../parser/value-parser.js'
-import { NOOP_QUERY_EXECUTOR } from '../query-executor/noop-query-executor.js'
 import { CaseBuilder } from '../query-builder/case-builder.js'
 import { CaseNode } from '../operation-node/case-node.js'
 import { isReadonlyArray, isUndefined } from '../util/object-utils.js'
@@ -1145,9 +1142,7 @@ export interface ExpressionBuilder<DB, TB extends keyof DB> {
   ): ExpressionWrapper<DB, TB, T>
 }
 
-export function createExpressionBuilder<DB, TB extends keyof DB>(
-  executor: QueryExecutor = NOOP_QUERY_EXECUTOR,
-): ExpressionBuilder<DB, TB> {
+export function createExpressionBuilder<DB, TB extends keyof DB>(): ExpressionBuilder<DB, TB> {
   function binary<
     RE extends ReferenceExpression<DB, TB>,
     OP extends BinaryOperatorExpression,
@@ -1182,8 +1177,6 @@ export function createExpressionBuilder<DB, TB extends keyof DB>(
 
     selectFrom(table: TableExpressionOrList<DB, TB>): any {
       return createSelectQueryBuilder({
-        queryId: createQueryId(),
-        executor,
         queryNode: SelectQueryNode.createFrom(
           parseTableExpressionOrList(table),
         ),

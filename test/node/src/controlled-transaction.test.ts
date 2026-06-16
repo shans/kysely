@@ -2,7 +2,7 @@ import * as sinon from 'sinon'
 import { Connection, ISOLATION_LEVEL } from 'tedious'
 import {
   CompiledQuery,
-  ControlledTransaction,
+  type ControlledTransaction,
   type Driver,
   DummyDriver,
   Kysely,

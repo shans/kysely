@@ -1,5 +1,4 @@
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
 import {
   parseSelectArg,
   parseSelectAll,
@@ -13,28 +12,19 @@ import {
 } from '../parser/insert-values-parser.js'
 import { InsertQueryNode } from '../operation-node/insert-query-node.js'
 import { QueryNode } from '../operation-node/query-node.js'
-import type {
-  NarrowPartial,
-  SimplifyResult,
-  SimplifySingleResult,
-} from '../util/type-utils.js'
+import type { NarrowPartial } from '../util/type-utils.js'
+import type { InsertResult } from './insert-result.js'
 import {
   type UpdateObjectExpression,
   parseUpdateObjectExpression,
 } from '../parser/update-set-parser.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { OnDuplicateKeyNode } from '../operation-node/on-duplicate-key-node.js'
-import { InsertResult } from './insert-result.js'
-import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
 import type {
   ReturningAllRow,
   ReturningCallbackRow,
   ReturningRow,
 } from '../parser/returning-parser.js'
-import { isNoResultErrorConstructor, NoResultError } from './no-result-error.js'
 import {
   type ExpressionOrFactory,
   parseExpression,
@@ -50,11 +40,13 @@ import {
 } from './on-conflict-builder.js'
 import { OnConflictNode } from '../operation-node/on-conflict-node.js'
 import type { Selectable } from '../util/column-type.js'
-import type { Explainable, ExplainFormat } from '../util/explainable.js'
 import type { Expression } from '../expression/expression.js'
 import type { KyselyTypeError } from '../util/type-error.js'
-import type { Streamable, StreamOptions } from '../util/streamable.js'
 import { parseTop } from '../parser/top-parser.js'
+import type { Compilable } from '../util/compilable.js'
+import type { Executable } from '../util/executable.js'
+import type { Streamable } from '../util/streamable.js'
+import type { Explainable } from '../util/explainable.js'
 import type {
   OutputCallback,
   OutputExpression,
@@ -63,21 +55,12 @@ import type {
   SelectExpressionFromOutputExpression,
 } from './output-interface.js'
 import { OrActionNode } from '../operation-node/or-action-node.js'
-import type {
-  Executable,
-  ExecuteTakeFirstOrThrowOptions,
-} from '../util/executable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
 
 export class InsertQueryBuilder<DB, TB extends keyof DB, out O>
   implements
     ReturningInterface<DB, TB, O>,
     OutputInterface<DB, TB, O, 'inserted'>,
-    OperationNodeSource,
-    Compilable<O>,
-    Executable<O>,
-    Explainable,
-    Streamable<O>
+    OperationNodeSource
 {
   readonly #props: InsertQueryBuilderProps
 
@@ -1262,132 +1245,19 @@ export class InsertQueryBuilder<DB, TB extends keyof DB, out O>
     return new InsertQueryBuilder(this.#props) as unknown as any
   }
 
-  /**
-   * Returns a copy of this InsertQueryBuilder instance with the given plugin installed.
-   */
-  withPlugin(plugin: KyselyPlugin): InsertQueryBuilder<DB, TB, O> {
-    return new InsertQueryBuilder({
-      ...this.#props,
-      executor: this.#props.executor.withPlugin(plugin),
-    })
-  }
-
   toOperationNode(): InsertQueryNode {
-    return this.#props.executor.transformQuery(
-      this.#props.queryNode,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery<O> {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<SimplifyResult<O>[]> {
-    const compiledQuery = this.compile()
-
-    const result = await this.#props.executor.executeQuery<O>(
-      compiledQuery,
-      options,
-    )
-
-    const { adapter } = this.#props.executor
-    const query = compiledQuery.query as InsertQueryNode
-
-    if (
-      (query.returning && adapter.supportsReturning) ||
-      (query.output && adapter.supportsOutput)
-    ) {
-      return result.rows as never
-    }
-
-    return [
-      new InsertResult(
-        result.insertId,
-        result.numAffectedRows ?? BigInt(0),
-      ) as never,
-    ]
-  }
-
-  async executeTakeFirst(
-    options?: AbortableQueryOptions,
-  ): Promise<SimplifySingleResult<O>> {
-    const [result] = await this.execute(options)
-
-    return result
-  }
-
-  async executeTakeFirstOrThrow(
-    errorConstructorOrOptions?:
-      | ExecuteTakeFirstOrThrowOptions
-      | ExecuteTakeFirstOrThrowOptions['errorConstructor'],
-  ): Promise<SimplifyResult<O>> {
-    if (typeof errorConstructorOrOptions === 'function') {
-      errorConstructorOrOptions = {
-        errorConstructor: errorConstructorOrOptions,
-      }
-    }
-
-    const result = await this.executeTakeFirst(errorConstructorOrOptions)
-
-    if (result === undefined) {
-      const errorConstructor =
-        errorConstructorOrOptions?.errorConstructor ?? NoResultError
-
-      const error = isNoResultErrorConstructor(errorConstructor)
-        ? new errorConstructor(this.toOperationNode())
-        : errorConstructor(this.toOperationNode())
-
-      throw error
-    }
-
-    return result as never
-  }
-
-  async *stream(
-    chunkSizeOrOptions?: StreamOptions | StreamOptions['chunkSize'],
-  ): AsyncIterableIterator<O> {
-    if (typeof chunkSizeOrOptions !== 'object') {
-      chunkSizeOrOptions = {
-        chunkSize: chunkSizeOrOptions,
-      }
-    }
-
-    const compiledQuery = this.compile()
-
-    const stream = this.#props.executor.stream<O>(
-      compiledQuery,
-      chunkSizeOrOptions.chunkSize ?? 100,
-      chunkSizeOrOptions,
-    )
-
-    for await (const item of stream) {
-      yield* item.rows
-    }
-  }
-
-  async explain<ER extends Record<string, any> = Record<string, any>>(
-    format?: ExplainFormat,
-    options?: Expression<any>,
-  ): Promise<ER[]> {
-    const builder = new InsertQueryBuilder<DB, TB, ER>({
-      ...this.#props,
-      queryNode: QueryNode.cloneWithExplain(
-        this.#props.queryNode,
-        format,
-        options,
-      ),
-    })
-
-    return await builder.execute()
+    return this.#props.queryNode
   }
 }
 
 export interface InsertQueryBuilderProps {
-  readonly queryId: QueryId
   readonly queryNode: InsertQueryNode
-  readonly executor: QueryExecutor
 }
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy (wrapBuilder) provides the implementations at runtime.
+export interface InsertQueryBuilder<DB, TB extends keyof DB, out O>
+  extends Compilable<O>,
+    Executable<O>,
+    Streamable<O>,
+    Explainable {}

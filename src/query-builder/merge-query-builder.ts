@@ -41,25 +41,11 @@ import type {
   UpdateObjectFactory,
 } from '../parser/update-set-parser.js'
 import type { ValueExpression } from '../parser/value-parser.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import { NOOP_QUERY_EXECUTOR } from '../query-executor/noop-query-executor.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
-import type { Compilable } from '../util/compilable.js'
-import type {
-  Executable,
-  ExecuteTakeFirstOrThrowOptions,
-} from '../util/executable.js'
 import { freeze } from '../util/object-utils.js'
-import type { QueryId } from '../util/query-id.js'
 import type {
   ShallowRecord,
-  SimplifyResult,
-  SimplifySingleResult,
   SqlBool,
 } from '../util/type-utils.js'
-import { MergeResult } from './merge-result.js'
-import { NoResultError, isNoResultErrorConstructor } from './no-result-error.js'
 import type {
   OutputCallback,
   OutputExpression,
@@ -69,7 +55,10 @@ import type {
   SelectExpressionFromOutputExpression,
 } from './output-interface.js'
 import type { MultiTableReturningInterface } from './returning-interface.js'
+import type { MergeResult } from './merge-result.js'
 import { UpdateQueryBuilder } from './update-query-builder.js'
+import type { Compilable } from '../util/compilable.js'
+import type { Executable } from '../util/executable.js'
 
 export class MergeQueryBuilder<DB, TT extends keyof DB, O>
   implements MultiTableReturningInterface<DB, TT, O>, OutputInterface<DB, TT, O>
@@ -312,9 +301,7 @@ export class MergeQueryBuilder<DB, TT extends keyof DB, O>
 }
 
 export interface MergeQueryBuilderProps {
-  readonly queryId: QueryId
   readonly queryNode: MergeQueryNode
-  readonly executor: QueryExecutor
 }
 
 export class WheneableMergeQueryBuilder<
@@ -326,9 +313,7 @@ export class WheneableMergeQueryBuilder<
   implements
     MultiTableReturningInterface<DB, TT | ST, O>,
     OutputInterface<DB, TT, O>,
-    OperationNodeSource,
-    Compilable<O>,
-    Executable<O>
+    OperationNodeSource
 {
   readonly #props: MergeQueryBuilderProps
 
@@ -864,75 +849,15 @@ export class WheneableMergeQueryBuilder<
   }
 
   toOperationNode(): MergeQueryNode {
-    return this.#props.executor.transformQuery(
-      this.#props.queryNode,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery<O> {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<SimplifyResult<O>[]> {
-    const compiledQuery = this.compile()
-
-    const result = await this.#props.executor.executeQuery<O>(
-      compiledQuery,
-      options,
-    )
-
-    const { adapter } = this.#props.executor
-    const query = compiledQuery.query as MergeQueryNode
-
-    if (
-      (query.returning && adapter.supportsReturning) ||
-      (query.output && adapter.supportsOutput)
-    ) {
-      return result.rows as never
-    }
-
-    return [new MergeResult(result.numAffectedRows) as never]
-  }
-
-  async executeTakeFirst(
-    options?: AbortableQueryOptions,
-  ): Promise<SimplifySingleResult<O>> {
-    const [result] = await this.execute(options)
-
-    return result
-  }
-
-  async executeTakeFirstOrThrow(
-    errorConstructorOrOptions?:
-      | ExecuteTakeFirstOrThrowOptions
-      | ExecuteTakeFirstOrThrowOptions['errorConstructor'],
-  ): Promise<SimplifyResult<O>> {
-    if (typeof errorConstructorOrOptions === 'function') {
-      errorConstructorOrOptions = {
-        errorConstructor: errorConstructorOrOptions,
-      }
-    }
-
-    const result = await this.executeTakeFirst(errorConstructorOrOptions)
-
-    if (result === undefined) {
-      const errorConstructor =
-        errorConstructorOrOptions?.errorConstructor ?? NoResultError
-
-      const error = isNoResultErrorConstructor(errorConstructor)
-        ? new errorConstructor(this.toOperationNode())
-        : errorConstructor(this.toOperationNode())
-
-      throw error
-    }
-
-    return result as never
+    return this.#props.queryNode
   }
 }
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy (wrapBuilder) provides the implementations at runtime.
+export interface WheneableMergeQueryBuilder<DB, TT extends keyof DB, ST extends keyof DB, O>
+  extends Compilable<O>,
+    Executable<O> {}
 
 export class MatchedThenableMergeQueryBuilder<
   DB,
@@ -1067,8 +992,6 @@ export class MatchedThenableMergeQueryBuilder<
         parseMergeThen(
           set(
             new UpdateQueryBuilder({
-              queryId: this.#props.queryId,
-              executor: NOOP_QUERY_EXECUTOR,
               queryNode: UpdateQueryNode.createWithoutTable(),
             }) as QB,
           ),

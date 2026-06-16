@@ -1,13 +1,10 @@
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { CreateTypeNode } from '../operation-node/create-type-node.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
-export class CreateTypeBuilder implements OperationNodeSource, Compilable {
+export class CreateTypeBuilder implements OperationNodeSource {
   readonly #props: CreateTypeBuilderProps
 
   constructor(props: CreateTypeBuilderProps) {
@@ -15,10 +12,7 @@ export class CreateTypeBuilder implements OperationNodeSource, Compilable {
   }
 
   toOperationNode(): CreateTypeNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
+    return this.#props.node
   }
 
   /**
@@ -45,20 +39,14 @@ export class CreateTypeBuilder implements OperationNodeSource, Compilable {
     return func(this)
   }
 
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
-  }
 }
 
 export interface CreateTypeBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: CreateTypeNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface CreateTypeBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

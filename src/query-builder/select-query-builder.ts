@@ -43,13 +43,10 @@ import {
 import { LimitNode } from '../operation-node/limit-node.js'
 import { OffsetNode } from '../operation-node/offset-node.js'
 import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { asArray, freeze } from '../util/object-utils.js'
 import { type GroupByArg, parseGroupBy } from '../parser/group-by-parser.js'
 import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
 import type { WhereInterface } from './where-interface.js'
-import { isNoResultErrorConstructor, NoResultError } from './no-result-error.js'
 import type { HavingInterface } from './having-interface.js'
 import { IdentifierNode } from '../operation-node/identifier-node.js'
 import type { Explainable, ExplainFormat } from '../util/explainable.js'
@@ -2149,7 +2146,7 @@ class SelectQueryBuilderImpl<
   DB,
   TB extends keyof DB,
   O,
-> implements SelectQueryBuilder<DB, TB, O> {
+> {
   readonly #props: SelectQueryBuilderProps
 
   constructor(props: SelectQueryBuilderProps) {
@@ -2178,7 +2175,7 @@ class SelectQueryBuilderImpl<
     lhs: ReferenceExpression<DB, TB>,
     op: ComparisonOperatorExpression,
     rhs: ReferenceExpression<DB, TB>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithWhere(
@@ -2202,7 +2199,7 @@ class SelectQueryBuilderImpl<
     lhs: ReferenceExpression<DB, TB>,
     op: ComparisonOperatorExpression,
     rhs: ReferenceExpression<DB, TB>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithHaving(
@@ -2214,7 +2211,7 @@ class SelectQueryBuilderImpl<
 
   select<SE extends SelectExpression<DB, TB>>(
     selection: SelectArg<DB, TB, SE>,
-  ): SelectQueryBuilder<DB, TB, O & Selection<DB, TB, SE>> {
+  ): SelectQueryBuilderImpl<DB, TB, O & Selection<DB, TB, SE>> {
     return new SelectQueryBuilderImpl<DB, TB, O & Selection<DB, TB, SE>>({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSelections(
@@ -2234,7 +2231,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  modifyFront(modifier: Expression<any>): SelectQueryBuilder<DB, TB, O> {
+  modifyFront(modifier: Expression<any>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithFrontModifier(
@@ -2244,7 +2241,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  modifyEnd(modifier: Expression<any>): SelectQueryBuilder<DB, TB, O> {
+  modifyEnd(modifier: Expression<any>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2254,7 +2251,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  distinct(): SelectQueryBuilder<DB, TB, O> {
+  distinct(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithFrontModifier(
@@ -2264,7 +2261,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  forUpdate(of?: TableOrList<TB>): SelectQueryBuilder<DB, TB, O> {
+  forUpdate(of?: TableOrList<TB>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2277,7 +2274,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  forShare(of?: TableOrList<TB>): SelectQueryBuilder<DB, TB, O> {
+  forShare(of?: TableOrList<TB>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2290,7 +2287,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  forKeyShare(of?: TableOrList<TB>): SelectQueryBuilder<DB, TB, O> {
+  forKeyShare(of?: TableOrList<TB>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2303,7 +2300,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  forNoKeyUpdate(of?: TableOrList<TB>): SelectQueryBuilder<DB, TB, O> {
+  forNoKeyUpdate(of?: TableOrList<TB>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2316,7 +2313,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  skipLocked(): SelectQueryBuilder<DB, TB, O> {
+  skipLocked(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2326,7 +2323,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  noWait(): SelectQueryBuilder<DB, TB, O> {
+  noWait(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithEndModifier(
@@ -2396,7 +2393,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  orderBy(...args: any[]): SelectQueryBuilder<DB, TB, O> {
+  orderBy(...args: any[]): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithOrderByItems(
@@ -2406,7 +2403,7 @@ class SelectQueryBuilderImpl<
     })
   }
 
-  groupBy(groupBy: GroupByArg<DB, TB, O>): SelectQueryBuilder<DB, TB, O> {
+  groupBy(groupBy: GroupByArg<DB, TB, O>): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithGroupByItems(
@@ -2418,7 +2415,7 @@ class SelectQueryBuilderImpl<
 
   limit(
     limit: ValueExpression<DB, TB, number | bigint | null>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithLimit(
@@ -2430,7 +2427,7 @@ class SelectQueryBuilderImpl<
 
   offset(
     offset: ValueExpression<DB, TB, number | bigint>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithOffset(
@@ -2443,7 +2440,7 @@ class SelectQueryBuilderImpl<
   fetch(
     rowCount: number | bigint,
     modifier: FetchModifier = 'only',
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithFetch(
@@ -2456,7 +2453,7 @@ class SelectQueryBuilderImpl<
   top(
     expression: number | bigint,
     modifiers?: TopModifier,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: QueryNode.cloneWithTop(
@@ -2468,7 +2465,7 @@ class SelectQueryBuilderImpl<
 
   union(
     expression: SetOperandExpression<DB, O>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSetOperations(
@@ -2480,7 +2477,7 @@ class SelectQueryBuilderImpl<
 
   unionAll(
     expression: SetOperandExpression<DB, O>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSetOperations(
@@ -2492,7 +2489,7 @@ class SelectQueryBuilderImpl<
 
   intersect(
     expression: SetOperandExpression<DB, O>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSetOperations(
@@ -2504,7 +2501,7 @@ class SelectQueryBuilderImpl<
 
   intersectAll(
     expression: SetOperandExpression<DB, O>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSetOperations(
@@ -2516,7 +2513,7 @@ class SelectQueryBuilderImpl<
 
   except(
     expression: SetOperandExpression<DB, O>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSetOperations(
@@ -2528,7 +2525,7 @@ class SelectQueryBuilderImpl<
 
   exceptAll(
     expression: SetOperandExpression<DB, O>,
-  ): SelectQueryBuilder<DB, TB, O> {
+  ): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithSetOperations(
@@ -2539,45 +2536,45 @@ class SelectQueryBuilderImpl<
   }
 
   as<A extends string>(alias: A): AliasedSelectQueryBuilder<O, A> {
-    return new AliasedSelectQueryBuilderImpl(this, alias)
+    return new AliasedSelectQueryBuilderImpl(this as any, alias)
   }
 
-  clearSelect(): SelectQueryBuilder<DB, TB, {}> {
+  clearSelect(): SelectQueryBuilderImpl<DB, TB, {}> {
     return new SelectQueryBuilderImpl<DB, TB, {}>({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithoutSelections(this.#props.queryNode),
     })
   }
 
-  clearWhere(): SelectQueryBuilder<DB, TB, O> {
+  clearWhere(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl<DB, TB, O>({
       ...this.#props,
       queryNode: QueryNode.cloneWithoutWhere(this.#props.queryNode),
     })
   }
 
-  clearLimit(): SelectQueryBuilder<DB, TB, O> {
+  clearLimit(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl<DB, TB, O>({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithoutLimit(this.#props.queryNode),
     })
   }
 
-  clearOffset(): SelectQueryBuilder<DB, TB, O> {
+  clearOffset(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl<DB, TB, O>({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithoutOffset(this.#props.queryNode),
     })
   }
 
-  clearOrderBy(): SelectQueryBuilder<DB, TB, O> {
+  clearOrderBy(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl<DB, TB, O>({
       ...this.#props,
       queryNode: QueryNode.cloneWithoutOrderBy(this.#props.queryNode),
     })
   }
 
-  clearGroupBy(): SelectQueryBuilder<DB, TB, O> {
+  clearGroupBy(): SelectQueryBuilderImpl<DB, TB, O> {
     return new SelectQueryBuilderImpl<DB, TB, O>({
       ...this.#props,
       queryNode: SelectQueryNode.cloneWithoutGroupBy(this.#props.queryNode),
@@ -2591,9 +2588,9 @@ class SelectQueryBuilderImpl<
   $if<O2>(
     condition: boolean,
     func: (qb: this) => SelectQueryBuilder<any, any, O & O2>,
-  ): SelectQueryBuilder<DB, TB, O & Partial<Omit<O2, keyof O>>> {
+  ): SelectQueryBuilderImpl<DB, TB, O & Partial<Omit<O2, keyof O>>> {
     if (condition) {
-      return func(this)
+      return func(this as any) as any
     }
 
     return new SelectQueryBuilderImpl({
@@ -2601,16 +2598,16 @@ class SelectQueryBuilderImpl<
     }) as any
   }
 
-  $castTo<C>(): SelectQueryBuilder<DB, TB, C> {
+  $castTo<C>(): SelectQueryBuilderImpl<DB, TB, C> {
     return new SelectQueryBuilderImpl(this.#props)
   }
 
-  $narrowType<T>(): SelectQueryBuilder<DB, TB, NarrowPartial<O, T>> {
+  $narrowType<T>(): SelectQueryBuilderImpl<DB, TB, NarrowPartial<O, T>> {
     return new SelectQueryBuilderImpl(this.#props)
   }
 
   $assertType<T extends O>(): O extends T
-    ? SelectQueryBuilder<DB, TB, T>
+    ? SelectQueryBuilderImpl<DB, TB, T>
     : KyselyTypeError<`$assertType() call failed: The type passed in is not equal to the output type of the query.`> {
     return new SelectQueryBuilderImpl(this.#props) as unknown as any
   }
@@ -2623,122 +2620,19 @@ class SelectQueryBuilderImpl<
     return new ExpressionWrapper(this.toOperationNode())
   }
 
-  withPlugin(plugin: KyselyPlugin): SelectQueryBuilder<DB, TB, O> {
-    return new SelectQueryBuilderImpl({
-      ...this.#props,
-      executor: this.#props.executor.withPlugin(plugin),
-    })
-  }
-
   toOperationNode(): SelectQueryNode {
-    return this.#props.executor.transformQuery(
-      this.#props.queryNode,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery<Simplify<O>> {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<SimplifyResult<O>[]> {
-    const compiledQuery = this.compile()
-
-    const result = await this.#props.executor.executeQuery<O>(
-      compiledQuery,
-      options,
-    )
-
-    return result.rows as never
-  }
-
-  async executeTakeFirst(
-    options?: AbortableQueryOptions,
-  ): Promise<SimplifySingleResult<O>> {
-    const [result] = await this.execute(options)
-
-    return result
-  }
-
-  async executeTakeFirstOrThrow(
-    errorConstructorOrOptions?:
-      | ExecuteTakeFirstOrThrowOptions
-      | ExecuteTakeFirstOrThrowOptions['errorConstructor'],
-  ): Promise<SimplifyResult<O>> {
-    if (typeof errorConstructorOrOptions === 'function') {
-      errorConstructorOrOptions = {
-        errorConstructor: errorConstructorOrOptions,
-      }
-    }
-
-    const result = await this.executeTakeFirst(errorConstructorOrOptions)
-
-    if (result === undefined) {
-      const errorConstructor =
-        errorConstructorOrOptions?.errorConstructor ?? NoResultError
-
-      const error = isNoResultErrorConstructor(errorConstructor)
-        ? new errorConstructor(this.toOperationNode())
-        : errorConstructor(this.toOperationNode())
-
-      throw error
-    }
-
-    return result as never
-  }
-
-  async *stream(
-    chunkSizeOrOptions?: StreamOptions | StreamOptions['chunkSize'],
-  ): AsyncIterableIterator<O> {
-    if (typeof chunkSizeOrOptions !== 'object') {
-      chunkSizeOrOptions = {
-        chunkSize: chunkSizeOrOptions,
-      }
-    }
-
-    const compiledQuery = this.compile()
-
-    const stream = this.#props.executor.stream<O>(
-      compiledQuery,
-      chunkSizeOrOptions.chunkSize ?? 100,
-      chunkSizeOrOptions,
-    )
-
-    for await (const item of stream) {
-      yield* item.rows
-    }
-  }
-
-  async explain<ER extends Record<string, any> = Record<string, any>>(
-    format?: ExplainFormat,
-    options?: Expression<any>,
-  ): Promise<ER[]> {
-    const builder = new SelectQueryBuilderImpl<DB, TB, ER>({
-      ...this.#props,
-      queryNode: QueryNode.cloneWithExplain(
-        this.#props.queryNode,
-        format,
-        options,
-      ),
-    })
-
-    return await builder.execute()
+    return this.#props.queryNode
   }
 }
 
 export function createSelectQueryBuilder<DB, TB extends keyof DB, O>(
   props: SelectQueryBuilderProps,
 ): SelectQueryBuilder<DB, TB, O> {
-  return new SelectQueryBuilderImpl(props)
+  return new SelectQueryBuilderImpl(props) as unknown as SelectQueryBuilder<DB, TB, O>
 }
 
 export interface SelectQueryBuilderProps {
-  readonly queryId: QueryId
   readonly queryNode: SelectQueryNode
-  readonly executor: QueryExecutor
 }
 
 export interface AliasedSelectQueryBuilder<

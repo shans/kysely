@@ -1,13 +1,10 @@
 import { CreateSchemaNode } from '../operation-node/create-schema-node.js'
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
-export class CreateSchemaBuilder implements OperationNodeSource, Compilable {
+export class CreateSchemaBuilder implements OperationNodeSource {
   readonly #props: CreateSchemaBuilderProps
 
   constructor(props: CreateSchemaBuilderProps) {
@@ -30,26 +27,16 @@ export class CreateSchemaBuilder implements OperationNodeSource, Compilable {
   }
 
   toOperationNode(): CreateSchemaNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface CreateSchemaBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: CreateSchemaNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface CreateSchemaBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

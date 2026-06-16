@@ -16,7 +16,6 @@ import {
   type SimpleTableReference,
   parseAliasedTable,
 } from './parser/table-parser.js'
-import type { QueryExecutor } from './query-executor/query-executor.js'
 import {
   type CommonTableExpression,
   type QueryCreatorWithCommonTableExpression,
@@ -24,13 +23,10 @@ import {
   parseCommonTableExpression,
 } from './parser/with-parser.js'
 import { WithNode } from './operation-node/with-node.js'
-import { createQueryId } from './util/query-id.js'
-import { WithSchemaPlugin } from './plugin/with-schema/with-schema-plugin.js'
 import { freeze } from './util/object-utils.js'
 import type { InsertResult } from './query-builder/insert-result.js'
 import type { DeleteResult } from './query-builder/delete-result.js'
 import type { UpdateResult } from './query-builder/update-result.js'
-import type { KyselyPlugin } from './plugin/kysely-plugin.js'
 import type { CTEBuilderCallback } from './query-builder/cte-builder.js'
 import {
   type CallbackSelection,
@@ -166,8 +162,6 @@ export class QueryCreator<DB> {
     from: TE,
   ): SelectFrom<DB, never, TE> {
     return createSelectQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: SelectQueryNode.createFrom(
         parseTableExpressionOrList(from as TableExpressionOrList<any, any>),
         this.#props.withNode,
@@ -237,8 +231,6 @@ export class QueryCreator<DB> {
     selection: SelectArg<DB, never, SE>,
   ): SelectQueryBuilder<DB, never, Selection<DB, never, SE>> {
     return createSelectQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: SelectQueryNode.cloneWithSelections(
         SelectQueryNode.create(this.#props.withNode),
         parseSelectArg(selection as any),
@@ -288,8 +280,6 @@ export class QueryCreator<DB> {
     table: T,
   ): InsertQueryBuilder<DB, T, InsertResult> {
     return new InsertQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: InsertQueryNode.create(
         parseTable(table),
         this.#props.withNode,
@@ -337,8 +327,6 @@ export class QueryCreator<DB> {
     table: T,
   ): InsertQueryBuilder<DB, T, InsertResult> {
     return new InsertQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: InsertQueryNode.create(
         parseTable(table),
         this.#props.withNode,
@@ -400,8 +388,6 @@ export class QueryCreator<DB> {
     from: TE,
   ): DeleteFrom<DB, TE> {
     return new DeleteQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: DeleteQueryNode.create(
         parseTableExpressionOrList(from as TableExpressionOrList<any, any>),
         this.#props.withNode,
@@ -436,8 +422,6 @@ export class QueryCreator<DB> {
     tables: TE,
   ): UpdateTable<DB, TE> {
     return new UpdateQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: UpdateQueryNode.create(
         parseTableExpressionOrList(tables as TableExpressionOrList<any, any>),
         this.#props.withNode,
@@ -532,8 +516,6 @@ export class QueryCreator<DB> {
     targetTable: TR,
   ): MergeInto<DB, TR> {
     return new MergeQueryBuilder({
-      queryId: createQueryId(),
-      executor: this.#props.executor,
       queryNode: MergeQueryNode.create(
         parseAliasedTable(targetTable),
         this.#props.withNode,
@@ -694,84 +676,8 @@ export class QueryCreator<DB> {
     })
   }
 
-  /**
-   * Returns a copy of this query creator instance with the given plugin installed.
-   */
-  withPlugin(plugin: KyselyPlugin): QueryCreator<DB> {
-    return new QueryCreator({
-      ...this.#props,
-      executor: this.#props.executor.withPlugin(plugin),
-    })
-  }
-
-  /**
-   * Returns a copy of this query creator instance without any plugins.
-   */
-  withoutPlugins(): QueryCreator<DB> {
-    return new QueryCreator({
-      ...this.#props,
-      executor: this.#props.executor.withoutPlugins(),
-    })
-  }
-
-  /**
-   * Sets the schema to be used for all table references that don't explicitly
-   * specify a schema.
-   *
-   * This only affects the query created through the builder returned from
-   * this method and doesn't modify the `db` instance.
-   *
-   * See [this recipe](https://github.com/kysely-org/kysely/blob/master/site/docs/recipes/0007-schemas.md)
-   * for a more detailed explanation.
-   *
-   * ### Examples
-   *
-   * ```
-   * await db
-   *   .withSchema('mammals')
-   *   .selectFrom('pet')
-   *   .selectAll()
-   *   .innerJoin('public.person', 'public.person.id', 'pet.owner_id')
-   *   .execute()
-   * ```
-   *
-   * The generated SQL (PostgreSQL):
-   *
-   * ```sql
-   * select * from "mammals"."pet"
-   * inner join "public"."person"
-   * on "public"."person"."id" = "mammals"."pet"."owner_id"
-   * ```
-   *
-   * `withSchema` is smart enough to not add schema for aliases,
-   * common table expressions or other places where the schema
-   * doesn't belong to:
-   *
-   * ```
-   * await db
-   *   .withSchema('mammals')
-   *   .selectFrom('pet as p')
-   *   .select('p.name')
-   *   .execute()
-   * ```
-   *
-   * The generated SQL (PostgreSQL):
-   *
-   * ```sql
-   * select "p"."name" from "mammals"."pet" as "p"
-   * ```
-   */
-  withSchema(schema: string): QueryCreator<DB> {
-    return new QueryCreator({
-      ...this.#props,
-      executor: this.#props.executor.withPluginAtFront(
-        new WithSchemaPlugin(schema),
-      ),
-    })
-  }
 }
 
 export interface QueryCreatorProps {
-  readonly executor: QueryExecutor
   readonly withNode?: WithNode
 }

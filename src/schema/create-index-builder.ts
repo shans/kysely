@@ -10,10 +10,6 @@ import {
   parseOrderedColumnName,
 } from '../parser/reference-parser.js'
 import { parseTable } from '../parser/table-parser.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze, isString } from '../util/object-utils.js'
 import type { Expression } from '../expression/expression.js'
 import {
@@ -24,10 +20,11 @@ import { QueryNode } from '../operation-node/query-node.js'
 import type { ExpressionBuilder } from '../expression/expression-builder.js'
 import type { ShallowRecord, SqlBool } from '../util/type-utils.js'
 import { ImmediateValueTransformer } from '../plugin/immediate-value/immediate-value-transformer.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
 export class CreateIndexBuilder<C = never>
-  implements OperationNodeSource, Compilable
+  implements OperationNodeSource
 {
   readonly #props: CreateIndexBuilderProps
 
@@ -312,7 +309,6 @@ export class CreateIndexBuilder<C = never>
         this.#props.node,
         transformer.transformNode(
           parseValueBinaryOperationOrExpression(args),
-          this.#props.queryId,
         ),
       ),
     })
@@ -327,26 +323,16 @@ export class CreateIndexBuilder<C = never>
   }
 
   toOperationNode(): CreateIndexNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface CreateIndexBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: CreateIndexNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface CreateIndexBuilder<C = never> extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

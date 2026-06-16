@@ -7,7 +7,7 @@ import {
   PGliteDriver,
   PostgresDriver,
   SqliteDriver,
-  Transaction,
+  type Transaction,
   TRANSACTION_ACCESS_MODES,
 } from '../../../dist/index.js'
 

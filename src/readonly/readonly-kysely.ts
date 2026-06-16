@@ -7,7 +7,7 @@ import type {
   Kysely,
   Transaction,
   TransactionBuilder,
-} from '../kysely.js'
+} from '../transaction-types.js'
 import type {
   ReleaseSavepoint,
   RollbackToSavepoint,

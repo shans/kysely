@@ -1,14 +1,11 @@
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { RefreshMaterializedViewNode } from '../operation-node/refresh-materialized-view-node.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
 export class RefreshMaterializedViewBuilder
-  implements OperationNodeSource, Compilable
+  implements OperationNodeSource
 {
   readonly #props: RefreshMaterializedViewBuilderProps
 
@@ -75,26 +72,16 @@ export class RefreshMaterializedViewBuilder
   }
 
   toOperationNode(): RefreshMaterializedViewNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface RefreshMaterializedViewBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: RefreshMaterializedViewNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface RefreshMaterializedViewBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

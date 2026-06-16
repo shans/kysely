@@ -1,5 +1,5 @@
 import type { MigrationLockOptions } from '../dialect/dialect-adapter.js'
-import type { Kysely } from '../kysely.js'
+import type { Kysely } from '../transaction-types.js'
 import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
 import { NoopPlugin } from '../plugin/noop-plugin.js'
 import { WithSchemaPlugin } from '../plugin/with-schema/with-schema-plugin.js'
@@ -456,10 +456,10 @@ export class Migrator {
     }
 
     try {
-      await this.#props.db
+      await (this.#props.db
         .withPlugin(this.#schemaPlugin)
         .insertInto(this.#migrationLockTable)
-        .values({ id: MIGRATION_LOCK_ID, is_locked: 0 })
+        .values({ id: MIGRATION_LOCK_ID, is_locked: 0 }) as any)
         .execute()
     } catch (error) {
       const lockRowExists = await this.#doesLockRowExists()
@@ -694,10 +694,10 @@ export class Migrator {
       try {
         if (migration.down) {
           await migration.down(db)
-          await db
+          await (db
             .withPlugin(this.#schemaPlugin)
             .deleteFrom(this.#migrationTable)
-            .where('name', '=', migration.name)
+            .where('name', '=', migration.name) as any)
             .execute()
 
           results[i] = {
@@ -744,13 +744,13 @@ export class Migrator {
 
       try {
         await migration.up(db)
-        await db
+        await (db
           .withPlugin(this.#schemaPlugin)
           .insertInto(this.#migrationTable)
           .values({
             name: migration.name,
             timestamp: new Date().toISOString(),
-          })
+          }) as any)
           .execute()
 
         results[i] = {
@@ -782,7 +782,7 @@ export class Migrator {
       qb = qb.ifNotExists()
     }
 
-    await qb.execute()
+    await (qb as any).execute()
   }
 }
 

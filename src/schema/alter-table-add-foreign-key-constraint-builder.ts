@@ -2,22 +2,18 @@ import { AddConstraintNode } from '../operation-node/add-constraint-node.js'
 import { AlterTableNode } from '../operation-node/alter-table-node.js'
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
 import type { OnModifyForeignAction } from '../operation-node/references-node.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
-import type { Compilable } from '../util/compilable.js'
 import { freeze } from '../util/object-utils.js'
-import type { QueryId } from '../util/query-id.js'
 import type {
   ForeignKeyConstraintBuilder,
   ForeignKeyConstraintBuilderInterface,
 } from './foreign-key-constraint-builder.js'
+import type { Compilable } from '../util/compilable.js'
+import type { AbortableQueryOptions } from '../util/abort.js'
 
 export class AlterTableAddForeignKeyConstraintBuilder
   implements
     ForeignKeyConstraintBuilderInterface<AlterTableAddForeignKeyConstraintBuilder>,
-    OperationNodeSource,
-    Compilable
+    OperationNodeSource
 {
   readonly #props: AlterTableAddForeignKeyConstraintBuilderProps
 
@@ -80,31 +76,21 @@ export class AlterTableAddForeignKeyConstraintBuilder
   }
 
   toOperationNode(): AlterTableNode {
-    return this.#props.executor.transformQuery(
-      AlterTableNode.cloneWithTableProps(this.#props.node, {
-        addConstraint: AddConstraintNode.create(
-          this.#props.constraintBuilder.toOperationNode(),
-        ),
-      }),
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return AlterTableNode.cloneWithTableProps(this.#props.node, {
+      addConstraint: AddConstraintNode.create(
+        this.#props.constraintBuilder.toOperationNode(),
+      ),
+    })
   }
 }
 
 export interface AlterTableAddForeignKeyConstraintBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: AlterTableNode
   readonly constraintBuilder: ForeignKeyConstraintBuilder
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface AlterTableAddForeignKeyConstraintBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

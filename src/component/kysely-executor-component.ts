@@ -4,19 +4,19 @@ import type { CompiledQuery } from '../query-compiler/compiled-query.js'
 import type { TransactionSettings } from '../driver/driver.js'
 import type { QueryId } from '../util/query-id.js'
 import type { DatabaseIntrospector, TableMetadata, SchemaMetadata, DatabaseMetadataOptions } from '../dialect/database-introspector.js'
-import type { KyselyProps } from '../kysely.js'
 import type { AbortableOperationOptions } from '../util/abort.js'
 import type { StreamChunk } from '../channels/channel_util.js'
 import type { RootOperationNode } from '../operation-node/root-operation-node.js'
 import type { PluginResultArgs, TransformedQueryResult } from './plugin-component.js'
 import type { KyselyComponentConfig } from './kysely-component.js'
-import { Kysely as KyselyImpl } from '../kysely.js'
 import { DefaultConnectionProvider } from '../driver/default-connection-provider.js'
 import { SingleConnectionProvider } from '../driver/single-connection-provider.js'
 import { DefaultQueryExecutor } from '../query-executor/default-query-executor.js'
 import { RuntimeDriver } from '../driver/runtime-driver.js'
 import { Log } from '../util/log.js'
 import { ChannelIn, ChannelOut, Component } from '../channels/channel.js'
+import { QueryCreator } from '../query-creator.js'
+import { createQueryId } from '../util/query-id.js'
 
 export type TxAction =
   | ({ kind: 'begin'; txId: string } & TransactionSettings)
@@ -95,13 +95,7 @@ export class KyselyExecutorComponent extends Component {
     )
     this.executorNoPlugins = this.executor.withoutPlugins()
     this.compileQueryFn = this.executor.compileQuery.bind(this.executor)
-    const internalKysely = new KyselyImpl<any>({
-      config: config as any,
-      driver: this.driver,
-      executor: this.executor,
-      dialect,
-    } as KyselyProps)
-    this.introspector = dialect.createIntrospector(internalKysely)
+    this.introspector = dialect.createIntrospector(new IntrospectionWrapper<any>(this.executor) as any)
   }
 
   // Compile → execute → send result to plugin hole for transformResult.
@@ -312,13 +306,7 @@ export class KyselyExecutorComponent extends Component {
     const pinnedExecutor = this.executor.withConnectionProvider(
       new SingleConnectionProvider(pinnedConnection),
     )
-    const pinnedKysely = new KyselyImpl<any>({
-      config: {} as any,
-      driver: this.driver,
-      executor: pinnedExecutor,
-      dialect: this.dialect,
-    } as KyselyProps)
-    return this.dialect.createIntrospector(pinnedKysely)
+    return this.dialect.createIntrospector(new IntrospectionWrapper<any>(pinnedExecutor) as any)
   }
 
   private getStreamId(tags: Set<string>): string | undefined {
@@ -343,4 +331,55 @@ export class KyselyExecutorComponent extends Component {
     if (connId !== undefined) return this.connections.get(connId)
     return undefined
   }
+}
+
+// Structural builder + real executor wrapper for introspection, used in place
+// of a full KyselyImpl. Wraps a QueryCreator (node accumulation only) and
+// intercepts execute() on returned builders to run against the real executor.
+class IntrospectionWrapper<DB> {
+  readonly #executor: DefaultQueryExecutor
+  readonly #creator: QueryCreator<DB>
+
+  constructor(executor: DefaultQueryExecutor, creator?: QueryCreator<DB>) {
+    this.#executor = executor
+    this.#creator = creator ?? new QueryCreator<DB>({})
+  }
+
+  selectFrom(from: any): any {
+    return wrapIntrospectionBuilder(this.#creator.selectFrom(from), this.#executor)
+  }
+
+  with(name: any, expression: any): IntrospectionWrapper<any> {
+    return new IntrospectionWrapper<any>(
+      this.#executor,
+      this.#creator.with(name, expression) as unknown as QueryCreator<any>,
+    )
+  }
+}
+
+function wrapIntrospectionBuilder(builder: any, executor: DefaultQueryExecutor): any {
+  return new Proxy(builder, {
+    get(target: any, prop: string | symbol) {
+      if (prop === 'execute') {
+        return async () => {
+          const node = target.toOperationNode()
+          const queryId = createQueryId()
+          const compiled = executor.compileQuery(node, queryId)
+          const result = await executor.executeQuery(compiled)
+          return result.rows
+        }
+      }
+      const value = target[prop]
+      if (typeof value === 'function') {
+        return (...args: any[]) => {
+          const result = value.apply(target, args)
+          if (result != null && typeof result === 'object' && typeof result.toOperationNode === 'function') {
+            return wrapIntrospectionBuilder(result, executor)
+          }
+          return result
+        }
+      }
+      return value
+    },
+  })
 }

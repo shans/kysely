@@ -8,8 +8,6 @@ import {
   createSelectQueryBuilder as newSelectQueryBuilder,
 } from '../query-builder/select-query-builder.js'
 import { QueryCreator } from '../query-creator.js'
-import { NOOP_QUERY_EXECUTOR } from '../query-executor/noop-query-executor.js'
-import { createQueryId } from '../util/query-id.js'
 import {
   parseTableExpression,
   parseTableExpressionOrList,
@@ -18,16 +16,12 @@ import {
 
 export function createSelectQueryBuilder(): SelectQueryBuilder<any, any, any> {
   return newSelectQueryBuilder({
-    queryId: createQueryId(),
-    executor: NOOP_QUERY_EXECUTOR,
     queryNode: SelectQueryNode.createFrom(parseTableExpressionOrList([])),
   })
 }
 
 export function createQueryCreator(): QueryCreator<any> {
-  return new QueryCreator({
-    executor: NOOP_QUERY_EXECUTOR,
-  })
+  return new QueryCreator({})
 }
 
 export function createJoinBuilder(

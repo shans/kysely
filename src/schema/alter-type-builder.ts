@@ -1,5 +1,3 @@
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { AlterTypeNode } from '../operation-node/alter-type-node.js'
 import { IdentifierNode } from '../operation-node/identifier-node.js'
@@ -81,7 +79,5 @@ export class AlterTypeBuilder<const N extends string> {
 }
 
 export interface AlterTypeBuilderProps {
-  readonly executor: QueryExecutor
   readonly node: AlterTypeNode
-  readonly queryId: QueryId
 }

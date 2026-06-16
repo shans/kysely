@@ -41,16 +41,10 @@ import {
   type ExtractUpdateTypeFromReferenceExpression,
   parseUpdate,
 } from '../parser/update-set-parser.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { UpdateResult } from './update-result.js'
-import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
 import type { WhereInterface } from './where-interface.js'
 import type { MultiTableReturningInterface } from './returning-interface.js'
-import { isNoResultErrorConstructor, NoResultError } from './no-result-error.js'
-import type { Explainable, ExplainFormat } from '../util/explainable.js'
 import type { AliasedExpression, Expression } from '../expression/expression.js'
 import {
   type ComparisonOperatorExpression,
@@ -59,7 +53,10 @@ import {
   parseValueBinaryOperationOrExpression,
 } from '../parser/binary-operation-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
-import type { Streamable, StreamOptions } from '../util/streamable.js'
+import type { Compilable } from '../util/compilable.js'
+import type { Executable } from '../util/executable.js'
+import type { Streamable } from '../util/streamable.js'
+import type { Explainable } from '../util/explainable.js'
 import type { ExpressionOrFactory } from '../parser/expression-parser.js'
 import {
   type ValueExpression,
@@ -83,11 +80,6 @@ import {
   type OrderByModifiers,
   parseOrderBy,
 } from '../parser/order-by-parser.js'
-import type {
-  Executable,
-  ExecuteTakeFirstOrThrowOptions,
-} from '../util/executable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
 
 export class UpdateQueryBuilder<DB, UT extends keyof DB, TB extends keyof DB, O>
   implements
@@ -95,11 +87,7 @@ export class UpdateQueryBuilder<DB, UT extends keyof DB, TB extends keyof DB, O>
     MultiTableReturningInterface<DB, TB, O>,
     OutputInterface<DB, TB, O>,
     OrderByInterface<DB, TB, never>,
-    OperationNodeSource,
-    Compilable<O>,
-    Executable<O>,
-    Explainable,
-    Streamable<O>
+    OperationNodeSource
 {
   readonly #props: UpdateQueryBuilderProps
 
@@ -1118,135 +1106,22 @@ export class UpdateQueryBuilder<DB, UT extends keyof DB, TB extends keyof DB, O>
     return new UpdateQueryBuilder(this.#props) as unknown as any
   }
 
-  /**
-   * Returns a copy of this UpdateQueryBuilder instance with the given plugin installed.
-   */
-  withPlugin(plugin: KyselyPlugin): UpdateQueryBuilder<DB, UT, TB, O> {
-    return new UpdateQueryBuilder({
-      ...this.#props,
-      executor: this.#props.executor.withPlugin(plugin),
-    })
-  }
-
   toOperationNode(): UpdateQueryNode {
-    return this.#props.executor.transformQuery(
-      this.#props.queryNode,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery<SimplifyResult<O>> {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<SimplifyResult<O>[]> {
-    const compiledQuery = this.compile()
-
-    const result = await this.#props.executor.executeQuery<O>(
-      compiledQuery,
-      options,
-    )
-
-    const { adapter } = this.#props.executor
-    const query = compiledQuery.query as UpdateQueryNode
-
-    if (
-      (query.returning && adapter.supportsReturning) ||
-      (query.output && adapter.supportsOutput)
-    ) {
-      return result.rows as never
-    }
-
-    return [
-      new UpdateResult(
-        result.numAffectedRows ?? BigInt(0),
-        result.numChangedRows,
-      ) as never,
-    ]
-  }
-
-  async executeTakeFirst(
-    options?: AbortableQueryOptions,
-  ): Promise<SimplifySingleResult<O>> {
-    const [result] = await this.execute(options)
-
-    return result
-  }
-
-  async executeTakeFirstOrThrow(
-    errorConstructorOrOptions?:
-      | ExecuteTakeFirstOrThrowOptions
-      | ExecuteTakeFirstOrThrowOptions['errorConstructor'],
-  ): Promise<SimplifyResult<O>> {
-    if (typeof errorConstructorOrOptions === 'function') {
-      errorConstructorOrOptions = {
-        errorConstructor: errorConstructorOrOptions,
-      }
-    }
-
-    const result = await this.executeTakeFirst(errorConstructorOrOptions)
-
-    if (result === undefined) {
-      const errorConstructor =
-        errorConstructorOrOptions?.errorConstructor ?? NoResultError
-
-      const error = isNoResultErrorConstructor(errorConstructor)
-        ? new errorConstructor(this.toOperationNode())
-        : errorConstructor(this.toOperationNode())
-
-      throw error
-    }
-
-    return result as never
-  }
-
-  async *stream(
-    chunkSizeOrOptions?: StreamOptions | StreamOptions['chunkSize'],
-  ): AsyncIterableIterator<O> {
-    if (typeof chunkSizeOrOptions !== 'object') {
-      chunkSizeOrOptions = {
-        chunkSize: chunkSizeOrOptions,
-      }
-    }
-
-    const compiledQuery = this.compile()
-
-    const stream = this.#props.executor.stream<O>(
-      compiledQuery,
-      chunkSizeOrOptions.chunkSize ?? 100,
-      chunkSizeOrOptions,
-    )
-
-    for await (const item of stream) {
-      yield* item.rows
-    }
-  }
-
-  async explain<ER extends Record<string, any> = Record<string, any>>(
-    format?: ExplainFormat,
-    options?: Expression<any>,
-  ): Promise<ER[]> {
-    const builder = new UpdateQueryBuilder<DB, UT, TB, ER>({
-      ...this.#props,
-      queryNode: QueryNode.cloneWithExplain(
-        this.#props.queryNode,
-        format,
-        options,
-      ),
-    })
-
-    return await builder.execute()
+    return this.#props.queryNode
   }
 }
 
 export interface UpdateQueryBuilderProps {
-  readonly queryId: QueryId
   readonly queryNode: UpdateQueryNode
-  readonly executor: QueryExecutor
 }
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy (wrapBuilder) provides the implementations at runtime.
+export interface UpdateQueryBuilder<DB, UT extends keyof DB, TB extends keyof DB, O>
+  extends Compilable<O>,
+    Executable<O>,
+    Streamable<O>,
+    Explainable {}
 
 export type UpdateQueryBuilderWithInnerJoin<
   DB,

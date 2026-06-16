@@ -1,13 +1,10 @@
 import { DropTableNode } from '../operation-node/drop-table-node.js'
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
-export class DropTableBuilder implements OperationNodeSource, Compilable {
+export class DropTableBuilder implements OperationNodeSource {
   readonly #props: DropTableBuilderProps
 
   constructor(props: DropTableBuilderProps) {
@@ -55,26 +52,16 @@ export class DropTableBuilder implements OperationNodeSource, Compilable {
   }
 
   toOperationNode(): DropTableNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface DropTableBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: DropTableNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface DropTableBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

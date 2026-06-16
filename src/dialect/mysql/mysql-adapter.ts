@@ -1,4 +1,4 @@
-import type { Kysely } from '../../kysely.js'
+import type { Kysely } from '../../transaction-types.js'
 import { sql } from '../../raw-builder/sql.js'
 import { DialectAdapterBase } from '../dialect-adapter-base.js'
 import type { MigrationLockOptions } from '../dialect-adapter.js'

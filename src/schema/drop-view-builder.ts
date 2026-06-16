@@ -1,13 +1,10 @@
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
-import type { QueryId } from '../util/query-id.js'
 import { freeze } from '../util/object-utils.js'
 import { DropViewNode } from '../operation-node/drop-view-node.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
-export class DropViewBuilder implements OperationNodeSource, Compilable {
+export class DropViewBuilder implements OperationNodeSource {
   readonly #props: DropViewBuilderProps
 
   constructor(props: DropViewBuilderProps) {
@@ -50,26 +47,16 @@ export class DropViewBuilder implements OperationNodeSource, Compilable {
   }
 
   toOperationNode(): DropViewNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface DropViewBuilderProps {
-  readonly queryId: QueryId
-  readonly executor: QueryExecutor
   readonly node: DropViewNode
+}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface DropViewBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
 }

@@ -5,15 +5,11 @@ import { DropColumnNode } from '../operation-node/drop-column-node.js'
 import { IdentifierNode } from '../operation-node/identifier-node.js'
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
 import { RenameColumnNode } from '../operation-node/rename-column-node.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { Compilable } from '../util/compilable.js'
 import { freeze, isString, noop } from '../util/object-utils.js'
 import {
   ColumnDefinitionBuilder,
   type ColumnDefinitionBuilderCallback,
 } from './column-definition-builder.js'
-import type { QueryId } from '../util/query-id.js'
-import type { QueryExecutor } from '../query-executor/query-executor.js'
 import { ModifyColumnNode } from '../operation-node/modify-column-node.js'
 import {
   type DataTypeExpression,
@@ -63,6 +59,7 @@ import {
   DropColumnBuilder,
   type DropColumnBuilderCallback,
 } from './drop-column-builder.js'
+import type { Compilable } from '../util/compilable.js'
 import type { AbortableQueryOptions } from '../util/abort.js'
 
 /**
@@ -383,9 +380,7 @@ export class AlterTableBuilder implements ColumnAlteringInterface {
 }
 
 export interface AlterTableBuilderProps {
-  readonly executor: QueryExecutor
   readonly node: AlterTableNode
-  readonly queryId: QueryId
 }
 
 export interface ColumnAlteringInterface {
@@ -420,7 +415,7 @@ export interface ColumnAlteringInterface {
 }
 
 export class AlterTableColumnAlteringBuilder
-  implements ColumnAlteringInterface, OperationNodeSource, Compilable
+  implements ColumnAlteringInterface, OperationNodeSource
 {
   readonly #props: AlterTableColumnAlteringBuilderProps
 
@@ -520,22 +515,14 @@ export class AlterTableColumnAlteringBuilder
   }
 
   toOperationNode(): AlterTableNode {
-    return this.#props.executor.transformQuery(
-      this.#props.node,
-      this.#props.queryId,
-    )
-  }
-
-  compile(): CompiledQuery {
-    return this.#props.executor.compileQuery(
-      this.toOperationNode(),
-      this.#props.queryId,
-    )
-  }
-
-  async execute(options?: AbortableQueryOptions): Promise<void> {
-    await this.#props.executor.executeQuery(this.compile(), options)
+    return this.#props.node
   }
 }
 
 export interface AlterTableColumnAlteringBuilderProps extends AlterTableBuilderProps {}
+
+// Declaration merge: adds terminal method types without runtime stubs.
+// The API-layer Proxy provides the implementations at runtime.
+export interface AlterTableColumnAlteringBuilder extends Compilable {
+  execute(options?: AbortableQueryOptions): Promise<void>
+}

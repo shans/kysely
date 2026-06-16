@@ -1,4 +1,4 @@
-import type { Kysely } from '../kysely.js'
+import type { Kysely } from '../transaction-types.js'
 
 /**
  * A `DialectAdapter` encapsulates all differences between dialects outside
