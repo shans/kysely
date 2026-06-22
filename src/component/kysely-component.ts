@@ -10,7 +10,7 @@ import type { StreamChunk } from '../channels/channel_util.js'
 import { Component, ChannelIn, ChannelOut } from '../channels/channel.js'
 import { KyselyEntryComponent } from './kysely-entry-component.js'
 import { KyselyExecutorComponent, type TxAction, type ConnAction } from './kysely-executor-component.js'
-import { KyselyPluginComponent, CompositeKyselyPluginComponent, makeKyselyPluginHole, type KyselyPluginHole } from './plugin-component.js'
+import { KyselyPluginComponent, CompositeKyselyPluginComponent, makeKyselyPluginHole, type KyselyPluginHole, type PluginResultArgs } from './plugin-component.js'
 
 export type { TxAction, ConnAction }
 
@@ -50,15 +50,45 @@ class StreamRouter extends Component {
   }
 }
 
+// Splits StreamChunk<PluginResultArgs> from the driver: done chunks go directly to
+// doneChunkOut; non-done chunks have their PluginResultArgs extracted and forwarded
+// to the plugin hole's transformStreamResult input.
+class StreamChunkUnwrapper extends Component {
+  readonly rawChunkIn      = new ChannelIn<StreamChunk<PluginResultArgs>>(this, this.route)
+  readonly pluginResultOut = new ChannelOut<PluginResultArgs>()
+  readonly doneChunkOut    = new ChannelOut<StreamChunk<QueryResult<unknown>>>()
+
+  private route(chunk: StreamChunk<PluginResultArgs>): void {
+    if (chunk.done) {
+      this.doneChunkOut.send({ done: true })
+    } else {
+      this.pluginResultOut.send(chunk.value)
+    }
+  }
+}
+
+// Re-wraps a plugin-transformed QueryResult as a non-done StreamChunk so it can
+// be merged with done chunks into the external streamChunkOut.
+class StreamChunkWrapper extends Component {
+  readonly transformedResultIn = new ChannelIn<QueryResult<unknown>>(this, this.wrap)
+  readonly wrappedChunkOut     = new ChannelOut<StreamChunk<QueryResult<unknown>>>()
+
+  private wrap(result: QueryResult<unknown>): void {
+    this.wrappedChunkOut.send({ done: false, value: result })
+  }
+}
+
 // Pure wiring container. Subcomponents that need no constructor config are field
 // initializers; channels that depend only on those subcomponents are also single-line
 // field initializers. The executor (which needs config) and its dependent channels are
 // assigned in the constructor.
 export class KyselyComponent extends Component {
   // Config-free subcomponents — field initializers so their channels can also be fields.
-  private readonly entry        = new KyselyEntryComponent()
-  private readonly hole         = makeKyselyPluginHole()
-  private readonly streamRouter = new StreamRouter()
+  private readonly entry          = new KyselyEntryComponent()
+  private readonly hole           = makeKyselyPluginHole()
+  private readonly streamRouter   = new StreamRouter()
+  private readonly chunkUnwrapper = new StreamChunkUnwrapper()
+  private readonly chunkWrapper   = new StreamChunkWrapper()
   // Executor needs config — assigned in constructor.
   private readonly executor: KyselyExecutorComponent
 
@@ -112,9 +142,20 @@ export class KyselyComponent extends Component {
     this.streamRouter.endOut.connect(ex.streamEndIn)
 
     // Executor-dependent forwarding outputs.
-    this.compiledOut    = new ChannelOut<CompiledQuery>(ex.compiledOut)
-    this.streamChunkOut = new ChannelOut<StreamChunk<QueryResult<unknown>>>(ex.streamChunkOut)
-    this.errorOut       = new ChannelOut<unknown>(this.entry.errorOut, this.hole.outputs.error, ex.errorOut)
+    this.compiledOut = new ChannelOut<CompiledQuery>(ex.compiledOut)
+
+    // Stream chunk path through the plugin hole: driver emits StreamChunk<PluginResultArgs>;
+    // non-done chunks are routed through hole.transformStreamResult for plugin application,
+    // then re-wrapped as StreamChunk; done chunks bypass the hole and merge at streamChunkOut.
+    ex.streamChunkOut.connect(this.chunkUnwrapper.rawChunkIn)
+    this.chunkUnwrapper.pluginResultOut.connect(this.hole.inputs.transformStreamResult)
+    ;(this.hole.outputs.transformStreamResult as unknown as ChannelOut<QueryResult<unknown>>).connect(this.chunkWrapper.transformedResultIn)
+    this.streamChunkOut = new ChannelOut<StreamChunk<QueryResult<unknown>>>(
+      this.chunkWrapper.wrappedChunkOut,
+      this.chunkUnwrapper.doneChunkOut,
+    )
+
+    this.errorOut = new ChannelOut<unknown>(this.entry.errorOut, this.hole.outputs.error, ex.errorOut)
     this.tablesOut      = new ChannelOut<TableMetadata[]>(ex.tablesOut)
     this.schemasOut     = new ChannelOut<SchemaMetadata[]>(ex.schemasOut)
 

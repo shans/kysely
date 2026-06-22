@@ -7,7 +7,7 @@ import type { KyselyComponentConfig } from './kysely-component.js'
 import { ChannelIn, ChannelOut, Component } from '../channels/channel.js'
 import { KyselyDriverComponent, type TxAction, type ConnAction, type CompiledStreamPayload } from './kysely-driver-component.js'
 import { KyselyCompilerComponent } from './kysely-compiler-component.js'
-import { RuntimeDriver } from '../driver/runtime-driver.js'
+import type { RuntimeDriver } from '../driver/runtime-driver.js'
 
 export type { TxAction, ConnAction }
 
@@ -49,7 +49,7 @@ export class KyselyExecutorComponent extends Component {
 
   readonly transformResultOut: ChannelOut<PluginResultArgs>
   readonly compiledOut:        ChannelOut<CompiledQuery>
-  readonly streamChunkOut:     ChannelOut<StreamChunk<QueryResult<unknown>>>
+  readonly streamChunkOut:     ChannelOut<StreamChunk<PluginResultArgs>>
   readonly errorOut:           ChannelOut<unknown>
   readonly tablesOut:          ChannelOut<TableMetadata[]>
   readonly schemasOut:         ChannelOut<SchemaMetadata[]>
@@ -90,7 +90,7 @@ export class KyselyExecutorComponent extends Component {
     // Forwarding outputs.
     this.compiledOut        = new ChannelOut<CompiledQuery>(compileOnlyCompiler.out)
     this.transformResultOut = new ChannelOut<PluginResultArgs>(drv.transformResultOut)
-    this.streamChunkOut     = new ChannelOut<StreamChunk<QueryResult<unknown>>>(drv.streamChunkOut)
+    this.streamChunkOut     = new ChannelOut<StreamChunk<PluginResultArgs>>(drv.streamChunkOut)
     this.errorOut           = new ChannelOut<unknown>(
       executeCompiler.errorOut,
       compileOnlyCompiler.errorOut,

@@ -52,7 +52,7 @@ export class KyselyDriverComponent extends Component {
   readonly getSchemasIn  = new ChannelIn<void>(this, this.handleGetSchemas)
 
   readonly transformResultOut = new ChannelOut<PluginResultArgs>()
-  readonly streamChunkOut     = new ChannelOut<StreamChunk<QueryResult<unknown>>>()
+  readonly streamChunkOut     = new ChannelOut<StreamChunk<PluginResultArgs>>()
   readonly errorOut           = new ChannelOut<unknown>()
   readonly tablesOut          = new ChannelOut<TableMetadata[]>()
   readonly schemasOut         = new ChannelOut<SchemaMetadata[]>()
@@ -69,7 +69,7 @@ export class KyselyDriverComponent extends Component {
   private readonly transactions  = new Map<string, DatabaseConnection>()
   private readonly connections   = new Map<string, DatabaseConnection>()
   private readonly borrowedTxIds = new Set<string>()
-  private readonly streams       = new Map<string, AsyncIterableIterator<QueryResult<unknown>>>()
+  private readonly streams       = new Map<string, { iterator: AsyncIterableIterator<QueryResult<unknown>>; queryId: QueryId }>()
 
   constructor({ dialect, log, plugins }: KyselyDriverConfig) {
     super()
@@ -106,9 +106,9 @@ export class KyselyDriverComponent extends Component {
     try {
       const pinnedConnection = this.getPinnedConnection(this._tags)
       const ex = pinnedConnection
-        ? this.executor.withConnectionProvider(new SingleConnectionProvider(pinnedConnection))
-        : this.executor
-      this.streams.set(streamId, ex.stream(compiled, chunkSize, options))
+        ? this.executorNoPlugins.withConnectionProvider(new SingleConnectionProvider(pinnedConnection))
+        : this.executorNoPlugins
+      this.streams.set(streamId, { iterator: ex.stream(compiled, chunkSize, options), queryId: compiled.queryId })
     } catch (error) {
       this.errorOut.send(error)
     }
@@ -198,14 +198,14 @@ export class KyselyDriverComponent extends Component {
   private async handleStreamNext(): Promise<void> {
     const streamId = this.getStreamId(this._tags)
     if (!streamId) return
-    const iterator = this.streams.get(streamId)!
+    const { iterator, queryId } = this.streams.get(streamId)!
     try {
       const result = await iterator.next()
       if (result.done) {
         this.streams.delete(streamId)
         this.streamChunkOut.send({ done: true })
       } else {
-        this.streamChunkOut.send({ done: false, value: result.value })
+        this.streamChunkOut.send({ done: false, value: { result: result.value as any, queryId } })
       }
     } catch (error) {
       this.streams.delete(streamId)
@@ -216,7 +216,7 @@ export class KyselyDriverComponent extends Component {
   private async handleStreamEnd(): Promise<void> {
     const streamId = this.getStreamId(this._tags)
     if (!streamId) return
-    const iterator = this.streams.get(streamId)!
+    const { iterator } = this.streams.get(streamId)!
     this.streams.delete(streamId)
     try { await iterator.return?.() } catch { /* ignore cleanup errors */ }
   }

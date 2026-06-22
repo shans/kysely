@@ -40,11 +40,12 @@ export abstract class KyselyPluginShape extends Component {
   abstract readonly transformQueryIn: ChannelIn<PluginQueryArgs>
   abstract readonly transformQueryOut: ChannelOut<TransformedQueryResult>
   abstract readonly transformResultIn: ChannelIn<PluginResultArgs>
-  // Carries just the result; queryId is not needed after transform because
-  // the hole's transformResult output IS the external resultOut.
   abstract readonly transformResultOut: ChannelOut<QueryResult<UnknownRow>>
-  // Async errors from transformResult propagate here so the executor can
-  // route them to its errorOut with the correct correlation tags.
+  // Separate path for stream chunk results — same plugin method, distinct channels
+  // so stream chunks can be re-wrapped and routed to streamChunkOut, not resultOut.
+  abstract readonly transformStreamResultIn: ChannelIn<PluginResultArgs>
+  abstract readonly transformStreamResultOut: ChannelOut<QueryResult<UnknownRow>>
+  // Async errors from either transformResult path propagate here.
   abstract readonly errorOut: ChannelOut<unknown>
 }
 
@@ -54,6 +55,8 @@ export class KyselyPluginComponent extends KyselyPluginShape {
   readonly transformQueryOut = new ChannelOut<TransformedQueryResult>()
   readonly transformResultIn = new ChannelIn<PluginResultArgs>(this, this.handleTransformResult)
   readonly transformResultOut = new ChannelOut<QueryResult<UnknownRow>>()
+  readonly transformStreamResultIn = new ChannelIn<PluginResultArgs>(this, this.handleTransformStreamResult)
+  readonly transformStreamResultOut = new ChannelOut<QueryResult<UnknownRow>>()
   readonly errorOut = new ChannelOut<unknown>()
 
   constructor(private readonly plugin: KyselyPlugin) { super() }
@@ -76,6 +79,15 @@ export class KyselyPluginComponent extends KyselyPluginShape {
       this.errorOut.send(error)
     }
   }
+
+  private async handleTransformStreamResult({ result, queryId }: PluginResultArgs): Promise<void> {
+    try {
+      const transformed = await this.plugin.transformResult({ queryId, result: result as any })
+      this.transformStreamResultOut.send(transformed as QueryResult<UnknownRow>)
+    } catch (error) {
+      this.errorOut.send(error)
+    }
+  }
 }
 
 // Chains N KyselyPluginShape components in series. With 0 plugins acts as a no-op.
@@ -85,16 +97,20 @@ export class CompositeKyselyPluginComponent extends KyselyPluginShape {
   readonly transformQueryOut = new ChannelOut<TransformedQueryResult>()
   readonly transformResultIn = new ChannelIn<PluginResultArgs>(this, this.handleTransformResult)
   readonly transformResultOut = new ChannelOut<QueryResult<UnknownRow>>()
+  readonly transformStreamResultIn = new ChannelIn<PluginResultArgs>(this, this.handleTransformStreamResult)
+  readonly transformStreamResultOut = new ChannelOut<QueryResult<UnknownRow>>()
   readonly errorOut = new ChannelOut<unknown>()
 
   private readonly queryFns: ReadonlyArray<(args: PluginQueryArgs) => TransformedQueryResult>
   private readonly resultFns: ReadonlyArray<(args: PluginResultArgs) => Promise<QueryResult<UnknownRow>>>
+  private readonly streamResultFns: ReadonlyArray<(args: PluginResultArgs) => Promise<QueryResult<UnknownRow>>>
 
   constructor(plugins: readonly KyselyPluginShape[]) {
     super()
     this.queryFns = plugins.map((p) => asFunction(p.transformQueryIn, p.transformQueryOut))
     // Pass each plugin's errorOut so asAsyncFunction can reject the promise on error.
     this.resultFns = plugins.map((p) => asAsyncFunction(p.transformResultIn, p.transformResultOut, p.errorOut))
+    this.streamResultFns = plugins.map((p) => asAsyncFunction(p.transformStreamResultIn, p.transformStreamResultOut, p.errorOut))
   }
 
   // No try/catch: sync errors from asFunction propagate to the caller.
@@ -117,6 +133,18 @@ export class CompositeKyselyPluginComponent extends KyselyPluginShape {
       this.errorOut.send(error)
     }
   }
+
+  private async handleTransformStreamResult({ result, queryId }: PluginResultArgs): Promise<void> {
+    try {
+      let current: QueryResult<UnknownRow> = result
+      for (const fn of this.streamResultFns) {
+        current = await fn({ result: current, queryId })
+      }
+      this.transformStreamResultOut.send(current)
+    } catch (error) {
+      this.errorOut.send(error)
+    }
+  }
 }
 
 // Returns true for KyselyPluginShape components; false for plain KyselyPlugin objects.
@@ -131,14 +159,16 @@ export function toKyselyPluginShape(p: KyselyPlugin | KyselyPluginShape): Kysely
 
 // Static accessor descriptors used by all plugin holes.
 const pluginInputAccessors = {
-  transformQuery: (c: KyselyPluginShape) => c.transformQueryIn,
-  transformResult: (c: KyselyPluginShape) => c.transformResultIn,
+  transformQuery:        (c: KyselyPluginShape) => c.transformQueryIn,
+  transformResult:       (c: KyselyPluginShape) => c.transformResultIn,
+  transformStreamResult: (c: KyselyPluginShape) => c.transformStreamResultIn,
 } as const
 
 const pluginOutputAccessors = {
-  transformQuery: (c: KyselyPluginShape) => c.transformQueryOut,
-  transformResult: (c: KyselyPluginShape) => c.transformResultOut,
-  error: (c: KyselyPluginShape) => c.errorOut,
+  transformQuery:        (c: KyselyPluginShape) => c.transformQueryOut,
+  transformResult:       (c: KyselyPluginShape) => c.transformResultOut,
+  transformStreamResult: (c: KyselyPluginShape) => c.transformStreamResultOut,
+  error:                 (c: KyselyPluginShape) => c.errorOut,
 } as const
 
 export type KyselyPluginHole = ComponentHole<
