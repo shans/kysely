@@ -1,6 +1,6 @@
 import type { Kysely } from '../../transaction-types.js'
 import { DialectAdapterBase } from '../dialect-adapter-base.js'
-import type { MigrationLockOptions } from '../dialect-adapter.js'
+import type { MigrationLockOptions } from '../../types/dialect/dialect-adapter.js'
 
 export class SqliteAdapter extends DialectAdapterBase {
   override get supportsMultipleConnections(): boolean {

@@ -2,7 +2,7 @@ import { DropTypeNode } from '../operation-node/drop-type-node.js'
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
 import { freeze } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export class DropTypeBuilder implements OperationNodeSource {
   readonly #props: DropTypeBuilderProps

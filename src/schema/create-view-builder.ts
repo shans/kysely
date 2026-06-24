@@ -6,7 +6,7 @@ import { ImmediateValueTransformer } from '../plugin/immediate-value/immediate-v
 import type { RawBuilder } from '../raw-builder/raw-builder.js'
 import type { SelectQueryBuilder } from '../query-builder/select-query-builder.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export class CreateViewBuilder implements OperationNodeSource {
   readonly #props: CreateViewBuilderProps

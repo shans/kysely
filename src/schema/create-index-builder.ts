@@ -18,10 +18,10 @@ import {
 } from '../parser/binary-operation-parser.js'
 import { QueryNode } from '../operation-node/query-node.js'
 import type { ExpressionBuilder } from '../expression/expression-builder.js'
-import type { ShallowRecord, SqlBool } from '../util/type-utils.js'
+import type { ShallowRecord, SqlBool } from '../types/util/type-utils.js'
 import { ImmediateValueTransformer } from '../plugin/immediate-value/immediate-value-transformer.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export class CreateIndexBuilder<C = never>
   implements OperationNodeSource

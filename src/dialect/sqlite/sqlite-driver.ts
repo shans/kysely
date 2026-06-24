@@ -1,15 +1,15 @@
 import type {
   DatabaseConnection,
   QueryResult,
-} from '../../driver/database-connection.js'
-import type { Driver } from '../../driver/driver.js'
+} from '../../types/driver/database-connection.js'
+import type { Driver } from '../../shared/driver/driver.js'
 import { SelectQueryNode } from '../../operation-node/select-query-node.js'
 import { parseSavepointCommand } from '../../parser/savepoint-parser.js'
-import { CompiledQuery } from '../../query-compiler/compiled-query.js'
-import type { QueryCompiler } from '../../query-compiler/query-compiler.js'
-import type { AbortableOperationOptions } from '../../util/abort.js'
+import { CompiledQuery } from '../../types/query-compiler/compiled-query.js'
+import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
+import type { AbortableOperationOptions } from '../../shared/util/abort.js'
 import { freeze, isFunction } from '../../util/object-utils.js'
-import { createQueryId } from '../../util/query-id.js'
+import { createQueryId } from '../../shared/util/query-id.js'
 import type {
   SqliteDatabase,
   SqliteDialectConfig,

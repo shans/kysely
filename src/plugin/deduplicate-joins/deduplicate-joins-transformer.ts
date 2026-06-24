@@ -4,7 +4,7 @@ import { OperationNodeTransformer } from '../../operation-node/operation-node-tr
 import type { SelectQueryNode } from '../../operation-node/select-query-node.js'
 import type { UpdateQueryNode } from '../../operation-node/update-query-node.js'
 import { compare, freeze } from '../../util/object-utils.js'
-import type { QueryId } from '../../util/query-id.js'
+import type { QueryId } from '../../shared/util/query-id.js'
 
 export class DeduplicateJoinsTransformer extends OperationNodeTransformer {
   protected transformSelectQuery(

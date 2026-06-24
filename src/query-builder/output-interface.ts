@@ -7,7 +7,7 @@ import type {
 import type {
   AnyAliasedColumnWithTable,
   AnyColumnWithTable,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 
 export interface OutputInterface<
   DB,

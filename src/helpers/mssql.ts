@@ -5,7 +5,7 @@ import type {
   ShallowDehydrateObject,
   ShallowDehydrateValue,
   Simplify,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 
 /**
  * An MS SQL Server helper for aggregating a subquery into a JSON array.

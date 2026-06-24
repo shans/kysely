@@ -1,4 +1,4 @@
-import type { DrainOuterGeneric } from '../util/type-utils.js'
+import type { DrainOuterGeneric } from '../types/util/type-utils.js'
 import type { ExtractTypeFromReferenceExpression } from './reference-parser.js'
 import type { ExtractTypeFromValueExpression } from './value-parser.js'
 

@@ -3,7 +3,7 @@ import type {
   OperandValueExpressionOrList,
 } from '../parser/binary-operation-parser.js'
 import type { ReferenceExpression } from '../parser/reference-parser.js'
-import type { SqlBool } from '../util/type-utils.js'
+import type { SqlBool } from '../types/util/type-utils.js'
 import type { ExpressionBuilder } from '../expression/expression-builder.js'
 import type { ExpressionOrFactory } from '../parser/expression-parser.js'
 

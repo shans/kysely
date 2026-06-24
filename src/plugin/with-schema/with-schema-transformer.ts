@@ -17,7 +17,7 @@ import { TableNode } from '../../operation-node/table-node.js'
 import { UsingNode } from '../../operation-node/using-node.js'
 import type { WithNode } from '../../operation-node/with-node.js'
 import { freeze } from '../../util/object-utils.js'
-import type { QueryId } from '../../util/query-id.js'
+import type { QueryId } from '../../shared/util/query-id.js'
 
 const SCHEMALESS_FUNCTIONS: Readonly<Record<string, true>> = freeze({
   json_agg: true,

@@ -2,7 +2,7 @@ import { SelectQueryNode } from '../operation-node/select-query-node.js'
 import {
   isCompiledQuery,
   type CompiledQuery,
-} from '../query-compiler/compiled-query.js'
+} from '../types/query-compiler/compiled-query.js'
 
 export type ReadonlyCompiledQuery<R> = CompiledQuery<R> & {
   readonly query: SelectQueryNode

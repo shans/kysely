@@ -10,7 +10,7 @@ import {
 import type { ExpressionOrFactory } from '../parser/expression-parser.js'
 import type { ReferenceExpression } from '../parser/reference-parser.js'
 import { freeze } from '../util/object-utils.js'
-import type { SqlBool } from '../util/type-utils.js'
+import type { SqlBool } from '../types/util/type-utils.js'
 
 export class JoinBuilder<
   DB,

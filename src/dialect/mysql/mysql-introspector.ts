@@ -3,7 +3,7 @@ import type {
   DatabaseMetadataOptions,
   SchemaMetadata,
   TableMetadata,
-} from '../database-introspector.js'
+} from '../../types/dialect/database-introspector.js'
 import {
   DEFAULT_MIGRATION_LOCK_TABLE,
   DEFAULT_MIGRATION_TABLE,

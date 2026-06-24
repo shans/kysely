@@ -1,12 +1,12 @@
 import type {
   DatabaseConnection,
   QueryResult,
-} from '../../driver/database-connection.js'
+} from '../../types/driver/database-connection.js'
 import type {
   Driver,
   IsolationLevel,
   TransactionSettings,
-} from '../../driver/driver.js'
+} from '../../shared/driver/driver.js'
 import {
   freeze,
   isBigInt,
@@ -26,7 +26,7 @@ import type {
   TediousConnection,
   TediousRequest,
 } from './mssql-dialect-config.js'
-import { CompiledQuery } from '../../query-compiler/compiled-query.js'
+import { CompiledQuery } from '../../types/query-compiler/compiled-query.js'
 import { extendStackTrace } from '../../util/stack-trace-utils.js'
 import { randomString } from '../../util/random-string.js'
 import { Deferred } from '../../util/deferred.js'

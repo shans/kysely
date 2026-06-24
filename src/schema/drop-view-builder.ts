@@ -2,7 +2,7 @@ import type { OperationNodeSource } from '../operation-node/operation-node-sourc
 import { freeze } from '../util/object-utils.js'
 import { DropViewNode } from '../operation-node/drop-view-node.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export class DropViewBuilder implements OperationNodeSource {
   readonly #props: DropViewBuilderProps

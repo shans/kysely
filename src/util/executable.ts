@@ -1,7 +1,7 @@
 import type { QueryNode } from '../operation-node/query-node.js'
 import type { NoResultErrorConstructor } from '../query-builder/no-result-error.js'
-import type { AbortableQueryOptions } from './abort.js'
-import type { SimplifyResult, SimplifySingleResult } from './type-utils.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { SimplifyResult, SimplifySingleResult } from '../types/util/type-utils.js'
 
 export interface Executable<O> {
   /**

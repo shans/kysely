@@ -1,6 +1,6 @@
 import type { IdentifierNode } from '../../operation-node/identifier-node.js'
 import { OperationNodeTransformer } from '../../operation-node/operation-node-transformer.js'
-import type { QueryId } from '../../util/query-id.js'
+import type { QueryId } from '../../shared/util/query-id.js'
 import type { StringMapper } from './camel-case.js'
 
 export class SnakeCaseTransformer extends OperationNodeTransformer {

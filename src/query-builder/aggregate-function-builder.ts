@@ -16,7 +16,7 @@ import {
   parseReferentialBinaryOperation,
   parseValueBinaryOperationOrExpression,
 } from '../parser/binary-operation-parser.js'
-import type { SqlBool } from '../util/type-utils.js'
+import type { SqlBool } from '../types/util/type-utils.js'
 import type { ExpressionOrFactory } from '../parser/expression-parser.js'
 import {
   type DirectedOrderByStringReference,

@@ -13,7 +13,7 @@ import {
 import type { OperandExpression } from '../parser/expression-parser.js'
 import type { ReferenceExpression } from '../parser/reference-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
-import type { SqlBool } from '../util/type-utils.js'
+import type { SqlBool } from '../types/util/type-utils.js'
 import type {
   AliasableExpression,
   AliasedExpression,

@@ -8,7 +8,7 @@ import {
 import { IdentifierNode } from '../operation-node/identifier-node.js'
 import type { OperationNode } from '../operation-node/operation-node.js'
 import type { AliasedExpression } from '../expression/expression.js'
-import type { DrainOuterGeneric } from '../util/type-utils.js'
+import type { DrainOuterGeneric } from '../types/util/type-utils.js'
 import {
   type AliasedDynamicTableBuilder,
   isAliasedDynamicTableBuilder,

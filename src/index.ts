@@ -5,10 +5,10 @@
 
 import type { KyselyTypeError } from './util/type-error.js'
 
-export { Kysely } from './component/api.js'
+export { Kysely } from './api.js'
 export type { KyselyProps, KyselyConfig, Transaction, ConnectionBuilder, TransactionBuilder, ControlledTransactionBuilder, ControlledTransaction, Command } from './transaction-types.js'
 export { isKyselyProps } from './transaction-types.js'
-export * from './query-creator.js'
+export * from './shared/query-creator.js'
 export * from './query-finalizer.js'
 
 export * from './expression/expression.js'
@@ -45,12 +45,12 @@ export * from './raw-builder/raw-builder.js'
 export * from './raw-builder/sql.js'
 
 export type * from './query-executor/query-executor.js'
-export * from './query-executor/default-query-executor.js'
+export * from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/DefaultQueryExecutor.js'
 export * from './query-executor/noop-query-executor.js'
 export type * from './query-executor/query-executor-provider.js'
 
 export * from './query-compiler/default-query-compiler.js'
-export * from './query-compiler/compiled-query.js'
+export * from './types/query-compiler/compiled-query.js'
 
 export * from './schema/schema-module.js'
 export * from './schema/create-table-builder.js'
@@ -74,17 +74,17 @@ export * from './dynamic/dynamic.js'
 export * from './dynamic/dynamic-reference-builder.js'
 export * from './dynamic/dynamic-table-builder.js'
 
-export * from './driver/driver.js'
-export type * from './driver/database-connection.js'
-export type * from './driver/connection-provider.js'
-export * from './driver/default-connection-provider.js'
-export * from './driver/single-connection-provider.js'
+export * from './shared/driver/driver.js'
+export type * from './types/driver/database-connection.js'
+export type * from './types/driver/connection-provider.js'
+export * from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/DefaultConnectionProvider.js'
+export * from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/SingleConnectionProvider.js'
 export * from './driver/dummy-driver.js'
 
-export type * from './dialect/dialect.js'
-export type * from './dialect/dialect-adapter.js'
+export type * from './types/dialect/dialect.js'
+export type * from './types/dialect/dialect-adapter.js'
 export * from './dialect/dialect-adapter-base.js'
-export type * from './dialect/database-introspector.js'
+export type * from './types/dialect/database-introspector.js'
 
 export * from './dialect/sqlite/sqlite-dialect.js'
 export type * from './dialect/sqlite/sqlite-dialect-config.js'
@@ -120,9 +120,9 @@ export * from './dialect/pglite/pglite-dialect.js'
 export type * from './dialect/pglite/pglite-dialect-config.js'
 
 export * from './query-compiler/default-query-compiler.js'
-export type * from './query-compiler/query-compiler.js'
+export type * from './types/query-compiler/query-compiler.js'
 
-export type * from './plugin/kysely-plugin.js'
+export type * from './types/plugin/kysely-plugin.js'
 export * from './plugin/camel-case/camel-case-plugin.js'
 export * from './plugin/deduplicate-joins/deduplicate-joins-plugin.js'
 export * from './plugin/with-schema/with-schema-plugin.js'
@@ -248,7 +248,7 @@ export * from './util/compilable.js'
 export type * from './util/explainable.js'
 export type * from './util/streamable.js'
 export type * from './util/executable.js'
-export * from './util/log.js'
+export * from './shared/util/log.js'
 export type {
   AnyAliasedColumn,
   AnyAliasedColumnWithTable,
@@ -271,16 +271,16 @@ export type {
   SqlBool,
   StringsWhenDataTypeNotAvailable,
   UnknownRow,
-} from './util/type-utils.js'
+} from './types/util/type-utils.js'
 export type * from './util/infer-result.js'
 export { logOnce } from './util/log-once.js'
-export { createQueryId, type QueryId } from './util/query-id.js'
+export { createQueryId, type QueryId } from './shared/util/query-id.js'
 export type { KyselyTypeError } from './util/type-error.js'
 export type {
   AbortableOperationOptions,
   AbortableQueryOptions,
   InflightQueryAbortStrategy,
-} from './util/abort.js'
+} from './shared/util/abort.js'
 
 export type {
   SelectExpression,

@@ -12,7 +12,7 @@ import {
 } from '../parser/insert-values-parser.js'
 import { InsertQueryNode } from '../operation-node/insert-query-node.js'
 import { QueryNode } from '../operation-node/query-node.js'
-import type { NarrowPartial } from '../util/type-utils.js'
+import type { NarrowPartial } from '../types/util/type-utils.js'
 import type { InsertResult } from './insert-result.js'
 import {
   type UpdateObjectExpression,

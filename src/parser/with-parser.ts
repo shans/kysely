@@ -2,7 +2,7 @@ import type { UpdateQueryBuilder } from '../query-builder/update-query-builder.j
 import type { DeleteQueryBuilder } from '../query-builder/delete-query-builder.js'
 import type { InsertQueryBuilder } from '../query-builder/insert-query-builder.js'
 import { CommonTableExpressionNameNode } from '../operation-node/common-table-expression-name-node.js'
-import type { QueryCreator } from '../query-creator.js'
+import type { QueryCreator } from '../shared/query-creator.js'
 import { createQueryCreator } from './parse-utils.js'
 import { isFunction } from '../util/object-utils.js'
 import {
@@ -13,7 +13,7 @@ import { CommonTableExpressionNode } from '../operation-node/common-table-expres
 import { isOperationNodeSource } from '../operation-node/operation-node-source.js'
 import type { Compilable } from '../util/compilable.js'
 import type { Expression } from '../expression/expression.js'
-import type { ShallowRecord } from '../util/type-utils.js'
+import type { ShallowRecord } from '../types/util/type-utils.js'
 import type { OperationNode } from '../operation-node/operation-node.js'
 
 export type CommonTableExpression<DB, CN> =

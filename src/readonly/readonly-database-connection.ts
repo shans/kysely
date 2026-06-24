@@ -1,4 +1,4 @@
-import type { QueryResult } from '../driver/database-connection.js'
+import type { QueryResult } from '../types/driver/database-connection.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 
 /**

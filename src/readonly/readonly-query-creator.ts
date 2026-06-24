@@ -1,5 +1,5 @@
 import type { CTEBuilderCallback } from '../query-builder/cte-builder.js'
-import type { QueryCreator } from '../query-creator.js'
+import type { QueryCreator } from '../shared/query-creator.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 import type {
   ReadonlyCommonTableExpression,

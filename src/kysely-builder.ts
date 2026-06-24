@@ -1,4 +1,4 @@
-import { QueryCreator, type QueryCreatorProps } from './query-creator.js'
+import { QueryCreator, type QueryCreatorProps } from './shared/query-creator.js'
 import { WithNode } from './operation-node/with-node.js'
 import { parseCommonTableExpression } from './parser/with-parser.js'
 import { SchemaModule } from './schema/schema-module.js'

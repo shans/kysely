@@ -1,7 +1,7 @@
 import type { Kysely } from '../../transaction-types.js'
 import { sql } from '../../raw-builder/sql.js'
 import { DialectAdapterBase } from '../dialect-adapter-base.js'
-import type { MigrationLockOptions } from '../dialect-adapter.js'
+import type { MigrationLockOptions } from '../../types/dialect/dialect-adapter.js'
 
 // Random id for our transaction lock.
 const LOCK_ID = BigInt('3853314791062309107')

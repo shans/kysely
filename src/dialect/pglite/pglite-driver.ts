@@ -1,18 +1,18 @@
 import type {
   DatabaseConnection,
   QueryResult,
-} from '../../driver/database-connection.js'
-import type { Driver } from '../../driver/driver.js'
+} from '../../types/driver/database-connection.js'
+import type { Driver } from '../../shared/driver/driver.js'
 import { parseSavepointCommand } from '../../parser/savepoint-parser.js'
-import type { CompiledQuery } from '../../query-compiler/compiled-query.js'
-import type { QueryCompiler } from '../../query-compiler/query-compiler.js'
+import type { CompiledQuery } from '../../types/query-compiler/compiled-query.js'
+import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
 import {
   waitOrAbort,
   type AbortableOperationOptions,
-} from '../../util/abort.js'
+} from '../../shared/util/abort.js'
 import { Deferred } from '../../util/deferred.js'
 import { freeze, isFunction } from '../../util/object-utils.js'
-import { createQueryId } from '../../util/query-id.js'
+import { createQueryId } from '../../shared/util/query-id.js'
 import { extendStackTrace } from '../../util/stack-trace-utils.js'
 import type {
   PGlite,

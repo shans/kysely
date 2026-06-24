@@ -1,5 +1,5 @@
 import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
+import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
 import {
   type JoinCallbackExpression,
   type JoinReferenceExpression,
@@ -34,7 +34,7 @@ import type {
   SimplifyResult,
   SimplifySingleResult,
   SqlBool,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import { UpdateQueryNode } from '../operation-node/update-query-node.js'
 import {
   type UpdateObjectExpression,

@@ -1,6 +1,6 @@
-import type { MigrationLockOptions } from '../dialect/dialect-adapter.js'
+import type { MigrationLockOptions } from '../types/dialect/dialect-adapter.js'
 import type { Kysely } from '../transaction-types.js'
-import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
+import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
 import { NoopPlugin } from '../plugin/noop-plugin.js'
 import { WithSchemaPlugin } from '../plugin/with-schema/with-schema-plugin.js'
 import type { CreateSchemaBuilder } from '../schema/create-schema-builder.js'

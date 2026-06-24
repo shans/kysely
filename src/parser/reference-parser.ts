@@ -7,7 +7,7 @@ import type {
   AnyColumn,
   AnyColumnWithTable,
   ExtractColumnType,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import type { SelectQueryBuilderExpression } from '../query-builder/select-query-builder-expression.js'
 import {
   parseExpression,

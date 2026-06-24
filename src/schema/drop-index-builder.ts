@@ -3,7 +3,7 @@ import type { OperationNodeSource } from '../operation-node/operation-node-sourc
 import { parseTable } from '../parser/table-parser.js'
 import { freeze } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export class DropIndexBuilder implements OperationNodeSource {
   readonly #props: DropIndexBuilderProps

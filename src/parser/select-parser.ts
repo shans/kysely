@@ -8,7 +8,7 @@ import type {
   AnyColumnWithTable,
   DrainOuterGeneric,
   ExtractColumnType,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import { parseAliasedStringReference } from './reference-parser.js'
 import {
   type DynamicReferenceBuilder,

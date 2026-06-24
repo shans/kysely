@@ -8,7 +8,7 @@ import type {
   ShallowDehydrateObject,
   ShallowDehydrateValue,
   Simplify,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 
 /**
  * A SQLite helper for aggregating a subquery into a JSON array.

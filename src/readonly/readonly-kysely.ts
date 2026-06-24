@@ -1,4 +1,4 @@
-import type { IsolationLevel } from '../driver/driver.js'
+import type { IsolationLevel } from '../shared/driver/driver.js'
 import type {
   Command,
   ConnectionBuilder,
@@ -12,14 +12,14 @@ import type {
   ReleaseSavepoint,
   RollbackToSavepoint,
 } from '../parser/savepoint-parser.js'
-import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
+import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
 import type { SelectQueryBuilder } from '../query-builder/select-query-builder.js'
 import type {
   AbortableOperationOptions,
   AbortableQueryOptions,
-} from '../util/abort.js'
+} from '../shared/util/abort.js'
 import type { KyselyTypeError } from '../util/type-error.js'
-import type { DrainOuterGeneric } from '../util/type-utils.js'
+import type { DrainOuterGeneric } from '../types/util/type-utils.js'
 import type { ReadonlyCompiledQuery } from './readonly-compiled-query.js'
 import type { ReadonlyQueryResult } from './readonly-database-connection.js'
 import type { ReadonlyAccessMode } from './readonly-driver.js'

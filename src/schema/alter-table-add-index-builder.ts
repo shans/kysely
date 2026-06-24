@@ -10,7 +10,7 @@ import {
 } from '../parser/reference-parser.js'
 import { freeze, isString } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export class AlterTableAddIndexBuilder
   implements OperationNodeSource

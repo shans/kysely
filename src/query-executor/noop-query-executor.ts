@@ -1,7 +1,7 @@
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
-import type { DialectAdapter } from '../dialect/dialect-adapter.js'
-import { QueryExecutorBase } from './query-executor-base.js'
+import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
+import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
+import type { DialectAdapter } from '../types/dialect/dialect-adapter.js'
+import { QueryExecutorBase } from '../shared/query-executor/query-executor-base.js'
 
 /**
  * A {@link QueryExecutor} subclass that can be used when you don't

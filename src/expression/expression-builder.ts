@@ -40,7 +40,7 @@ import {
   OperatorNode,
   type UnaryOperator,
 } from '../operation-node/operator-node.js'
-import type { IsNever, SqlBool } from '../util/type-utils.js'
+import type { IsNever, SqlBool } from '../types/util/type-utils.js'
 import { parseUnaryOperation } from '../parser/unary-operation-parser.js'
 import {
   type ExtractTypeFromValueExpression,

@@ -7,7 +7,7 @@ import {
   type SelectQueryBuilder,
   createSelectQueryBuilder as newSelectQueryBuilder,
 } from '../query-builder/select-query-builder.js'
-import { QueryCreator } from '../query-creator.js'
+import { QueryCreator } from '../shared/query-creator.js'
 import {
   parseTableExpression,
   parseTableExpressionOrList,

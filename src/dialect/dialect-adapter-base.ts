@@ -1,5 +1,5 @@
 import type { Kysely } from '../transaction-types.js'
-import type { DialectAdapter, MigrationLockOptions } from './dialect-adapter.js'
+import type { DialectAdapter, MigrationLockOptions } from '../types/dialect/dialect-adapter.js'
 
 /**
  * A basic implementation of `DialectAdapter` with sensible default values.

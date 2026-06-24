@@ -12,7 +12,7 @@ import {
   parseReferenceExpression,
   type ReferenceExpression,
 } from './reference-parser.js'
-import type { AnyColumn, DrainOuterGeneric } from '../util/type-utils.js'
+import type { AnyColumn, DrainOuterGeneric } from '../types/util/type-utils.js'
 
 export type UpdateObject<
   DB,

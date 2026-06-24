@@ -1,6 +1,6 @@
-import type { ConnectionProvider } from '../driver/connection-provider.js'
-import type { DatabaseConnection } from '../driver/database-connection.js'
-import type { AbortableOperationOptions } from './abort.js'
+import type { ConnectionProvider } from '../types/driver/connection-provider.js'
+import type { DatabaseConnection } from '../types/driver/database-connection.js'
+import type { AbortableOperationOptions } from '../shared/util/abort.js'
 import { Deferred } from './deferred.js'
 import { freeze } from './object-utils.js'
 

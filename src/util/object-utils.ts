@@ -1,4 +1,4 @@
-import type { ShallowRecord } from './type-utils.js'
+import type { ShallowRecord } from '../types/util/type-utils.js'
 
 export function isEmpty(obj: ArrayLike<unknown> | string | object): boolean {
   if (Array.isArray(obj) || isString(obj) || isBuffer(obj)) {

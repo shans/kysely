@@ -1,4 +1,4 @@
-import type { DrainOuterGeneric, IsNever, IsNullable } from './type-utils.js'
+import type { DrainOuterGeneric, IsNever, IsNullable } from '../types/util/type-utils.js'
 
 /**
  * This type can be used to specify a different type for

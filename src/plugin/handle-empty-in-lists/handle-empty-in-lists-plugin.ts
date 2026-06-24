@@ -1,10 +1,10 @@
-import type { QueryResult } from '../../driver/database-connection.js'
+import type { QueryResult } from '../../types/driver/database-connection.js'
 import type {
   KyselyPlugin,
   PluginTransformQueryArgs,
   PluginTransformResultArgs,
-} from '../kysely-plugin.js'
-import type { UnknownRow } from '../../util/type-utils.js'
+} from '../../types/plugin/kysely-plugin.js'
+import type { UnknownRow } from '../../types/util/type-utils.js'
 import { HandleEmptyInListsTransformer } from './handle-empty-in-lists-transformer.js'
 import type { HandleEmptyInListsOptions } from './handle-empty-in-lists.js'
 import type { RootOperationNode } from '../../operation-node/root-operation-node.js'

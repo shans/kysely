@@ -6,7 +6,7 @@ import { ValueNode } from '../operation-node/value-node.js'
 import { parseStringReference } from '../parser/reference-parser.js'
 import { parseTable } from '../parser/table-parser.js'
 import { parseValueExpression } from '../parser/value-parser.js'
-import { createQueryId } from '../util/query-id.js'
+import { createQueryId } from '../shared/util/query-id.js'
 import { type RawBuilder, createRawBuilder } from './raw-builder.js'
 
 export interface Sql {

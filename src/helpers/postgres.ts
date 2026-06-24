@@ -5,7 +5,7 @@ import type {
   ShallowDehydrateValue,
   ShallowDehydrateObject,
   Simplify,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 
 /**
  * A postgres helper for aggregating a subquery (or other expression) into a JSONB array.

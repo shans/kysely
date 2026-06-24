@@ -45,7 +45,7 @@ import { freeze } from '../util/object-utils.js'
 import type {
   ShallowRecord,
   SqlBool,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import type {
   OutputCallback,
   OutputExpression,

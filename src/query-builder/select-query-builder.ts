@@ -1,5 +1,5 @@
 import { AliasNode } from '../operation-node/alias-node.js'
-import type { CompiledQuery } from '../query-compiler/compiled-query.js'
+import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
 import { SelectModifierNode } from '../operation-node/select-modifier-node.js'
 import {
   type JoinCallbackExpression,
@@ -33,7 +33,7 @@ import type {
   SimplifyResult,
   SimplifySingleResult,
   SqlBool,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import {
   type DirectedOrderByStringReference,
   type OrderByExpression,
@@ -45,7 +45,7 @@ import { OffsetNode } from '../operation-node/offset-node.js'
 import type { Compilable } from '../util/compilable.js'
 import { asArray, freeze } from '../util/object-utils.js'
 import { type GroupByArg, parseGroupBy } from '../parser/group-by-parser.js'
-import type { KyselyPlugin } from '../plugin/kysely-plugin.js'
+import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
 import type { WhereInterface } from './where-interface.js'
 import type { HavingInterface } from './having-interface.js'
 import { IdentifierNode } from '../operation-node/identifier-node.js'
@@ -81,7 +81,7 @@ import type {
   Executable,
   ExecuteTakeFirstOrThrowOptions,
 } from '../util/executable.js'
-import type { AbortableQueryOptions } from '../util/abort.js'
+import type { AbortableQueryOptions } from '../shared/util/abort.js'
 
 export interface SelectQueryBuilder<DB, TB extends keyof DB, O>
   extends

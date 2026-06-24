@@ -23,7 +23,7 @@ import type {
   ShallowDehydrateObject,
   ShallowDehydrateValue,
   Simplify,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import { AggregateFunctionBuilder } from './aggregate-function-builder.js'
 import type { SelectQueryBuilderExpression } from '../query-builder/select-query-builder-expression.js'
 import { isString } from '../util/object-utils.js'

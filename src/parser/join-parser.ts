@@ -4,7 +4,7 @@ import type {
   AnyColumn,
   AnyColumnWithTable,
   DrainOuterGeneric,
-} from '../util/type-utils.js'
+} from '../types/util/type-utils.js'
 import { parseReferentialBinaryOperation } from './binary-operation-parser.js'
 import { createJoinBuilder } from './parse-utils.js'
 import {
