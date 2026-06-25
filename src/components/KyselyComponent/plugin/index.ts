@@ -1,0 +1,5 @@
+export { KyselyPluginShape } from './KyselyPluginShape.js'
+export { KyselyPluginComponent } from './KyselyPluginComponent.js'
+export { CompositeKyselyPluginComponent } from './CompositeKyselyPluginComponent.js'
+export { makeKyselyPluginHole, isKyselyPluginShape, toKyselyPluginShape, type KyselyPluginHole } from './KyselyPluginHole.js'
+export type { PluginResultArgs } from '../../../types/plugin-types.js'

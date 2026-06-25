@@ -78,10 +78,11 @@ export class ComponentHole<
       const k = key
       inputs[k] = new ChannelIn<any>(this, function(this: any, v: any) {
         if (!hole.current) throw new Error(`ComponentHole: no component slotted (input: ${k})`)
-        // `this` is the ComponentContext proxy over the hole; _tags carries the
-        // correlation and routing tags for the in-flight message.
+        // `this` is the ComponentContext proxy over the hole; _tags and _promises carry
+        // the correlation tags and promise accumulator for the in-flight message.
         const tags = (this as any)._tags as Set<string> | undefined
-        inputAccessors[k](hole.current).receive(v, tags)
+        const promises = (this as any)._promises as Promise<void>[] | undefined
+        inputAccessors[k](hole.current).receive(v, tags, promises)
       })
     }
     this.inputs = inputs as HoleInputs<C, IA>

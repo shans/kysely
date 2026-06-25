@@ -4,11 +4,12 @@ import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js
 import type { DatabaseIntrospector } from '../../types/dialect/database-introspector.js'
 import type { DialectAdapter } from '../../types/dialect/dialect-adapter.js'
 import type { Dialect } from '../../types/dialect/dialect.js'
-import { PostgresIntrospector } from '../postgres/postgres-introspector.js'
-import { PostgresQueryCompiler } from '../postgres/postgres-query-compiler.js'
-import { PGliteAdapter } from './pglite-adapter.js'
-import type { PGliteDialectConfig } from './pglite-dialect-config.js'
-import { PGliteDriver } from './pglite-driver.js'
+import { PostgresIntrospector } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/postgres-introspector.js'
+import { PostgresQueryCompiler } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent/postgres-query-compiler.js'
+import { PGliteAdapter } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/pglite-adapter.js'
+import type { PGliteDialectConfig } from '../../types/dialect/pglite-dialect-config.js'
+import type { KyselyDialectConfig } from '../../types/dialect/dialect-config.js'
+import { PGliteDriver } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/pglite-driver.js'
 
 /**
  * PGlite dialect.
@@ -39,6 +40,11 @@ export class PGliteDialect implements Dialect {
 
   constructor(config: PGliteDialectConfig) {
     this.#config = config
+  }
+
+  get dialectConfig(): KyselyDialectConfig | undefined {
+    if (Object.getPrototypeOf(this) !== PGliteDialect.prototype) return undefined
+    return { dialectName: 'pglite', ...this.#config }
   }
 
   createAdapter(): DialectAdapter {

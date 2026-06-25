@@ -276,6 +276,9 @@ export class ComponentContext {
     if (prop == '_tags') {
         return this._tags;
     }
+    if (prop == '_promises') {
+        return this._promises;
+    }
 
     const v = (target as any)[prop];
 

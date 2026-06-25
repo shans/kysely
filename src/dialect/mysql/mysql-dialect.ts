@@ -3,12 +3,13 @@ import type { Kysely } from '../../transaction-types.js'
 import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
 import type { Dialect } from '../../types/dialect/dialect.js'
 import type { DatabaseIntrospector } from '../../types/dialect/database-introspector.js'
-import { MysqlDriver } from './mysql-driver.js'
-import { MysqlQueryCompiler } from './mysql-query-compiler.js'
-import { MysqlIntrospector } from './mysql-introspector.js'
+import { MysqlDriver } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mysql-driver.js'
+import { MysqlQueryCompiler } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent/mysql-query-compiler.js'
+import { MysqlIntrospector } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mysql-introspector.js'
 import type { DialectAdapter } from '../../types/dialect/dialect-adapter.js'
-import { MysqlAdapter } from './mysql-adapter.js'
-import type { MysqlDialectConfig } from './mysql-dialect-config.js'
+import { MysqlAdapter } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mysql-adapter.js'
+import type { MysqlDialectConfig } from '../../types/dialect/mysql-dialect-config.js'
+import type { KyselyDialectConfig } from '../../types/dialect/dialect-config.js'
 
 /**
  * MySQL dialect that uses the [mysql2](https://github.com/sidorares/node-mysql2#readme) library.
@@ -45,6 +46,11 @@ export class MysqlDialect implements Dialect {
 
   constructor(config: MysqlDialectConfig) {
     this.#config = config
+  }
+
+  get dialectConfig(): KyselyDialectConfig | undefined {
+    if (Object.getPrototypeOf(this) !== MysqlDialect.prototype) return undefined
+    return { dialectName: 'mysql', ...this.#config }
   }
 
   createDriver(): Driver {

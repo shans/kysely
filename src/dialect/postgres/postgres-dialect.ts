@@ -2,13 +2,14 @@ import type { Driver } from '../../shared/driver/driver.js'
 import type { Kysely } from '../../transaction-types.js'
 import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
 import type { Dialect } from '../../types/dialect/dialect.js'
-import { PostgresDriver } from './postgres-driver.js'
+import { PostgresDriver } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/postgres-driver.js'
 import type { DatabaseIntrospector } from '../../types/dialect/database-introspector.js'
-import { PostgresIntrospector } from './postgres-introspector.js'
-import { PostgresQueryCompiler } from './postgres-query-compiler.js'
+import { PostgresIntrospector } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/postgres-introspector.js'
+import { PostgresQueryCompiler } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent/postgres-query-compiler.js'
 import type { DialectAdapter } from '../../types/dialect/dialect-adapter.js'
-import { PostgresAdapter } from './postgres-adapter.js'
-import type { PostgresDialectConfig } from './postgres-dialect-config.js'
+import { PostgresAdapter } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/postgres-adapter.js'
+import type { PostgresDialectConfig } from '../../types/dialect/postgres-dialect-config.js'
+import type { KyselyDialectConfig } from '../../types/dialect/dialect-config.js'
 
 /**
  * PostgreSQL dialect that uses the [pg](https://node-postgres.com/) library.
@@ -45,6 +46,11 @@ export class PostgresDialect implements Dialect {
 
   constructor(config: PostgresDialectConfig) {
     this.#config = config
+  }
+
+  get dialectConfig(): KyselyDialectConfig | undefined {
+    if (Object.getPrototypeOf(this) !== PostgresDialect.prototype) return undefined
+    return { dialectName: 'postgres', ...this.#config }
   }
 
   createDriver(): Driver {
