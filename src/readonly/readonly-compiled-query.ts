@@ -1,4 +1,4 @@
-import { SelectQueryNode } from '../operation-node/select-query-node.js'
+import { SelectQueryNode } from '../shared/operation-node/select-query-node.js'
 import {
   isCompiledQuery,
   type CompiledQuery,

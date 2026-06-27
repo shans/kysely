@@ -1,7 +1,7 @@
-import { AddIndexNode } from '../operation-node/add-index-node.js'
-import type { IndexType } from '../operation-node/create-index-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { RawNode } from '../operation-node/raw-node.js'
+import { AddIndexNode } from '../shared/operation-node/add-index-node.js'
+import type { IndexType } from '../shared/operation-node/create-index-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { RawNode } from '../shared/operation-node/raw-node.js'
 
 export class CreateTableAddIndexBuilder implements OperationNodeSource {
   readonly #node: AddIndexNode

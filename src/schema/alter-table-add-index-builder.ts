@@ -1,16 +1,16 @@
 import type { Expression } from '../expression/expression.js'
-import { AddIndexNode } from '../operation-node/add-index-node.js'
-import { AlterTableNode } from '../operation-node/alter-table-node.js'
-import type { IndexType } from '../operation-node/create-index-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { RawNode } from '../operation-node/raw-node.js'
+import { AddIndexNode } from '../shared/operation-node/add-index-node.js'
+import { AlterTableNode } from '../shared/operation-node/alter-table-node.js'
+import type { IndexType } from '../shared/operation-node/create-index-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { RawNode } from '../shared/operation-node/raw-node.js'
 import {
   type OrderedColumnName,
   parseOrderedColumnName,
-} from '../parser/reference-parser.js'
+} from '../shared/parser/reference-parser.js'
 import { freeze, isString } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class AlterTableAddIndexBuilder
   implements OperationNodeSource

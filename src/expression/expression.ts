@@ -1,9 +1,9 @@
-import type { AliasNode } from '../operation-node/alias-node.js'
+import type { AliasNode } from '../shared/operation-node/alias-node.js'
 import {
   isOperationNodeSource,
   type OperationNodeSource,
-} from '../operation-node/operation-node-source.js'
-import type { OperationNode } from '../operation-node/operation-node.js'
+} from '../shared/operation-node/operation-node-source.js'
+import type { OperationNode } from '../shared/operation-node/operation-node.js'
 import { isObject, isString } from '../util/object-utils.js'
 
 /**

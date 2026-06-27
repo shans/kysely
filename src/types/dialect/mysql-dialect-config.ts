@@ -1,5 +1,5 @@
 import type { DatabaseConnection } from '../driver/database-connection.js'
-import type { AbortableOperationOptions } from '../../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../util/abort.js'
 
 /**
  * Config for the MySQL dialect.

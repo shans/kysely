@@ -1,12 +1,12 @@
-import type { BinaryOperationNode } from '../../operation-node/binary-operation-node.js'
-import { OperationNodeTransformer } from '../../operation-node/operation-node-transformer.js'
-import { PrimitiveValueListNode } from '../../operation-node/primitive-value-list-node.js'
-import { OperatorNode } from '../../operation-node/operator-node.js'
+import type { BinaryOperationNode } from '../../shared/operation-node/binary-operation-node.js'
+import { OperationNodeTransformer } from '../../shared/operation-node/operation-node-transformer.js'
+import { PrimitiveValueListNode } from '../../shared/operation-node/primitive-value-list-node.js'
+import { OperatorNode } from '../../shared/operation-node/operator-node.js'
 import type {
   EmptyInListNode,
   EmptyInListsStrategy,
 } from './handle-empty-in-lists.js'
-import { ValueListNode } from '../../operation-node/value-list-node.js'
+import { ValueListNode } from '../../shared/operation-node/value-list-node.js'
 
 export class HandleEmptyInListsTransformer extends OperationNodeTransformer {
   readonly #strategy: EmptyInListsStrategy

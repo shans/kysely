@@ -2,13 +2,13 @@ import type { ConnectionProvider } from '../types/driver/connection-provider.js'
 import type { QueryResult } from '../types/driver/database-connection.js'
 import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
 import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
-import type { QueryId } from '../shared/util/query-id.js'
+import type { QueryId } from '../types/util/query-id.js'
 import type { DialectAdapter } from '../types/dialect/dialect-adapter.js'
-import type { RootOperationNode } from '../operation-node/root-operation-node.js'
+import type { RootOperationNode } from '../shared/operation-node/root-operation-node.js'
 import type {
   AbortableOperationOptions,
   AbortableQueryOptions,
-} from '../shared/util/abort.js'
+} from '../types/util/abort.js'
 
 /**
  * This interface abstracts away the details of how to compile a query into SQL

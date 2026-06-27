@@ -1,5 +1,5 @@
 import { DefaultQueryExecutor } from './DefaultQueryExecutor.js'
-import { QueryCreator } from '../../../../shared/query-creator.js'
+import { QueryCreator } from '../../../../codeView/QueryCreator.js'
 import { createQueryId } from '../../../../shared/util/query-id.js'
 
 export class IntrospectionWrapper<DB> {

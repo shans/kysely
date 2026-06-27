@@ -1,10 +1,10 @@
-import { BinaryOperationNode } from '../../operation-node/binary-operation-node.js'
-import { CastNode } from '../../operation-node/cast-node.js'
-import { DataTypeNode } from '../../operation-node/data-type-node.js'
-import { OperatorNode } from '../../operation-node/operator-node.js'
-import type { PrimitiveValueListNode } from '../../operation-node/primitive-value-list-node.js'
-import { ValueListNode } from '../../operation-node/value-list-node.js'
-import { ValueNode } from '../../operation-node/value-node.js'
+import { BinaryOperationNode } from '../../shared/operation-node/binary-operation-node.js'
+import { CastNode } from '../../shared/operation-node/cast-node.js'
+import { DataTypeNode } from '../../shared/operation-node/data-type-node.js'
+import { OperatorNode } from '../../shared/operation-node/operator-node.js'
+import type { PrimitiveValueListNode } from '../../shared/operation-node/primitive-value-list-node.js'
+import { ValueListNode } from '../../shared/operation-node/value-list-node.js'
+import { ValueNode } from '../../shared/operation-node/value-node.js'
 import { freeze } from '../../util/object-utils.js'
 
 export interface HandleEmptyInListsOptions {

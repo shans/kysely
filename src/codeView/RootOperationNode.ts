@@ -1,4 +1,4 @@
-import type { RootOperationNode as RootOperationNodeRaw } from '../operation-node/root-operation-node.js'
+import type { RootOperationNode as RootOperationNodeRaw } from '../shared/operation-node/root-operation-node.js'
 
 export type { RootOperationNodeRaw }
 

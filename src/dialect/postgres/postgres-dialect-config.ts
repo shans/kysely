@@ -1,5 +1,5 @@
 import type { DatabaseConnection } from '../../types/driver/database-connection.js'
-import type { AbortableOperationOptions } from '../../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../../types/util/abort.js'
 
 /**
  * Config for the PostgreSQL dialect.

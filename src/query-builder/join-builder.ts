@@ -1,14 +1,14 @@
-import { JoinNode } from '../operation-node/join-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { RawNode } from '../operation-node/raw-node.js'
+import { JoinNode } from '../shared/operation-node/join-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { RawNode } from '../shared/operation-node/raw-node.js'
 import {
   type ComparisonOperatorExpression,
   type OperandValueExpressionOrList,
   parseValueBinaryOperationOrExpression,
   parseReferentialBinaryOperation,
-} from '../parser/binary-operation-parser.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 import { freeze } from '../util/object-utils.js'
 import type { SqlBool } from '../types/util/type-utils.js'
 

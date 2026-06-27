@@ -7,7 +7,7 @@ import type {
 import type { UnknownRow } from '../../types/util/type-utils.js'
 import { HandleEmptyInListsTransformer } from './handle-empty-in-lists-transformer.js'
 import type { HandleEmptyInListsOptions } from './handle-empty-in-lists.js'
-import type { RootOperationNode } from '../../operation-node/root-operation-node.js'
+import type { RootOperationNode } from '../../shared/operation-node/root-operation-node.js'
 
 /**
  * A plugin that allows handling `in ()` and `not in ()` expressions.

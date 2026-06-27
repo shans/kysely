@@ -1,4 +1,4 @@
-import type { CreateIndexNode } from '../../../../operation-node/create-index-node.js'
+import type { CreateIndexNode } from '../../../../shared/operation-node/create-index-node.js'
 import { DefaultQueryCompiler } from './default-query-compiler.js'
 
 const LITERAL_ESCAPE_REGEX = /[\\']/g

@@ -1,20 +1,20 @@
 import type { Expression } from '../expression/expression.js'
-import { ColumnNode } from '../operation-node/column-node.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
-import { OnConflictNode } from '../operation-node/on-conflict-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import { ColumnNode } from '../shared/operation-node/column-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
+import { OnConflictNode } from '../shared/operation-node/on-conflict-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import {
   type ComparisonOperatorExpression,
   type OperandValueExpressionOrList,
   parseValueBinaryOperationOrExpression,
   parseReferentialBinaryOperation,
-} from '../parser/binary-operation-parser.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 import {
   type UpdateObjectExpression,
   parseUpdateObjectExpression,
-} from '../parser/update-set-parser.js'
+} from '../shared/parser/update-set-parser.js'
 import type { Updateable } from '../util/column-type.js'
 import { freeze } from '../util/object-utils.js'
 import type { AnyColumn, SqlBool } from '../types/util/type-utils.js'

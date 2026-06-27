@@ -1,5 +1,5 @@
 import type { DatabaseConnection, QueryResult } from '../types/driver/database-connection.js'
-import type { Driver } from '../shared/driver/driver.js'
+import type { Driver } from '../types/driver/driver.js'
 
 /**
  * A driver that does absolutely nothing.

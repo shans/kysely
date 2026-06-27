@@ -3,7 +3,7 @@ import type {
   OrderByExpression,
   DirectedOrderByStringReference,
   OrderByModifiers,
-} from '../parser/order-by-parser.js'
+} from '../shared/parser/order-by-parser.js'
 
 export interface OrderByInterface<DB, TB extends keyof DB, O> {
   /**

@@ -1,4 +1,4 @@
-import type { Driver } from '../../shared/driver/driver.js'
+import type { Driver } from '../../types/driver/driver.js'
 import type { Kysely } from '../../transaction-types.js'
 import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
 import type { DatabaseIntrospector } from '../../types/dialect/database-introspector.js'

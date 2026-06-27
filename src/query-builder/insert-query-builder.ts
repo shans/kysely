@@ -1,35 +1,35 @@
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import {
   parseSelectArg,
   parseSelectAll,
   type SelectExpression,
   type SelectArg,
   type SelectCallback,
-} from '../parser/select-parser.js'
+} from '../shared/parser/select-parser.js'
 import {
   type InsertExpression,
   parseInsertExpression,
-} from '../parser/insert-values-parser.js'
-import { InsertQueryNode } from '../operation-node/insert-query-node.js'
-import { QueryNode } from '../operation-node/query-node.js'
+} from '../shared/parser/insert-values-parser.js'
+import { InsertQueryNode } from '../shared/operation-node/insert-query-node.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
 import type { NarrowPartial } from '../types/util/type-utils.js'
 import type { InsertResult } from './insert-result.js'
 import {
   type UpdateObjectExpression,
   parseUpdateObjectExpression,
-} from '../parser/update-set-parser.js'
+} from '../shared/parser/update-set-parser.js'
 import { freeze } from '../util/object-utils.js'
-import { OnDuplicateKeyNode } from '../operation-node/on-duplicate-key-node.js'
+import { OnDuplicateKeyNode } from '../shared/operation-node/on-duplicate-key-node.js'
 import type {
   ReturningAllRow,
   ReturningCallbackRow,
   ReturningRow,
-} from '../parser/returning-parser.js'
+} from '../shared/parser/returning-parser.js'
 import {
   type ExpressionOrFactory,
   parseExpression,
-} from '../parser/expression-parser.js'
-import { ColumnNode } from '../operation-node/column-node.js'
+} from '../shared/parser/expression-parser.js'
+import { ColumnNode } from '../shared/operation-node/column-node.js'
 import type { ReturningInterface } from './returning-interface.js'
 import {
   OnConflictBuilder,
@@ -38,11 +38,11 @@ import {
   type OnConflictTables,
   type OnConflictUpdateBuilder,
 } from './on-conflict-builder.js'
-import { OnConflictNode } from '../operation-node/on-conflict-node.js'
+import { OnConflictNode } from '../shared/operation-node/on-conflict-node.js'
 import type { Selectable } from '../util/column-type.js'
 import type { Expression } from '../expression/expression.js'
 import type { KyselyTypeError } from '../util/type-error.js'
-import { parseTop } from '../parser/top-parser.js'
+import { parseTop } from '../shared/parser/top-parser.js'
 import type { Compilable } from '../util/compilable.js'
 import type { Executable } from '../util/executable.js'
 import type { Streamable } from '../util/streamable.js'
@@ -54,7 +54,7 @@ import type {
   SelectExpressionFromOutputCallback,
   SelectExpressionFromOutputExpression,
 } from './output-interface.js'
-import { OrActionNode } from '../operation-node/or-action-node.js'
+import { OrActionNode } from '../shared/operation-node/or-action-node.js'
 
 export class InsertQueryBuilder<DB, TB extends keyof DB, out O>
   implements

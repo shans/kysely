@@ -3,13 +3,14 @@ import type {
   DatabaseConnection,
   QueryResult,
 } from '../../../../types/driver/database-connection.js'
-import type { Driver, TransactionSettings } from '../../../../shared/driver/driver.js'
-import { parseSavepointCommand } from '../../../../parser/savepoint-parser.js'
+import type { Driver, TransactionSettings } from '../../../../types/driver/driver.js'
+import { parseSavepointCommand } from '../../../../shared/parser/savepoint-parser.js'
 import { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
-import type { AbortableOperationOptions } from '../../../../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
 import { isFunction, isObject, freeze } from '../../../../util/object-utils.js'
-import { createQueryId, type QueryId } from '../../../../shared/util/query-id.js'
+import type { QueryId } from '../../../../types/util/query-id.js'
+import { createQueryId } from '../../../../shared/util/query-id.js'
 import { extendStackTrace } from '../../../../util/stack-trace-utils.js'
 import type {
   MysqlDialectConfig,

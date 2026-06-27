@@ -1,9 +1,9 @@
-import { DropIndexNode } from '../operation-node/drop-index-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { parseTable } from '../parser/table-parser.js'
+import { DropIndexNode } from '../shared/operation-node/drop-index-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { parseTable } from '../shared/parser/table-parser.js'
 import { freeze } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class DropIndexBuilder implements OperationNodeSource {
   readonly #props: DropIndexBuilderProps

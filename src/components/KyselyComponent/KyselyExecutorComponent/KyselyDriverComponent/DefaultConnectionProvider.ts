@@ -1,7 +1,7 @@
 import type { DatabaseConnection } from '../../../../types/driver/database-connection.js'
 import type { ConnectionProvider } from '../../../../types/driver/connection-provider.js'
-import type { Driver } from '../../../../shared/driver/driver.js'
-import type { AbortableOperationOptions } from '../../../../shared/util/abort.js'
+import type { Driver } from '../../../../types/driver/driver.js'
+import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
 
 export class DefaultConnectionProvider implements ConnectionProvider {
   readonly #driver: Driver

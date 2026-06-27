@@ -1,5 +1,5 @@
 import type { CompiledQuery } from '../query-compiler/compiled-query.js'
-import type { AbortableOperationOptions } from '../../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../util/abort.js'
 
 /**
  * A single connection to the database engine.

@@ -1,7 +1,7 @@
-import { OperationNodeTransformer } from '../../operation-node/operation-node-transformer.js'
-import type { PrimitiveValueListNode } from '../../operation-node/primitive-value-list-node.js'
-import { ValueListNode } from '../../operation-node/value-list-node.js'
-import { ValueNode } from '../../operation-node/value-node.js'
+import { OperationNodeTransformer } from '../../shared/operation-node/operation-node-transformer.js'
+import type { PrimitiveValueListNode } from '../../shared/operation-node/primitive-value-list-node.js'
+import { ValueListNode } from '../../shared/operation-node/value-list-node.js'
+import { ValueNode } from '../../shared/operation-node/value-node.js'
 
 /**
  * Transforms all ValueNodes to immediate.

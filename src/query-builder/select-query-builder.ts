@@ -1,12 +1,12 @@
-import { AliasNode } from '../operation-node/alias-node.js'
+import { AliasNode } from '../shared/operation-node/alias-node.js'
 import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
-import { SelectModifierNode } from '../operation-node/select-modifier-node.js'
+import { SelectModifierNode } from '../shared/operation-node/select-modifier-node.js'
 import {
   type JoinCallbackExpression,
   type JoinReferenceExpression,
   parseJoin,
-} from '../parser/join-parser.js'
-import { type TableExpression, parseTable } from '../parser/table-parser.js'
+} from '../shared/parser/join-parser.js'
+import { type TableExpression, parseTable } from '../shared/parser/table-parser.js'
 import {
   parseSelectArg,
   parseSelectAll,
@@ -16,14 +16,14 @@ import {
   type AllSelection,
   type SelectCallback,
   type CallbackSelection,
-} from '../parser/select-parser.js'
+} from '../shared/parser/select-parser.js'
 import {
   parseReferenceExpressionOrList,
   type ReferenceExpression,
   type ReferenceExpressionOrList,
-} from '../parser/reference-parser.js'
-import { SelectQueryNode } from '../operation-node/select-query-node.js'
-import { QueryNode } from '../operation-node/query-node.js'
+} from '../shared/parser/reference-parser.js'
+import { SelectQueryNode } from '../shared/operation-node/select-query-node.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
 import type {
   DrainOuterGeneric,
   NarrowPartial,
@@ -39,49 +39,49 @@ import {
   type OrderByExpression,
   type OrderByModifiers,
   parseOrderBy,
-} from '../parser/order-by-parser.js'
-import { LimitNode } from '../operation-node/limit-node.js'
-import { OffsetNode } from '../operation-node/offset-node.js'
+} from '../shared/parser/order-by-parser.js'
+import { LimitNode } from '../shared/operation-node/limit-node.js'
+import { OffsetNode } from '../shared/operation-node/offset-node.js'
 import type { Compilable } from '../util/compilable.js'
 import { asArray, freeze } from '../util/object-utils.js'
-import { type GroupByArg, parseGroupBy } from '../parser/group-by-parser.js'
+import { type GroupByArg, parseGroupBy } from '../shared/parser/group-by-parser.js'
 import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
 import type { WhereInterface } from './where-interface.js'
 import type { HavingInterface } from './having-interface.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
 import type { Explainable, ExplainFormat } from '../util/explainable.js'
 import {
   type SetOperandExpression,
   parseSetOperations,
-} from '../parser/set-operation-parser.js'
+} from '../shared/parser/set-operation-parser.js'
 import type { AliasedExpression, Expression } from '../expression/expression.js'
 import {
   type ComparisonOperatorExpression,
   type OperandValueExpressionOrList,
   parseValueBinaryOperationOrExpression,
   parseReferentialBinaryOperation,
-} from '../parser/binary-operation-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 import type { Selectable } from '../util/column-type.js'
 import type { Streamable, StreamOptions } from '../util/streamable.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
 import { ExpressionWrapper } from '../expression/expression-wrapper.js'
 import type { SelectQueryBuilderExpression } from './select-query-builder-expression.js'
 import {
   type ValueExpression,
   parseValueExpression,
-} from '../parser/value-parser.js'
-import type { FetchModifier } from '../operation-node/fetch-node.js'
-import { parseFetch } from '../parser/fetch-parser.js'
-import type { TopModifier } from '../operation-node/top-node.js'
-import { parseTop } from '../parser/top-parser.js'
-import type { JoinType } from '../operation-node/join-node.js'
+} from '../shared/parser/value-parser.js'
+import type { FetchModifier } from '../shared/operation-node/fetch-node.js'
+import { parseFetch } from '../shared/parser/fetch-parser.js'
+import type { TopModifier } from '../shared/operation-node/top-node.js'
+import { parseTop } from '../shared/parser/top-parser.js'
+import type { JoinType } from '../shared/operation-node/join-node.js'
 import type { OrderByInterface } from './order-by-interface.js'
 import type {
   Executable,
   ExecuteTakeFirstOrThrowOptions,
 } from '../util/executable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export interface SelectQueryBuilder<DB, TB extends keyof DB, O>
   extends

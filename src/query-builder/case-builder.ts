@@ -5,21 +5,21 @@ import {
   parseReferenceExpression,
   type ExtractTypeFromReferenceExpression,
   type ReferenceExpression,
-} from '../parser/reference-parser.js'
-import { CaseNode } from '../operation-node/case-node.js'
-import { WhenNode } from '../operation-node/when-node.js'
+} from '../shared/parser/reference-parser.js'
+import { CaseNode } from '../shared/operation-node/case-node.js'
+import { WhenNode } from '../shared/operation-node/when-node.js'
 import {
   type ComparisonOperatorExpression,
   type OperandValueExpressionOrList,
   parseReferentialBinaryOperation,
   parseValueBinaryOperationOrExpression,
-} from '../parser/binary-operation-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
 import {
   type ExtractTypeFromValueExpression,
   isSafeImmediateValue,
   parseSafeImmediateValue,
   parseValueExpression,
-} from '../parser/value-parser.js'
+} from '../shared/parser/value-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 
 export class CaseBuilder<

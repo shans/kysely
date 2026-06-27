@@ -2,15 +2,15 @@ import type { DialectAdapter } from '../../../../types/dialect/dialect-adapter.j
 import type { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
 import type { Log } from '../../../../shared/util/log.js'
+import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
 import {
-  type AbortableOperationOptions,
   printBackgroundFail,
   waitOrAbort,
 } from '../../../../shared/util/abort.js'
 import { performanceNow } from '../../../../shared/util/performance-now.js'
 import { ConnectionMutex } from './ConnectionMutex.js'
 import type { DatabaseConnection, QueryResult } from '../../../../types/driver/database-connection.js'
-import type { Driver, TransactionSettings } from '../../../../shared/driver/driver.js'
+import type { Driver, TransactionSettings } from '../../../../types/driver/driver.js'
 
 /**
  * A small wrapper around {@link Driver} that makes sure the driver is

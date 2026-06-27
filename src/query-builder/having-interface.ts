@@ -1,8 +1,8 @@
 import type {
   ComparisonOperatorExpression,
   OperandValueExpressionOrList,
-} from '../parser/binary-operation-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 
 export interface HavingInterface<DB, TB extends keyof DB> {
   /**

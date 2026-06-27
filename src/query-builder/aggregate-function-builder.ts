@@ -1,31 +1,31 @@
 import { freeze } from '../util/object-utils.js'
-import { AggregateFunctionNode } from '../operation-node/aggregate-function-node.js'
-import { AliasNode } from '../operation-node/alias-node.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
+import { AggregateFunctionNode } from '../shared/operation-node/aggregate-function-node.js'
+import { AliasNode } from '../shared/operation-node/alias-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
 import type { OverBuilder } from './over-builder.js'
-import { createOverBuilder } from '../parser/parse-utils.js'
+import { createOverBuilder } from '../shared/parser/parse-utils.js'
 import type {
   AliasableExpression,
   AliasedExpression,
   Expression,
 } from '../expression/expression.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 import {
   type ComparisonOperatorExpression,
   type OperandValueExpressionOrList,
   parseReferentialBinaryOperation,
   parseValueBinaryOperationOrExpression,
-} from '../parser/binary-operation-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
 import type { SqlBool } from '../types/util/type-utils.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
 import {
   type DirectedOrderByStringReference,
   type OrderByExpression,
   type OrderByModifiers,
   parseOrderBy,
-} from '../parser/order-by-parser.js'
+} from '../shared/parser/order-by-parser.js'
 import type { OrderByInterface } from './order-by-interface.js'
-import { QueryNode } from '../operation-node/query-node.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
 
 export class AggregateFunctionBuilder<DB, TB extends keyof DB, O = unknown>
   implements OrderByInterface<DB, TB, {}>, AliasableExpression<O>

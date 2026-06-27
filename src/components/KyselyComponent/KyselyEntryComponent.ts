@@ -1,4 +1,4 @@
-import type { RootOperationNode } from '../../operation-node/root-operation-node.js'
+import type { RootOperationNode } from '../../shared/operation-node/root-operation-node.js'
 import { ChannelIn, ChannelOut, Component } from '../../channels/channel.js'
 import { createQueryId } from '../../shared/util/query-id.js'
 import type { PluginQueryArgs } from '../../types/plugin-types.js'

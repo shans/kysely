@@ -1,29 +1,18 @@
-import type { CompiledQuery } from '../../types/query-compiler/compiled-query.js'
+// Runtime-only: the Log class, LOG_LEVELS const, and defaultLogger function
+// survive TypeScript compilation and belong in shared/. The type aliases and
+// interfaces (LogLevel, Logger, LogConfig, QueryLogEvent, ErrorLogEvent, LogEvent)
+// are erased at compile time and live in types/util/log.ts.
 import { freeze, isFunction } from '../../util/object-utils.js'
-import type { ArrayItemType } from '../../types/util/type-utils.js'
+import type {
+  LogLevel,
+  Logger,
+  LogConfig,
+  QueryLogEvent,
+  ErrorLogEvent,
+} from '../../types/util/log.js'
 
 const logLevels = ['query', 'error'] as const
 export const LOG_LEVELS: Readonly<typeof logLevels> = freeze(logLevels)
-
-export type LogLevel = ArrayItemType<typeof LOG_LEVELS>
-
-export interface QueryLogEvent {
-  readonly level: 'query'
-  readonly isStream?: boolean
-  readonly query: CompiledQuery
-  readonly queryDurationMillis: number
-}
-
-export interface ErrorLogEvent {
-  readonly level: 'error'
-  readonly error: unknown
-  readonly query: CompiledQuery
-  readonly queryDurationMillis: number
-}
-
-export type LogEvent = QueryLogEvent | ErrorLogEvent
-export type Logger = (event: LogEvent) => void | Promise<void>
-export type LogConfig = ReadonlyArray<LogLevel> | Logger
 
 export class Log {
   readonly #levels: Readonly<Record<LogLevel, boolean>>
@@ -64,7 +53,7 @@ export class Log {
   }
 }
 
-function defaultLogger(event: LogEvent): void {
+function defaultLogger(event: QueryLogEvent | ErrorLogEvent): void {
   if (event.level === 'query') {
     const prefix = `kysely:query:${event.isStream ? 'stream:' : ''}`
     console.log(`${prefix} ${event.query.sql}`)

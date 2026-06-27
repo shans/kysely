@@ -1,7 +1,7 @@
-import { ForeignKeyConstraintNode } from '../operation-node/foreign-key-constraint-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { OnModifyForeignAction } from '../operation-node/references-node.js'
-import { parseOnModifyForeignAction } from '../parser/on-modify-action-parser.js'
+import { ForeignKeyConstraintNode } from '../shared/operation-node/foreign-key-constraint-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import type { OnModifyForeignAction } from '../shared/operation-node/references-node.js'
+import { parseOnModifyForeignAction } from '../shared/parser/on-modify-action-parser.js'
 
 export interface ForeignKeyConstraintBuilderInterface<R> {
   onDelete(onDelete: OnModifyForeignAction): R

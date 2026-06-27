@@ -1,7 +1,7 @@
 import type { QueryResult } from '../driver/database-connection.js'
-import type { RootOperationNode } from '../../operation-node/root-operation-node.js'
-import type { AbortableOperationOptions } from '../../shared/util/abort.js'
-import type { QueryId } from '../../shared/util/query-id.js'
+import type { RootOperationNode } from '../../shared/operation-node/root-operation-node.js'
+import type { AbortableOperationOptions } from '../util/abort.js'
+import type { QueryId } from '../util/query-id.js'
 import type { UnknownRow } from '../util/type-utils.js'
 
 export interface KyselyPlugin {

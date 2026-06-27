@@ -1,8 +1,8 @@
-import { CollateNode } from '../operation-node/collate-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { OrderByItemNode } from '../operation-node/order-by-item-node.js'
-import { RawNode } from '../operation-node/raw-node.js'
-import type { Collation } from '../parser/collate-parser.js'
+import { CollateNode } from '../shared/operation-node/collate-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { OrderByItemNode } from '../shared/operation-node/order-by-item-node.js'
+import { RawNode } from '../shared/operation-node/raw-node.js'
+import type { Collation } from '../shared/parser/collate-parser.js'
 import { freeze } from '../util/object-utils.js'
 
 export class OrderByItemBuilder implements OperationNodeSource {

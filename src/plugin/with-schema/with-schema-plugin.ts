@@ -6,7 +6,7 @@ import type {
   PluginTransformResultArgs,
 } from '../../types/plugin/kysely-plugin.js'
 import type { UnknownRow } from '../../types/util/type-utils.js'
-import type { RootOperationNode } from '../../operation-node/root-operation-node.js'
+import type { RootOperationNode } from '../../shared/operation-node/root-operation-node.js'
 
 export class WithSchemaPlugin implements KyselyPlugin {
   readonly #transformer: WithSchemaTransformer

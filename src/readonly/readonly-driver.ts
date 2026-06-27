@@ -1,4 +1,4 @@
-import type { AccessMode } from '../shared/driver/driver.js'
+import type { AccessMode } from '../types/driver/driver.js'
 
 /**
  * Similar to {@link AccessMode} but read-only.

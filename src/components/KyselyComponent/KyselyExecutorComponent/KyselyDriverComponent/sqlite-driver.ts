@@ -2,12 +2,12 @@ import type {
   DatabaseConnection,
   QueryResult,
 } from '../../../../types/driver/database-connection.js'
-import type { Driver } from '../../../../shared/driver/driver.js'
-import { SelectQueryNode } from '../../../../operation-node/select-query-node.js'
-import { parseSavepointCommand } from '../../../../parser/savepoint-parser.js'
+import type { Driver } from '../../../../types/driver/driver.js'
+import { SelectQueryNode } from '../../../../shared/operation-node/select-query-node.js'
+import { parseSavepointCommand } from '../../../../shared/parser/savepoint-parser.js'
 import { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
-import type { AbortableOperationOptions } from '../../../../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
 import { freeze, isFunction } from '../../../../util/object-utils.js'
 import { createQueryId } from '../../../../shared/util/query-id.js'
 import type {

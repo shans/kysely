@@ -1,11 +1,11 @@
 import type {
   ComparisonOperatorExpression,
   OperandValueExpressionOrList,
-} from '../parser/binary-operation-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 import type { SqlBool } from '../types/util/type-utils.js'
 import type { ExpressionBuilder } from '../expression/expression-builder.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
 
 export interface WhereInterface<DB, TB extends keyof DB> {
   /**

@@ -1,17 +1,17 @@
-import { AliasNode } from '../operation-node/alias-node.js'
-import { AndNode } from '../operation-node/and-node.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
-import { isOperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { OperationNode } from '../operation-node/operation-node.js'
-import { OrNode } from '../operation-node/or-node.js'
-import { ParensNode } from '../operation-node/parens-node.js'
+import { AliasNode } from '../shared/operation-node/alias-node.js'
+import { AndNode } from '../shared/operation-node/and-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
+import { isOperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import type { OperationNode } from '../shared/operation-node/operation-node.js'
+import { OrNode } from '../shared/operation-node/or-node.js'
+import { ParensNode } from '../shared/operation-node/parens-node.js'
 import {
   type ComparisonOperatorExpression,
   type OperandValueExpressionOrList,
   parseValueBinaryOperationOrExpression,
-} from '../parser/binary-operation-parser.js'
-import type { OperandExpression } from '../parser/expression-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
+import type { OperandExpression } from '../shared/parser/expression-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 import type { SqlBool } from '../types/util/type-utils.js'
 import type {

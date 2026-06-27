@@ -1,31 +1,31 @@
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
 import {
   type JoinCallbackExpression,
   type JoinReferenceExpression,
   parseJoin,
-} from '../parser/join-parser.js'
+} from '../shared/parser/join-parser.js'
 import {
   type TableExpression,
   type From,
   type FromTables,
   parseTableExpressionOrList,
   type TableExpressionOrList,
-} from '../parser/table-parser.js'
+} from '../shared/parser/table-parser.js'
 import {
   parseSelectArg,
   parseSelectAll,
   type SelectExpression,
   type SelectArg,
   type SelectCallback,
-} from '../parser/select-parser.js'
+} from '../shared/parser/select-parser.js'
 import type {
   ReturningAllRow,
   ReturningCallbackRow,
   ReturningRow,
-} from '../parser/returning-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
-import { QueryNode } from '../operation-node/query-node.js'
+} from '../shared/parser/returning-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
 import type {
   DrainOuterGeneric,
   NarrowPartial,
@@ -35,12 +35,12 @@ import type {
   SimplifySingleResult,
   SqlBool,
 } from '../types/util/type-utils.js'
-import { UpdateQueryNode } from '../operation-node/update-query-node.js'
+import { UpdateQueryNode } from '../shared/operation-node/update-query-node.js'
 import {
   type UpdateObjectExpression,
   type ExtractUpdateTypeFromReferenceExpression,
   parseUpdate,
-} from '../parser/update-set-parser.js'
+} from '../shared/parser/update-set-parser.js'
 import { freeze } from '../util/object-utils.js'
 import { UpdateResult } from './update-result.js'
 import type { WhereInterface } from './where-interface.js'
@@ -51,19 +51,19 @@ import {
   type OperandValueExpressionOrList,
   parseReferentialBinaryOperation,
   parseValueBinaryOperationOrExpression,
-} from '../parser/binary-operation-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 import type { Compilable } from '../util/compilable.js'
 import type { Executable } from '../util/executable.js'
 import type { Streamable } from '../util/streamable.js'
 import type { Explainable } from '../util/explainable.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
 import {
   type ValueExpression,
   parseValueExpression,
-} from '../parser/value-parser.js'
-import { LimitNode } from '../operation-node/limit-node.js'
-import { parseTop } from '../parser/top-parser.js'
+} from '../shared/parser/value-parser.js'
+import { LimitNode } from '../shared/operation-node/limit-node.js'
+import { parseTop } from '../shared/parser/top-parser.js'
 import type {
   OutputCallback,
   OutputExpression,
@@ -72,14 +72,14 @@ import type {
   SelectExpressionFromOutputCallback,
   SelectExpressionFromOutputExpression,
 } from './output-interface.js'
-import type { JoinType } from '../operation-node/join-node.js'
+import type { JoinType } from '../shared/operation-node/join-node.js'
 import type { OrderByInterface } from './order-by-interface.js'
 import {
   type DirectedOrderByStringReference,
   type OrderByExpression,
   type OrderByModifiers,
   parseOrderBy,
-} from '../parser/order-by-parser.js'
+} from '../shared/parser/order-by-parser.js'
 
 export class UpdateQueryBuilder<DB, UT extends keyof DB, TB extends keyof DB, O>
   implements

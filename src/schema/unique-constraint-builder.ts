@@ -1,5 +1,5 @@
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { UniqueConstraintNode } from '../operation-node/unique-constraint-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { UniqueConstraintNode } from '../shared/operation-node/unique-constraint-node.js'
 
 export class UniqueConstraintNodeBuilder implements OperationNodeSource {
   readonly #node: UniqueConstraintNode

@@ -10,7 +10,7 @@ import {
   DEFAULT_MIGRATION_TABLE,
 } from '../../../../migration/migrator.js'
 import { sql } from '../../../../raw-builder/sql.js'
-import type { QueryCreator } from '../../../../shared/query-creator.js'
+import type { QueryCreator } from '../../../../codeView/QueryCreator.js'
 
 interface SqliteSystemDatabase {
   // https://www.sqlite.org/schematab.html#alternative_names

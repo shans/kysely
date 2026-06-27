@@ -1,8 +1,8 @@
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import { freeze } from '../util/object-utils.js'
-import { RefreshMaterializedViewNode } from '../operation-node/refresh-materialized-view-node.js'
+import { RefreshMaterializedViewNode } from '../shared/operation-node/refresh-materialized-view-node.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class RefreshMaterializedViewBuilder
   implements OperationNodeSource

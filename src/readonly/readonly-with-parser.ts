@@ -8,7 +8,7 @@ import type {
   ExtractTableFromCommonTableExpressionName,
   QueryCreatorWithCommonTableExpression,
   RecursiveCommonTableExpression,
-} from '../parser/with-parser.js'
+} from '../shared/parser/with-parser.js'
 import type { SelectQueryBuilder } from '../query-builder/select-query-builder.js'
 import type { ReadonlyQueryCreator } from './readonly-query-creator.js'
 

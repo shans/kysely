@@ -1,8 +1,8 @@
-import { DropSchemaNode } from '../operation-node/drop-schema-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import { DropSchemaNode } from '../shared/operation-node/drop-schema-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import { freeze } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class DropSchemaBuilder implements OperationNodeSource {
   readonly #props: DropSchemaBuilderProps

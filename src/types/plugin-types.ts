@@ -1,8 +1,8 @@
 import type { QueryResult } from './driver/database-connection.js'
-import type { QueryId } from '../shared/util/query-id.js'
+import type { QueryId } from './util/query-id.js'
 import type { UnknownRow } from './util/type-utils.js'
-import type { AbortableOperationOptions } from '../shared/util/abort.js'
-import type { RootOperationNode as RootOperationNodeRaw } from '../operation-node/root-operation-node.js'
+import type { AbortableOperationOptions } from './util/abort.js'
+import type { RootOperationNode as RootOperationNodeRaw } from '../shared/operation-node/root-operation-node.js'
 
 export type { RootOperationNodeRaw }
 

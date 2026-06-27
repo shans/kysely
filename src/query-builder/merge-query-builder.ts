@@ -1,46 +1,46 @@
 import type { AliasedExpression, Expression } from '../expression/expression.js'
-import { InsertQueryNode } from '../operation-node/insert-query-node.js'
-import { MergeQueryNode } from '../operation-node/merge-query-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { QueryNode } from '../operation-node/query-node.js'
-import { UpdateQueryNode } from '../operation-node/update-query-node.js'
+import { InsertQueryNode } from '../shared/operation-node/insert-query-node.js'
+import { MergeQueryNode } from '../shared/operation-node/merge-query-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
+import { UpdateQueryNode } from '../shared/operation-node/update-query-node.js'
 import type {
   ComparisonOperatorExpression,
   OperandValueExpressionOrList,
-} from '../parser/binary-operation-parser.js'
-import type { ExpressionOrFactory } from '../parser/expression-parser.js'
+} from '../shared/parser/binary-operation-parser.js'
+import type { ExpressionOrFactory } from '../shared/parser/expression-parser.js'
 import {
   type InsertExpression,
   type InsertObjectOrList,
   type InsertObjectOrListFactory,
   parseInsertExpression,
-} from '../parser/insert-values-parser.js'
+} from '../shared/parser/insert-values-parser.js'
 import {
   type JoinCallbackExpression,
   type JoinReferenceExpression,
   parseJoin,
-} from '../parser/join-parser.js'
-import { parseMergeThen, parseMergeWhen } from '../parser/merge-parser.js'
-import type { ReferenceExpression } from '../parser/reference-parser.js'
+} from '../shared/parser/join-parser.js'
+import { parseMergeThen, parseMergeWhen } from '../shared/parser/merge-parser.js'
+import type { ReferenceExpression } from '../shared/parser/reference-parser.js'
 import type {
   ReturningAllRow,
   ReturningCallbackRow,
   ReturningRow,
-} from '../parser/returning-parser.js'
+} from '../shared/parser/returning-parser.js'
 import {
   parseSelectAll,
   parseSelectArg,
   type SelectCallback,
   type SelectExpression,
-} from '../parser/select-parser.js'
-import type { TableExpression } from '../parser/table-parser.js'
-import { parseTop } from '../parser/top-parser.js'
+} from '../shared/parser/select-parser.js'
+import type { TableExpression } from '../shared/parser/table-parser.js'
+import { parseTop } from '../shared/parser/top-parser.js'
 import type {
   ExtractUpdateTypeFromReferenceExpression,
   UpdateObject,
   UpdateObjectFactory,
-} from '../parser/update-set-parser.js'
-import type { ValueExpression } from '../parser/value-parser.js'
+} from '../shared/parser/update-set-parser.js'
+import type { ValueExpression } from '../shared/parser/value-parser.js'
 import { freeze } from '../util/object-utils.js'
 import type {
   ShallowRecord,

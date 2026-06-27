@@ -5,9 +5,9 @@ import type { QueryCompiler } from '../../../../types/query-compiler/query-compi
 import type { KyselyPlugin } from '../../../../types/plugin/kysely-plugin.js'
 import { QueryExecutorBase } from '../../../../shared/query-executor/query-executor-base.js'
 import type { DialectAdapter } from '../../../../types/dialect/dialect-adapter.js'
-import type { QueryId } from '../../../../shared/util/query-id.js'
-import type { RootOperationNode } from '../../../../operation-node/root-operation-node.js'
-import type { AbortableOperationOptions } from '../../../../shared/util/abort.js'
+import type { QueryId } from '../../../../types/util/query-id.js'
+import type { RootOperationNode } from '../../../../shared/operation-node/root-operation-node.js'
+import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
 
 export class DefaultQueryExecutor extends QueryExecutorBase {
   #compiler: QueryCompiler

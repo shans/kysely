@@ -1,22 +1,22 @@
 import { ExpressionWrapper } from '../expression/expression-wrapper.js'
 import type { Expression } from '../expression/expression.js'
-import { AggregateFunctionNode } from '../operation-node/aggregate-function-node.js'
-import { FunctionNode } from '../operation-node/function-node.js'
+import { AggregateFunctionNode } from '../shared/operation-node/aggregate-function-node.js'
+import { FunctionNode } from '../shared/operation-node/function-node.js'
 import type {
   ExtractTypeFromCoalesce1,
   ExtractTypeFromCoalesce3,
   ExtractTypeFromCoalesce2,
   ExtractTypeFromCoalesce4,
   ExtractTypeFromCoalesce5,
-} from '../parser/coalesce-parser.js'
+} from '../shared/parser/coalesce-parser.js'
 import {
   type ExtractTypeFromReferenceExpression,
   type ReferenceExpression,
   type StringReference,
   parseReferenceExpressionOrList,
   type ExtractTypeFromStringReference,
-} from '../parser/reference-parser.js'
-import { parseSelectAll } from '../parser/select-parser.js'
+} from '../shared/parser/reference-parser.js'
+import { parseSelectAll } from '../shared/parser/select-parser.js'
 import type { KyselyTypeError } from '../util/type-error.js'
 import type {
   IsNever,
@@ -27,7 +27,7 @@ import type {
 import { AggregateFunctionBuilder } from './aggregate-function-builder.js'
 import type { SelectQueryBuilderExpression } from '../query-builder/select-query-builder-expression.js'
 import { isString } from '../util/object-utils.js'
-import { parseTable } from '../parser/table-parser.js'
+import { parseTable } from '../shared/parser/table-parser.js'
 import type { Selectable, SelectType } from '../util/column-type.js'
 
 /**

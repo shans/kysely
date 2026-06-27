@@ -1,7 +1,7 @@
-import { BinaryOperationNode } from '../../operation-node/binary-operation-node.js'
-import { OperationNodeTransformer } from '../../operation-node/operation-node-transformer.js'
-import { OperatorNode } from '../../operation-node/operator-node.js'
-import { ValueNode } from '../../operation-node/value-node.js'
+import { BinaryOperationNode } from '../../shared/operation-node/binary-operation-node.js'
+import { OperationNodeTransformer } from '../../shared/operation-node/operation-node-transformer.js'
+import { OperatorNode } from '../../shared/operation-node/operator-node.js'
+import { ValueNode } from '../../shared/operation-node/value-node.js'
 
 export class SafeNullComparisonTransformer extends OperationNodeTransformer {
   protected transformBinaryOperation(

@@ -1,4 +1,4 @@
-import type { AbortableOperationOptions } from '../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../types/util/abort.js'
 
 export interface Streamable<O> {
   /**

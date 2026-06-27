@@ -1,5 +1,5 @@
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { CommonTableExpressionNode } from '../operation-node/common-table-expression-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { CommonTableExpressionNode } from '../shared/operation-node/common-table-expression-node.js'
 import { freeze } from '../util/object-utils.js'
 
 export class CTEBuilder<N extends string> implements OperationNodeSource {

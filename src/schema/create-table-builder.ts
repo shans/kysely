@@ -1,13 +1,13 @@
-import { ColumnDefinitionNode } from '../operation-node/column-definition-node.js'
+import { ColumnDefinitionNode } from '../shared/operation-node/column-definition-node.js'
 import {
   CreateTableNode,
   type OnCommitAction,
-} from '../operation-node/create-table-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+} from '../shared/operation-node/create-table-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import { ColumnDefinitionBuilder } from './column-definition-builder.js'
 import { freeze, isString, noop } from '../util/object-utils.js'
-import { ForeignKeyConstraintNode } from '../operation-node/foreign-key-constraint-node.js'
-import { ColumnNode } from '../operation-node/column-node.js'
+import { ForeignKeyConstraintNode } from '../shared/operation-node/foreign-key-constraint-node.js'
+import { ColumnNode } from '../shared/operation-node/column-node.js'
 import {
   ForeignKeyConstraintBuilder,
   type ForeignKeyConstraintBuilderCallback,
@@ -15,12 +15,12 @@ import {
 import {
   type DataTypeExpression,
   parseDataTypeExpression,
-} from '../parser/data-type-parser.js'
-import { PrimaryKeyConstraintNode } from '../operation-node/primary-key-constraint-node.js'
-import { UniqueConstraintNode } from '../operation-node/unique-constraint-node.js'
-import { CheckConstraintNode } from '../operation-node/check-constraint-node.js'
-import { parseTable } from '../parser/table-parser.js'
-import { parseOnCommitAction } from '../parser/on-commit-action-parse.js'
+} from '../shared/parser/data-type-parser.js'
+import { PrimaryKeyConstraintNode } from '../shared/operation-node/primary-key-constraint-node.js'
+import { UniqueConstraintNode } from '../shared/operation-node/unique-constraint-node.js'
+import { CheckConstraintNode } from '../shared/operation-node/check-constraint-node.js'
+import { parseTable } from '../shared/parser/table-parser.js'
+import { parseOnCommitAction } from '../shared/parser/on-commit-action-parse.js'
 import type { Expression } from '../expression/expression.js'
 import {
   UniqueConstraintNodeBuilder,
@@ -29,7 +29,7 @@ import {
 import {
   type ExpressionOrFactory,
   parseExpression,
-} from '../parser/expression-parser.js'
+} from '../shared/parser/expression-parser.js'
 import {
   PrimaryKeyConstraintBuilder,
   type PrimaryKeyConstraintBuilderCallback,
@@ -38,13 +38,13 @@ import {
   CheckConstraintBuilder,
   type CheckConstraintBuilderCallback,
 } from './check-constraint-builder.js'
-import { AddIndexNode } from '../operation-node/add-index-node.js'
+import { AddIndexNode } from '../shared/operation-node/add-index-node.js'
 import {
   CreateTableAddIndexBuilder,
   type CreateTableAddIndexBuilderCallback,
 } from './create-table-add-index-builder.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 /**
  * This builder can be used to create a `create table` query.
  */

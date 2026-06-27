@@ -1,21 +1,21 @@
 import type { QueryResult } from '../types/driver/database-connection.js'
-import { AliasNode } from '../operation-node/alias-node.js'
-import type { RawNode } from '../operation-node/raw-node.js'
+import { AliasNode } from '../shared/operation-node/alias-node.js'
+import type { RawNode } from '../shared/operation-node/raw-node.js'
 import type { CompiledQuery } from '../types/query-compiler/compiled-query.js'
 import type { QueryExecutor } from '../query-executor/query-executor.js'
 import { freeze } from '../util/object-utils.js'
 import type { KyselyPlugin } from '../types/plugin/kysely-plugin.js'
 import { NOOP_QUERY_EXECUTOR } from '../query-executor/noop-query-executor.js'
 import type { QueryExecutorProvider } from '../query-executor/query-executor-provider.js'
-import type { QueryId } from '../shared/util/query-id.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
+import type { QueryId } from '../types/util/query-id.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
 import type {
   AliasableExpression,
   AliasedExpression,
   Expression,
 } from '../expression/expression.js'
-import { isOperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import { isOperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 /**
  * An instance of this class can be used to create raw SQL snippets or queries.

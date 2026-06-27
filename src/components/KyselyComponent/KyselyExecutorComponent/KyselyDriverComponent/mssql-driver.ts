@@ -6,7 +6,7 @@ import type {
   Driver,
   IsolationLevel,
   TransactionSettings,
-} from '../../../../shared/driver/driver.js'
+} from '../../../../types/driver/driver.js'
 import {
   freeze,
   isBigInt,

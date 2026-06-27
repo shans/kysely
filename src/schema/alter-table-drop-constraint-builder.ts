@@ -1,9 +1,9 @@
-import { AlterTableNode } from '../operation-node/alter-table-node.js'
-import { DropConstraintNode } from '../operation-node/drop-constraint-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import { AlterTableNode } from '../shared/operation-node/alter-table-node.js'
+import { DropConstraintNode } from '../shared/operation-node/drop-constraint-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import { freeze } from '../util/object-utils.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class AlterTableDropConstraintBuilder
   implements OperationNodeSource

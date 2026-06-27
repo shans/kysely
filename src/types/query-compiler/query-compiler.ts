@@ -1,5 +1,5 @@
-import type { RootOperationNode } from '../../operation-node/root-operation-node.js'
-import type { QueryId } from '../../shared/util/query-id.js'
+import type { RootOperationNode } from '../../shared/operation-node/root-operation-node.js'
+import type { QueryId } from '../util/query-id.js'
 import type { CompiledQuery } from './compiled-query.js'
 
 /**

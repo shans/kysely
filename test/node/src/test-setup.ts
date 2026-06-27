@@ -43,7 +43,7 @@ import {
   PGliteDialect,
 } from '../../../dist/index.js'
 import type { ConnectionConfiguration } from 'tedious'
-import type { DataTypeExpression } from '../../../dist/parser/data-type-parser.js'
+import type { DataTypeExpression } from '../../../dist/shared/parser/data-type-parser.js'
 
 export type Gender = 'male' | 'female' | 'other'
 export type MaritalStatus = 'single' | 'married' | 'divorced' | 'widowed'

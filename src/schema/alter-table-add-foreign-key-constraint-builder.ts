@@ -1,14 +1,14 @@
-import { AddConstraintNode } from '../operation-node/add-constraint-node.js'
-import { AlterTableNode } from '../operation-node/alter-table-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { OnModifyForeignAction } from '../operation-node/references-node.js'
+import { AddConstraintNode } from '../shared/operation-node/add-constraint-node.js'
+import { AlterTableNode } from '../shared/operation-node/alter-table-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import type { OnModifyForeignAction } from '../shared/operation-node/references-node.js'
 import { freeze } from '../util/object-utils.js'
 import type {
   ForeignKeyConstraintBuilder,
   ForeignKeyConstraintBuilderInterface,
 } from './foreign-key-constraint-builder.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class AlterTableAddForeignKeyConstraintBuilder
   implements

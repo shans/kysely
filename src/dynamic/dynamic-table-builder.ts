@@ -1,10 +1,10 @@
-import { AliasNode } from '../operation-node/alias-node.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
+import { AliasNode } from '../shared/operation-node/alias-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
 import {
   isOperationNodeSource,
   type OperationNodeSource,
-} from '../operation-node/operation-node-source.js'
-import { parseTable } from '../parser/table-parser.js'
+} from '../shared/operation-node/operation-node-source.js'
+import { parseTable } from '../shared/parser/table-parser.js'
 import { isObject, isString } from '../util/object-utils.js'
 
 export class DynamicTableBuilder<T extends string> {

@@ -3,18 +3,18 @@ import type {
   AliasedExpression,
   Expression,
 } from '../expression/expression.js'
-import { AliasNode } from '../operation-node/alias-node.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
-import { JSONOperatorChainNode } from '../operation-node/json-operator-chain-node.js'
+import { AliasNode } from '../shared/operation-node/alias-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
+import { JSONOperatorChainNode } from '../shared/operation-node/json-operator-chain-node.js'
 import {
   JSONPathLegNode,
   type JSONPathLegType,
-} from '../operation-node/json-path-leg-node.js'
-import { JSONPathNode } from '../operation-node/json-path-node.js'
-import { JSONReferenceNode } from '../operation-node/json-reference-node.js'
-import { isOperationNodeSource } from '../operation-node/operation-node-source.js'
-import type { OperationNode } from '../operation-node/operation-node.js'
-import { ValueNode } from '../operation-node/value-node.js'
+} from '../shared/operation-node/json-path-leg-node.js'
+import { JSONPathNode } from '../shared/operation-node/json-path-node.js'
+import { JSONReferenceNode } from '../shared/operation-node/json-reference-node.js'
+import { isOperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import type { OperationNode } from '../shared/operation-node/operation-node.js'
+import { ValueNode } from '../shared/operation-node/value-node.js'
 
 const HASH_NEGATIVE_INDEX_REGEX = /^#-\d+$/
 

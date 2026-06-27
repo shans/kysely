@@ -1,5 +1,5 @@
 import type { DatabaseConnection } from './database-connection.js'
-import type { AbortableOperationOptions } from '../../shared/util/abort.js'
+import type { AbortableOperationOptions } from '../util/abort.js'
 
 export interface ConnectionProvider {
   /**

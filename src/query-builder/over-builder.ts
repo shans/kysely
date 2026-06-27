@@ -1,18 +1,18 @@
 import type { Expression } from '../expression/expression.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { OverNode } from '../operation-node/over-node.js'
-import { QueryNode } from '../operation-node/query-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { OverNode } from '../shared/operation-node/over-node.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
 import {
   type DirectedOrderByStringReference,
   type OrderByExpression,
   type OrderByModifiers,
   parseOrderBy,
-} from '../parser/order-by-parser.js'
+} from '../shared/parser/order-by-parser.js'
 import {
   parsePartitionBy,
   type PartitionByExpression,
   type PartitionByExpressionOrList,
-} from '../parser/partition-by-parser.js'
+} from '../shared/parser/partition-by-parser.js'
 import { freeze } from '../util/object-utils.js'
 import type { OrderByInterface } from './order-by-interface.js'
 

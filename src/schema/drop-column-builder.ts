@@ -1,5 +1,5 @@
-import { DropColumnNode } from '../operation-node/drop-column-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import { DropColumnNode } from '../shared/operation-node/drop-column-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import { freeze } from '../util/object-utils.js'
 
 export class DropColumnBuilder implements OperationNodeSource {

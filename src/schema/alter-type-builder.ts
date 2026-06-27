@@ -1,11 +1,11 @@
 import { freeze } from '../util/object-utils.js'
-import { AlterTypeNode } from '../operation-node/alter-type-node.js'
-import { IdentifierNode } from '../operation-node/identifier-node.js'
+import { AlterTypeNode } from '../shared/operation-node/alter-type-node.js'
+import { IdentifierNode } from '../shared/operation-node/identifier-node.js'
 import { AlterTypeAddValueBuilder } from './alter-type-add-value-builder.js'
-import { AddValueNode } from '../operation-node/add-value-node.js'
-import { ValueNode } from '../operation-node/value-node.js'
+import { AddValueNode } from '../shared/operation-node/add-value-node.js'
+import { ValueNode } from '../shared/operation-node/value-node.js'
 import { QueryFinalizer } from '../query-finalizer.js'
-import { RenameValueNode } from '../operation-node/rename-value-node.js'
+import { RenameValueNode } from '../shared/operation-node/rename-value-node.js'
 
 /**
  * This builder can be used to create `alter type` queries.

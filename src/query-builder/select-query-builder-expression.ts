@@ -1,5 +1,5 @@
 import type { AliasableExpression } from '../expression/expression.js'
-import type { SelectQueryNode } from '../operation-node/select-query-node.js'
+import type { SelectQueryNode } from '../shared/operation-node/select-query-node.js'
 
 export interface SelectQueryBuilderExpression<
   out O,

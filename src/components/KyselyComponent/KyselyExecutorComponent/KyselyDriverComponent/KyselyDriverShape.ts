@@ -1,5 +1,5 @@
 import type { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
-import type { TransactionSettings } from '../../../../shared/driver/driver.js'
+import type { TransactionSettings } from '../../../../types/driver/driver.js'
 import type { DatabaseMetadataOptions, TableMetadata, SchemaMetadata } from '../../../../types/dialect/database-introspector.js'
 import type { StreamChunk } from '../../../../channels/channel_util.js'
 import type { PluginResultArgs, StreamMeta } from '../../../../types/plugin-types.js'

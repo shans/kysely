@@ -1,10 +1,11 @@
-import { RawNode } from '../../operation-node/raw-node.js'
+import { RawNode } from '../../shared/operation-node/raw-node.js'
 import {
   isRootOperationNode,
   type RootOperationNode,
-} from '../../operation-node/root-operation-node.js'
+} from '../../shared/operation-node/root-operation-node.js'
 import { freeze, isObject, isString } from '../../util/object-utils.js'
-import { createQueryId, type QueryId } from '../../shared/util/query-id.js'
+import type { QueryId } from '../util/query-id.js'
+import { createQueryId } from '../../shared/util/query-id.js'
 
 export interface CompiledQuery<O = unknown> {
   readonly query: RootOperationNode

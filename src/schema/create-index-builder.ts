@@ -1,27 +1,27 @@
 import {
   CreateIndexNode,
   type IndexType,
-} from '../operation-node/create-index-node.js'
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
-import { RawNode } from '../operation-node/raw-node.js'
+} from '../shared/operation-node/create-index-node.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
+import { RawNode } from '../shared/operation-node/raw-node.js'
 import {
   type ExtractColumnNameFromOrderedColumnName,
   type OrderedColumnName,
   parseOrderedColumnName,
-} from '../parser/reference-parser.js'
-import { parseTable } from '../parser/table-parser.js'
+} from '../shared/parser/reference-parser.js'
+import { parseTable } from '../shared/parser/table-parser.js'
 import { freeze, isString } from '../util/object-utils.js'
 import type { Expression } from '../expression/expression.js'
 import {
   type ComparisonOperatorExpression,
   parseValueBinaryOperationOrExpression,
-} from '../parser/binary-operation-parser.js'
-import { QueryNode } from '../operation-node/query-node.js'
+} from '../shared/parser/binary-operation-parser.js'
+import { QueryNode } from '../shared/operation-node/query-node.js'
 import type { ExpressionBuilder } from '../expression/expression-builder.js'
 import type { ShallowRecord, SqlBool } from '../types/util/type-utils.js'
 import { ImmediateValueTransformer } from '../plugin/immediate-value/immediate-value-transformer.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class CreateIndexBuilder<C = never>
   implements OperationNodeSource

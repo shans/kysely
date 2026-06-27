@@ -1,8 +1,8 @@
-import type { OperationNodeSource } from '../operation-node/operation-node-source.js'
+import type { OperationNodeSource } from '../shared/operation-node/operation-node-source.js'
 import { freeze } from '../util/object-utils.js'
-import { CreateTypeNode } from '../operation-node/create-type-node.js'
+import { CreateTypeNode } from '../shared/operation-node/create-type-node.js'
 import type { Compilable } from '../util/compilable.js'
-import type { AbortableQueryOptions } from '../shared/util/abort.js'
+import type { AbortableQueryOptions } from '../types/util/abort.js'
 
 export class CreateTypeBuilder implements OperationNodeSource {
   readonly #props: CreateTypeBuilderProps

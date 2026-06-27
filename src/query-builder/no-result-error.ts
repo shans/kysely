@@ -1,4 +1,4 @@
-import type { QueryNode } from '../operation-node/query-node.js'
+import type { QueryNode } from '../shared/operation-node/query-node.js'
 
 export type NoResultErrorConstructor = new (node: QueryNode) => Error
 

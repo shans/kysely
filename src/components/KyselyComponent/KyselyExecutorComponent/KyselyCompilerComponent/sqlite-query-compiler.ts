@@ -1,5 +1,5 @@
-import type { DefaultInsertValueNode } from '../../../../operation-node/default-insert-value-node.js'
-import type { OrActionNode } from '../../../../operation-node/or-action-node.js'
+import type { DefaultInsertValueNode } from '../../../../shared/operation-node/default-insert-value-node.js'
+import type { OrActionNode } from '../../../../shared/operation-node/or-action-node.js'
 import { DefaultQueryCompiler } from './default-query-compiler.js'
 
 const ID_WRAP_REGEX = /"/g
