@@ -74,7 +74,7 @@ import type { RootOperationNode } from '../../shared/operation-node/root-operati
  * The following strategy does the following:
  *
  * When `in`, pushes a `null` value into the empty list resulting in `in (null)`,
- * similiarly to how {@link https://github.com/typeorm/typeorm/blob/0280cdc451c35ef73c830eb1191c95d34f6ce06e/src/query-builder/QueryBuilder.ts#L919-L922 | TypeORM}
+ * similiarly to how {@link https://github.com/typeorm/typeorm/blob/0280cdc451c35ef73c830eb1191c95d34f6ce06e/src/codeView/query-builder/QueryBuilder.ts#L919-L922 | TypeORM}
  * and {@link https://github.com/sequelize/sequelize/blob/0f2891c6897e12bf9bf56df344aae5b698f58c7d/packages/core/src/abstract-dialect/where-sql-builder.ts#L368-L379 | Sequelize}
  * handle `in ()`. `in (null)` is logically the equivalent of `= null`, which returns
  * `null`, which is a falsy expression in most SQL databases. We recommend NOT

@@ -1,5 +1,5 @@
 import type { Kysely } from '../../../../transaction-types.js'
-import { sql } from '../../../../raw-builder/sql.js'
+import { sql } from '../../../../codeView/raw-builder/sql.js'
 import { DialectAdapterBase } from './dialect-adapter-base.js'
 import type { MigrationLockOptions } from '../../../../types/dialect/dialect-adapter.js'
 

@@ -1,5 +1,5 @@
 import { JoinNode, type JoinType } from '../../shared/operation-node/join-node.js'
-import type { JoinBuilder } from '../../query-builder/join-builder.js'
+import type { JoinBuilder } from '../../codeView/query-builder/join-builder.js'
 import type {
   AnyColumn,
   AnyColumnWithTable,

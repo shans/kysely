@@ -8,17 +8,17 @@ import type {
   AnyColumnWithTable,
   ExtractColumnType,
 } from '../../types/util/type-utils.js'
-import type { SelectQueryBuilderExpression } from '../../query-builder/select-query-builder-expression.js'
+import type { SelectQueryBuilderExpression } from '../../codeView/query-builder/select-query-builder-expression.js'
 import {
   parseExpression,
   type ExpressionOrFactory,
   isExpressionOrFactory,
 } from './expression-parser.js'
-import type { DynamicReferenceBuilder } from '../../dynamic/dynamic-reference-builder.js'
+import type { DynamicReferenceBuilder } from '../../codeView/dynamic/dynamic-reference-builder.js'
 import type { SelectType } from '../../util/column-type.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
-import type { Expression } from '../../expression/expression.js'
+import type { Expression } from '../../codeView/expression/expression.js'
 import type { SimpleReferenceExpressionNode } from '../../shared/operation-node/simple-reference-expression-node.js'
 import {
   type OrderByDirection,

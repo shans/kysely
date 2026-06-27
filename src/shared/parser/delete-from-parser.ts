@@ -1,5 +1,5 @@
-import type { DeleteQueryBuilder } from '../../query-builder/delete-query-builder.js'
-import type { DeleteResult } from '../../query-builder/delete-result.js'
+import type { DeleteQueryBuilder } from '../../codeView/query-builder/delete-query-builder.js'
+import type { DeleteResult } from '../../codeView/query-builder/delete-result.js'
 import type { ShallowRecord } from '../../types/util/type-utils.js'
 import type {
   ExtractTableAlias,

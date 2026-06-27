@@ -1,12 +1,12 @@
 import { JoinNode, type JoinType } from '../../shared/operation-node/join-node.js'
 import { OverNode } from '../../shared/operation-node/over-node.js'
 import { SelectQueryNode } from '../../shared/operation-node/select-query-node.js'
-import { JoinBuilder } from '../../query-builder/join-builder.js'
-import { OverBuilder } from '../../query-builder/over-builder.js'
+import { JoinBuilder } from '../../codeView/query-builder/join-builder.js'
+import { OverBuilder } from '../../codeView/query-builder/over-builder.js'
 import {
   type SelectQueryBuilder,
   createSelectQueryBuilder as newSelectQueryBuilder,
-} from '../../query-builder/select-query-builder.js'
+} from '../../codeView/query-builder/select-query-builder.js'
 import { QueryCreator } from '../../codeView/QueryCreator.js'
 import {
   parseTableExpression,

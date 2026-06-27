@@ -1,5 +1,5 @@
-import type { MergeQueryBuilder } from '../../query-builder/merge-query-builder.js'
-import type { MergeResult } from '../../query-builder/merge-result.js'
+import type { MergeQueryBuilder } from '../../codeView/query-builder/merge-query-builder.js'
+import type { MergeResult } from '../../codeView/query-builder/merge-result.js'
 import type { ShallowRecord } from '../../types/util/type-utils.js'
 import type { ExtractTableAlias, SimpleTableReference } from './table-parser.js'
 

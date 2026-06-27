@@ -1,4 +1,4 @@
-import type { Expression } from '../expression/expression.js'
+import type { Expression } from '../codeView/expression/expression.js'
 
 export type ExplainFormat =
   | 'text'

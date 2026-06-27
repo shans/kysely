@@ -7,12 +7,12 @@ import {
 } from './expression-parser.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
-import type { AliasedExpression } from '../../expression/expression.js'
+import type { AliasedExpression } from '../../codeView/expression/expression.js'
 import type { DrainOuterGeneric } from '../../types/util/type-utils.js'
 import {
   type AliasedDynamicTableBuilder,
   isAliasedDynamicTableBuilder,
-} from '../../dynamic/dynamic-table-builder.js'
+} from '../../codeView/dynamic/dynamic-table-builder.js'
 
 export type TableExpression<DB, TB extends keyof DB> =
   | AnyAliasedTable<DB>

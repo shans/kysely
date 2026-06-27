@@ -1,12 +1,12 @@
 import {
   type DynamicReferenceBuilder,
   isDynamicReferenceBuilder,
-} from '../../dynamic/dynamic-reference-builder.js'
-import { type Expression, isExpression } from '../../expression/expression.js'
+} from '../../codeView/dynamic/dynamic-reference-builder.js'
+import { type Expression, isExpression } from '../../codeView/expression/expression.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
 import { OrderByItemNode } from '../../shared/operation-node/order-by-item-node.js'
 import { RawNode } from '../../shared/operation-node/raw-node.js'
-import { OrderByItemBuilder } from '../../query-builder/order-by-item-builder.js'
+import { OrderByItemBuilder } from '../../codeView/query-builder/order-by-item-builder.js'
 import { logOnce } from '../../util/log-once.js'
 import {
   type ExpressionOrFactory,

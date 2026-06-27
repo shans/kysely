@@ -1,6 +1,6 @@
 import type { Kysely } from '../../../../transaction-types.js'
 import { DEFAULT_MIGRATION_TABLE } from '../../../../migration/migrator.js'
-import { sql } from '../../../../raw-builder/sql.js'
+import { sql } from '../../../../codeView/raw-builder/sql.js'
 import { DialectAdapterBase } from './dialect-adapter-base.js'
 
 export class MssqlAdapter extends DialectAdapterBase {

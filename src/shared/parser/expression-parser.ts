@@ -3,15 +3,15 @@ import {
   type Expression,
   isAliasedExpression,
   isExpression,
-} from '../../expression/expression.js'
+} from '../../codeView/expression/expression.js'
 import type { AliasNode } from '../../shared/operation-node/alias-node.js'
 import { isOperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
 import {
   expressionBuilder,
   type ExpressionBuilder,
-} from '../../expression/expression-builder.js'
-import type { SelectQueryBuilderExpression } from '../../query-builder/select-query-builder-expression.js'
+} from '../../codeView/expression/expression-builder.js'
+import type { SelectQueryBuilderExpression } from '../../codeView/query-builder/select-query-builder-expression.js'
 import { isFunction } from '../../util/object-utils.js'
 
 /**

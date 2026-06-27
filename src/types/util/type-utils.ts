@@ -1,7 +1,7 @@
-import type { DeleteResult } from '../../query-builder/delete-result.js'
-import type { InsertResult } from '../../query-builder/insert-result.js'
-import type { MergeResult } from '../../query-builder/merge-result.js'
-import type { UpdateResult } from '../../query-builder/update-result.js'
+import type { DeleteResult } from '../../codeView/query-builder/delete-result.js'
+import type { InsertResult } from '../../codeView/query-builder/insert-result.js'
+import type { MergeResult } from '../../codeView/query-builder/merge-result.js'
+import type { UpdateResult } from '../../codeView/query-builder/update-result.js'
 import type { KyselyTypeError } from '../../util/type-error.js'
 
 /**

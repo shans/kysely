@@ -1,4 +1,4 @@
-import type { DynamicReferenceBuilder } from '../../dynamic/dynamic-reference-builder.js'
+import type { DynamicReferenceBuilder } from '../../codeView/dynamic/dynamic-reference-builder.js'
 import { PartitionByItemNode } from '../../shared/operation-node/partition-by-item-node.js'
 import type { SimpleReferenceExpressionNode } from '../../shared/operation-node/simple-reference-expression-node.js'
 import {

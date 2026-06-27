@@ -1,8 +1,8 @@
-import type { Expression } from '../expression/expression.js'
+import type { Expression } from '../codeView/expression/expression.js'
 import type { SelectQueryNode } from '../shared/operation-node/select-query-node.js'
-import type { SelectQueryBuilderExpression } from '../query-builder/select-query-builder-expression.js'
-import type { RawBuilder } from '../raw-builder/raw-builder.js'
-import { sql } from '../raw-builder/sql.js'
+import type { SelectQueryBuilderExpression } from '../codeView/query-builder/select-query-builder-expression.js'
+import type { RawBuilder } from '../codeView/raw-builder/raw-builder.js'
+import { sql } from '../codeView/raw-builder/sql.js'
 import { getJsonObjectArgs } from '../util/json-object-args.js'
 import type {
   ShallowDehydrateObject,

@@ -9,7 +9,7 @@ import {
   DEFAULT_MIGRATION_LOCK_TABLE,
   DEFAULT_MIGRATION_TABLE,
 } from '../../../../migration/migrator.js'
-import { sql } from '../../../../raw-builder/sql.js'
+import { sql } from '../../../../codeView/raw-builder/sql.js'
 import type { QueryCreator } from '../../../../codeView/QueryCreator.js'
 
 interface SqliteSystemDatabase {

@@ -1,5 +1,5 @@
 import { isFunction, isReadonlyArray, isString } from '../../util/object-utils.js'
-import type { AliasedSelectQueryBuilder } from '../../query-builder/select-query-builder.js'
+import type { AliasedSelectQueryBuilder } from '../../codeView/query-builder/select-query-builder.js'
 import { SelectionNode } from '../../shared/operation-node/selection-node.js'
 import type {
   AnyAliasedColumn,
@@ -13,18 +13,18 @@ import { parseAliasedStringReference } from './reference-parser.js'
 import {
   type DynamicReferenceBuilder,
   isDynamicReferenceBuilder,
-} from '../../dynamic/dynamic-reference-builder.js'
+} from '../../codeView/dynamic/dynamic-reference-builder.js'
 import {
   type AliasedExpressionOrFactory,
   parseAliasedExpression,
 } from './expression-parser.js'
 import type { SelectType } from '../../util/column-type.js'
 import { parseTable } from './table-parser.js'
-import type { AliasedExpression } from '../../expression/expression.js'
+import type { AliasedExpression } from '../../codeView/expression/expression.js'
 import {
   expressionBuilder,
   type ExpressionBuilder,
-} from '../../expression/expression-builder.js'
+} from '../../codeView/expression/expression-builder.js'
 
 export type SelectExpression<DB, TB extends keyof DB> =
   | AnyAliasedColumnWithTable<DB, TB>

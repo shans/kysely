@@ -1,5 +1,5 @@
-import { ExpressionWrapper } from '../expression/expression-wrapper.js'
-import type { Expression } from '../expression/expression.js'
+import { ExpressionWrapper } from '../codeView/expression/expression-wrapper.js'
+import type { Expression } from '../codeView/expression/expression.js'
 import { AliasNode } from '../shared/operation-node/alias-node.js'
 import { ColumnNode } from '../shared/operation-node/column-node.js'
 import { IdentifierNode } from '../shared/operation-node/identifier-node.js'

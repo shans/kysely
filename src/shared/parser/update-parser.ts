@@ -1,5 +1,5 @@
-import type { UpdateQueryBuilder } from '../../query-builder/update-query-builder.js'
-import type { UpdateResult } from '../../query-builder/update-result.js'
+import type { UpdateQueryBuilder } from '../../codeView/query-builder/update-query-builder.js'
+import type { UpdateResult } from '../../codeView/query-builder/update-result.js'
 import type { ShallowRecord } from '../../types/util/type-utils.js'
 import type {
   ExtractTableAlias,

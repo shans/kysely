@@ -2,7 +2,7 @@ import { GroupByItemNode } from '../../shared/operation-node/group-by-item-node.
 import {
   expressionBuilder,
   type ExpressionBuilder,
-} from '../../expression/expression-builder.js'
+} from '../../codeView/expression/expression-builder.js'
 import { isFunction } from '../../util/object-utils.js'
 import {
   parseReferenceExpressionOrList,

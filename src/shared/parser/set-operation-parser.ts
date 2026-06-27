@@ -1,8 +1,8 @@
 import {
   type ExpressionBuilder,
   createExpressionBuilder,
-} from '../../expression/expression-builder.js'
-import type { Expression } from '../../expression/expression.js'
+} from '../../codeView/expression/expression-builder.js'
+import type { Expression } from '../../codeView/expression/expression.js'
 import {
   type SetOperator,
   SetOperationNode,

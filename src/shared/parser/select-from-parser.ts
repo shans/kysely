@@ -1,4 +1,4 @@
-import type { SelectQueryBuilder } from '../../query-builder/select-query-builder.js'
+import type { SelectQueryBuilder } from '../../codeView/query-builder/select-query-builder.js'
 import type { ShallowRecord } from '../../types/util/type-utils.js'
 import type {
   ExtractTableAlias,

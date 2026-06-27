@@ -31,13 +31,13 @@ import { createQueryId } from './shared/util/query-id.js'
 import { assertNotAborted, throwReasonWithTiming } from './shared/util/abort.js'
 import type { AbortableOperationOptions } from './types/util/abort.js'
 import type { Kysely as KyselyPublicType } from './transaction-types.js'
-import { NoResultError, isNoResultErrorConstructor } from './query-builder/no-result-error.js'
+import { NoResultError, isNoResultErrorConstructor } from './codeView/query-builder/no-result-error.js'
 import { KyselyBuilder } from './codeView/KyselyBuilder.js'
 import { WithSchemaPlugin } from './plugin/with-schema/with-schema-plugin.js'
 import { isCompilable } from './util/compilable.js'
-import { InsertResult } from './query-builder/insert-result.js'
-import { UpdateResult } from './query-builder/update-result.js'
-import { DeleteResult } from './query-builder/delete-result.js'
+import { InsertResult } from './codeView/query-builder/insert-result.js'
+import { UpdateResult } from './codeView/query-builder/update-result.js'
+import { DeleteResult } from './codeView/query-builder/delete-result.js'
 
 interface ApiConfig {
   readonly dialect: Dialect

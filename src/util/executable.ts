@@ -1,5 +1,5 @@
 import type { QueryNode } from '../shared/operation-node/query-node.js'
-import type { NoResultErrorConstructor } from '../query-builder/no-result-error.js'
+import type { NoResultErrorConstructor } from '../codeView/query-builder/no-result-error.js'
 import type { AbortableQueryOptions } from '../types/util/abort.js'
 import type { SimplifyResult, SimplifySingleResult } from '../types/util/type-utils.js'
 

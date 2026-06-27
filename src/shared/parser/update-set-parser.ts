@@ -3,7 +3,7 @@ import { ColumnUpdateNode } from '../../shared/operation-node/column-update-node
 import {
   expressionBuilder,
   type ExpressionBuilder,
-} from '../../expression/expression-builder.js'
+} from '../../codeView/expression/expression-builder.js'
 import type { UpdateType } from '../../util/column-type.js'
 import { isFunction } from '../../util/object-utils.js'
 import { parseValueExpression, type ValueExpression } from './value-parser.js'

@@ -1,4 +1,4 @@
-import type { Expression } from '../../expression/expression.js'
+import type { Expression } from '../../codeView/expression/expression.js'
 import { isOperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
 import { ValueNode } from '../../shared/operation-node/value-node.js'

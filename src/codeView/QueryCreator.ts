@@ -8,10 +8,10 @@
 import {
   type SelectQueryBuilder,
   createSelectQueryBuilder,
-} from '../query-builder/select-query-builder.js'
-import { InsertQueryBuilder } from '../query-builder/insert-query-builder.js'
-import { DeleteQueryBuilder } from '../query-builder/delete-query-builder.js'
-import { UpdateQueryBuilder } from '../query-builder/update-query-builder.js'
+} from '../codeView/query-builder/select-query-builder.js'
+import { InsertQueryBuilder } from '../codeView/query-builder/insert-query-builder.js'
+import { DeleteQueryBuilder } from '../codeView/query-builder/delete-query-builder.js'
+import { UpdateQueryBuilder } from '../codeView/query-builder/update-query-builder.js'
 import { DeleteQueryNode } from '../shared/operation-node/delete-query-node.js'
 import { InsertQueryNode } from '../shared/operation-node/insert-query-node.js'
 import { SelectQueryNode } from '../shared/operation-node/select-query-node.js'
@@ -31,10 +31,10 @@ import {
 } from '../shared/parser/with-parser.js'
 import { WithNode } from '../shared/operation-node/with-node.js'
 import { freeze } from '../util/object-utils.js'
-import type { InsertResult } from '../query-builder/insert-result.js'
-import type { DeleteResult } from '../query-builder/delete-result.js'
-import type { UpdateResult } from '../query-builder/update-result.js'
-import type { CTEBuilderCallback } from '../query-builder/cte-builder.js'
+import type { InsertResult } from '../codeView/query-builder/insert-result.js'
+import type { DeleteResult } from '../codeView/query-builder/delete-result.js'
+import type { UpdateResult } from '../codeView/query-builder/update-result.js'
+import type { CTEBuilderCallback } from '../codeView/query-builder/cte-builder.js'
 import {
   type CallbackSelection,
   type SelectArg,
@@ -43,9 +43,9 @@ import {
   type Selection,
   parseSelectArg,
 } from '../shared/parser/select-parser.js'
-import { MergeQueryBuilder } from '../query-builder/merge-query-builder.js'
+import { MergeQueryBuilder } from '../codeView/query-builder/merge-query-builder.js'
 import { MergeQueryNode } from '../shared/operation-node/merge-query-node.js'
-import type { MergeResult } from '../query-builder/merge-result.js'
+import type { MergeResult } from '../codeView/query-builder/merge-result.js'
 import type { SelectFrom } from '../shared/parser/select-from-parser.js'
 import type { DeleteFrom } from '../shared/parser/delete-from-parser.js'
 import type { UpdateTable } from '../shared/parser/update-parser.js'

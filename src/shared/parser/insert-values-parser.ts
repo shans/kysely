@@ -19,7 +19,7 @@ import { DefaultInsertValueNode } from '../../shared/operation-node/default-inse
 import {
   expressionBuilder,
   type ExpressionBuilder,
-} from '../../expression/expression-builder.js'
+} from '../../codeView/expression/expression-builder.js'
 
 export type InsertObject<DB, TB extends keyof DB> = {
   [C in NonNullableInsertKeys<DB[TB]>]: ValueExpression<
