@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { JSONOperatorChainNode } from './json-operator-chain-node.js'
 import type { JSONPathNode } from './json-path-node.js'
 import type { OperationNode } from './operation-node.js'

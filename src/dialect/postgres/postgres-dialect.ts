@@ -1,5 +1,5 @@
 import type { Driver } from '../../types/driver/driver.js'
-import type { Kysely } from '../../transaction-types.js'
+import type { Kysely } from '../../types/transaction-types.js'
 import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
 import type { Dialect } from '../../types/dialect/dialect.js'
 import { PostgresDriver } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/postgres-driver.js'

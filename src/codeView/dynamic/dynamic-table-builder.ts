@@ -5,7 +5,7 @@ import {
   type OperationNodeSource,
 } from '../../shared/operation-node/operation-node-source.js'
 import { parseTable } from '../../shared/parser/table-parser.js'
-import { isObject, isString } from '../../util/object-utils.js'
+import { isObject, isString } from '../../shared/util/object-utils.js'
 
 export class DynamicTableBuilder<T extends string> {
   readonly #table: T

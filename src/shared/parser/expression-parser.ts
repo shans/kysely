@@ -12,7 +12,7 @@ import {
   type ExpressionBuilder,
 } from '../../codeView/expression/expression-builder.js'
 import type { SelectQueryBuilderExpression } from '../../codeView/query-builder/select-query-builder-expression.js'
-import { isFunction } from '../../util/object-utils.js'
+import { isFunction } from '../util/object-utils.js'
 
 /**
  * Like `Expression<V>` but also accepts a select query with an output

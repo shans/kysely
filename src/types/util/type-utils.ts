@@ -2,7 +2,7 @@ import type { DeleteResult } from '../../codeView/query-builder/delete-result.js
 import type { InsertResult } from '../../codeView/query-builder/insert-result.js'
 import type { MergeResult } from '../../codeView/query-builder/merge-result.js'
 import type { UpdateResult } from '../../codeView/query-builder/update-result.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 
 /**
  * Given a database type and a union of table names in that db, returns

@@ -5,7 +5,7 @@ import {
 } from '../../shared/operation-node/create-table-node.js'
 import type { OperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
 import { ColumnDefinitionBuilder } from './column-definition-builder.js'
-import { freeze, isString, noop } from '../../util/object-utils.js'
+import { freeze, isString, noop } from '../../shared/util/object-utils.js'
 import { ForeignKeyConstraintNode } from '../../shared/operation-node/foreign-key-constraint-node.js'
 import { ColumnNode } from '../../shared/operation-node/column-node.js'
 import {
@@ -43,7 +43,7 @@ import {
   CreateTableAddIndexBuilder,
   type CreateTableAddIndexBuilderCallback,
 } from './create-table-add-index-builder.js'
-import type { Compilable } from '../../util/compilable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 /**
  * This builder can be used to create a `create table` query.

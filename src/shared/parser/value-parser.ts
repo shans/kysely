@@ -6,7 +6,7 @@ import {
   isNull,
   isNumber,
   isReadonlyArray,
-} from '../../util/object-utils.js'
+} from '../util/object-utils.js'
 import {
   parseExpression,
   type ExpressionOrFactory,

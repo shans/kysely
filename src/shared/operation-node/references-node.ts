@@ -1,7 +1,7 @@
 import type { OperationNode } from './operation-node.js'
 import type { ColumnNode } from './column-node.js'
 import type { TableNode } from './table-node.js'
-import { freeze, isString } from '../../util/object-utils.js'
+import { freeze, isString } from '../util/object-utils.js'
 
 export type OnModifyForeignAction =
   | 'cascade'

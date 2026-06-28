@@ -1,6 +1,6 @@
 import type { Expression } from '../expression/expression.js'
 import { ExpressionWrapper } from '../expression/expression-wrapper.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import {
   parseReferenceExpression,
   type ExtractTypeFromReferenceExpression,
@@ -20,7 +20,7 @@ import {
   parseSafeImmediateValue,
   parseValueExpression,
 } from '../../shared/parser/value-parser.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 
 export class CaseBuilder<
   DB,

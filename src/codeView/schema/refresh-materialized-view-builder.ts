@@ -1,7 +1,7 @@
 import type { OperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import { RefreshMaterializedViewNode } from '../../shared/operation-node/refresh-materialized-view-node.js'
-import type { Compilable } from '../../util/compilable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 export class RefreshMaterializedViewBuilder

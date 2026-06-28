@@ -1,5 +1,5 @@
 import type { Driver } from '../../types/driver/driver.js'
-import type { Kysely } from '../../transaction-types.js'
+import type { Kysely } from '../../types/transaction-types.js'
 import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
 import type { Dialect } from '../../types/dialect/dialect.js'
 import type { DatabaseIntrospector } from '../../types/dialect/database-introspector.js'
@@ -10,7 +10,7 @@ import type { DialectAdapter } from '../../types/dialect/dialect-adapter.js'
 import { SqliteAdapter } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/sqlite-adapter.js'
 import type { SqliteDialectConfig } from '../../types/dialect/sqlite-dialect-config.js'
 import type { KyselyDialectConfig } from '../../types/dialect/dialect-config.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 
 /**
  * SQLite dialect that uses the [better-sqlite3](https://github.com/JoshuaWise/better-sqlite3) library.

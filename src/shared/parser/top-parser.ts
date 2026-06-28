@@ -1,5 +1,5 @@
 import { type TopModifier, TopNode } from '../../shared/operation-node/top-node.js'
-import { isBigInt, isNumber, isUndefined } from '../../util/object-utils.js'
+import { isBigInt, isNumber, isUndefined } from '../util/object-utils.js'
 
 export function parseTop(
   expression: number | bigint,

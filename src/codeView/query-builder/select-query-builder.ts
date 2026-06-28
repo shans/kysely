@@ -42,14 +42,14 @@ import {
 } from '../../shared/parser/order-by-parser.js'
 import { LimitNode } from '../../shared/operation-node/limit-node.js'
 import { OffsetNode } from '../../shared/operation-node/offset-node.js'
-import type { Compilable } from '../../util/compilable.js'
-import { asArray, freeze } from '../../util/object-utils.js'
+import type { Compilable } from '../../shared/util/compilable.js'
+import { asArray, freeze } from '../../shared/util/object-utils.js'
 import { type GroupByArg, parseGroupBy } from '../../shared/parser/group-by-parser.js'
 import type { KyselyPlugin } from '../../types/plugin/kysely-plugin.js'
 import type { WhereInterface } from './where-interface.js'
 import type { HavingInterface } from './having-interface.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'
-import type { Explainable, ExplainFormat } from '../../util/explainable.js'
+import type { Explainable, ExplainFormat } from '../../types/util/explainable.js'
 import {
   type SetOperandExpression,
   parseSetOperations,
@@ -61,9 +61,9 @@ import {
   parseValueBinaryOperationOrExpression,
   parseReferentialBinaryOperation,
 } from '../../shared/parser/binary-operation-parser.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
-import type { Selectable } from '../../util/column-type.js'
-import type { Streamable, StreamOptions } from '../../util/streamable.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
+import type { Selectable } from '../../types/util/column-type.js'
+import type { Streamable, StreamOptions } from '../../types/util/streamable.js'
 import type { ExpressionOrFactory } from '../../shared/parser/expression-parser.js'
 import { ExpressionWrapper } from '../expression/expression-wrapper.js'
 import type { SelectQueryBuilderExpression } from './select-query-builder-expression.js'
@@ -80,7 +80,7 @@ import type { OrderByInterface } from './order-by-interface.js'
 import type {
   Executable,
   ExecuteTakeFirstOrThrowOptions,
-} from '../../util/executable.js'
+} from '../../types/util/executable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 export interface SelectQueryBuilder<DB, TB extends keyof DB, O>

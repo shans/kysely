@@ -8,8 +8,8 @@ import {
   DEFAULT_MIGRATION_LOCK_TABLE,
   DEFAULT_MIGRATION_TABLE,
 } from '../../../../migration/migrator.js'
-import type { Kysely } from '../../../../transaction-types.js'
-import { freeze } from '../../../../util/object-utils.js'
+import type { Kysely } from '../../../../types/transaction-types.js'
+import { freeze } from '../../../../shared/util/object-utils.js'
 import { sql } from '../../../../codeView/raw-builder/sql.js'
 
 export class MysqlIntrospector implements DatabaseIntrospector {

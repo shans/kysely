@@ -1,5 +1,5 @@
 import { BinaryOperationNode } from '../../shared/operation-node/binary-operation-node.js'
-import { isBoolean, isNull, isUndefined } from '../../util/object-utils.js'
+import { isBoolean, isNull, isUndefined } from '../util/object-utils.js'
 import {
   type OperationNodeSource,
   isOperationNodeSource,
@@ -27,12 +27,12 @@ import {
 import { ValueNode } from '../../shared/operation-node/value-node.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
 import type { Expression } from '../../codeView/expression/expression.js'
-import type { SelectType } from '../../util/column-type.js'
+import type { SelectType } from '../../types/util/column-type.js'
 import { AndNode } from '../../shared/operation-node/and-node.js'
 import { ParensNode } from '../../shared/operation-node/parens-node.js'
 import { OrNode } from '../../shared/operation-node/or-node.js'
 import type { IsNever } from '../../types/util/type-utils.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 
 export type OperandValueExpression<
   DB,

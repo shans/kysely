@@ -4,7 +4,7 @@ import {
   type OperationNodeSource,
 } from '../../shared/operation-node/operation-node-source.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
-import { isObject, isString } from '../../util/object-utils.js'
+import { isObject, isString } from '../../shared/util/object-utils.js'
 
 /**
  * `Expression` represents an arbitrary SQL expression with a type.

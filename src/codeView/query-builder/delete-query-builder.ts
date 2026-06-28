@@ -35,7 +35,7 @@ import type {
   SimplifySingleResult,
   SqlBool,
 } from '../../types/util/type-utils.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import type { WhereInterface } from './where-interface.js'
 import type { MultiTableReturningInterface } from './returning-interface.js'
 import { DeleteResult } from './delete-result.js'
@@ -54,11 +54,11 @@ import {
   parseValueBinaryOperationOrExpression,
   parseReferentialBinaryOperation,
 } from '../../shared/parser/binary-operation-parser.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
-import type { Compilable } from '../../util/compilable.js'
-import type { Executable } from '../../util/executable.js'
-import type { Streamable } from '../../util/streamable.js'
-import type { Explainable } from '../../util/explainable.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
+import type { Compilable } from '../../shared/util/compilable.js'
+import type { Executable } from '../../types/util/executable.js'
+import type { Streamable } from '../../types/util/streamable.js'
+import type { Explainable } from '../../types/util/explainable.js'
 import type { ExpressionOrFactory } from '../../shared/parser/expression-parser.js'
 import {
   type ValueExpression,

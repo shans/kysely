@@ -8,10 +8,10 @@ import { parseSavepointCommand } from '../../../../shared/parser/savepoint-parse
 import { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
 import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
-import { isFunction, isObject, freeze } from '../../../../util/object-utils.js'
+import { isFunction, isObject, freeze } from '../../../../shared/util/object-utils.js'
 import type { QueryId } from '../../../../types/util/query-id.js'
 import { createQueryId } from '../../../../shared/util/query-id.js'
-import { extendStackTrace } from '../../../../util/stack-trace-utils.js'
+import { extendStackTrace } from '../../../../shared/util/stack-trace-utils.js'
 import type {
   MysqlDialectConfig,
   MysqlOkPacket,

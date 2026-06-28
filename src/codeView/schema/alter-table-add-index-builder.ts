@@ -8,8 +8,8 @@ import {
   type OrderedColumnName,
   parseOrderedColumnName,
 } from '../../shared/parser/reference-parser.js'
-import { freeze, isString } from '../../util/object-utils.js'
-import type { Compilable } from '../../util/compilable.js'
+import { freeze, isString } from '../../shared/util/object-utils.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 export class AlterTableAddIndexBuilder

@@ -8,7 +8,7 @@ import { parseSavepointCommand } from '../../../../shared/parser/savepoint-parse
 import { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
 import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
-import { freeze, isFunction } from '../../../../util/object-utils.js'
+import { freeze, isFunction } from '../../../../shared/util/object-utils.js'
 import { createQueryId } from '../../../../shared/util/query-id.js'
 import type {
   SqliteDatabase,

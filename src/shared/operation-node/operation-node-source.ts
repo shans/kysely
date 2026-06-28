@@ -1,4 +1,4 @@
-import { isFunction, isObject } from '../../util/object-utils.js'
+import { isFunction, isObject } from '../util/object-utils.js'
 import type { OperationNode } from './operation-node.js'
 
 export interface OperationNodeSource {

@@ -6,14 +6,14 @@ import {
   isFunction,
   isReadonlyArray,
   isUndefined,
-} from '../../util/object-utils.js'
+} from '../util/object-utils.js'
 import { parseValueExpression, type ValueExpression } from './value-parser.js'
 import { ValuesNode } from '../../shared/operation-node/values-node.js'
 import type {
   NonNullableInsertKeys,
   NullableInsertKeys,
   InsertType,
-} from '../../util/column-type.js'
+} from '../../types/util/column-type.js'
 import { isExpressionOrFactory } from './expression-parser.js'
 import { DefaultInsertValueNode } from '../../shared/operation-node/default-insert-value-node.js'
 import {

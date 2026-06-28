@@ -15,8 +15,8 @@ import {
   type UpdateObjectExpression,
   parseUpdateObjectExpression,
 } from '../../shared/parser/update-set-parser.js'
-import type { Updateable } from '../../util/column-type.js'
-import { freeze } from '../../util/object-utils.js'
+import type { Updateable } from '../../types/util/column-type.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import type { AnyColumn, SqlBool } from '../../types/util/type-utils.js'
 import type { WhereInterface } from './where-interface.js'
 

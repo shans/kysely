@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { CollateNode } from './collate-node.js'
 import type { OperationNode } from './operation-node.js'
 

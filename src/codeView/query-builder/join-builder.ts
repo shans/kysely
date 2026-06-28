@@ -9,7 +9,7 @@ import {
 } from '../../shared/parser/binary-operation-parser.js'
 import type { ExpressionOrFactory } from '../../shared/parser/expression-parser.js'
 import type { ReferenceExpression } from '../../shared/parser/reference-parser.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import type { SqlBool } from '../../types/util/type-utils.js'
 
 export class JoinBuilder<

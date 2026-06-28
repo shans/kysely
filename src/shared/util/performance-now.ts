@@ -5,7 +5,7 @@
 // state into it that another caller would then read back, so it cannot be used to
 // leak data between components. The red flags for isolation violations are shared
 // mutable state and callback/closure parameters; this function has neither.
-import { isFunction } from '../../util/object-utils.js'
+import { isFunction } from './object-utils.js'
 
 export function performanceNow() {
   if (typeof performance !== 'undefined' && isFunction(performance.now)) {

@@ -1,5 +1,5 @@
 import type { OperationNode } from './operation-node.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { AddColumnNode } from './add-column-node.js'
 import type { DropColumnNode } from './drop-column-node.js'
 import type { TableNode } from './table-node.js'

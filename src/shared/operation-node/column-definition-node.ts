@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { CheckConstraintNode } from './check-constraint-node.js'
 import { ColumnNode } from './column-node.js'
 import type { DefaultValueNode } from './default-value-node.js'

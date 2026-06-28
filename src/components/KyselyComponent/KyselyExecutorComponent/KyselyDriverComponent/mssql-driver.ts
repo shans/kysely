@@ -17,7 +17,7 @@ import {
   isNumber,
   isString,
   isUndefined,
-} from '../../../../util/object-utils.js'
+} from '../../../../shared/util/object-utils.js'
 import type {
   MssqlDialectConfig,
   TarnPool,
@@ -27,9 +27,9 @@ import type {
   TediousRequest,
 } from '../../../../types/dialect/mssql-dialect-config.js'
 import { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
-import { extendStackTrace } from '../../../../util/stack-trace-utils.js'
-import { randomString } from '../../../../util/random-string.js'
-import { Deferred } from '../../../../util/deferred.js'
+import { extendStackTrace } from '../../../../shared/util/stack-trace-utils.js'
+import { randomString } from '../../../../shared/util/random-string.js'
+import { Deferred } from '../../../../shared/util/deferred.js'
 
 const PRIVATE_RESET_METHOD: unique symbol = Symbol()
 const PRIVATE_DESTROY_METHOD: unique symbol = Symbol()

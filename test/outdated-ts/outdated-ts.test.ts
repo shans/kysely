@@ -1,5 +1,5 @@
 import { Kysely, RawBuilder, sql } from 'kysely'
-import { KyselyTypeError } from '../../src/util/type-error'
+import { KyselyTypeError } from '../../src/types/util/type-error'
 
 function expectOutdatedTSError(
   _: KyselyTypeError<'The installed TypeScript version is outdated and cannot guarantee type-safety with Kysely. Please upgrade to version 5.4 or newer.'>,

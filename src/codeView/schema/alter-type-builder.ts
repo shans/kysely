@@ -1,10 +1,10 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import { AlterTypeNode } from '../../shared/operation-node/alter-type-node.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'
 import { AlterTypeAddValueBuilder } from './alter-type-add-value-builder.js'
 import { AddValueNode } from '../../shared/operation-node/add-value-node.js'
 import { ValueNode } from '../../shared/operation-node/value-node.js'
-import { QueryFinalizer } from '../../query-finalizer.js'
+import { QueryFinalizer } from '../QueryFinalizer.js'
 import { RenameValueNode } from '../../shared/operation-node/rename-value-node.js'
 
 /**

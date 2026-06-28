@@ -7,7 +7,7 @@ import {
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
 import { RawNode } from '../../shared/operation-node/raw-node.js'
 import { WhenNode } from '../../shared/operation-node/when-node.js'
-import { isString } from '../../util/object-utils.js'
+import { isString } from '../util/object-utils.js'
 import {
   parseFilterList,
   parseReferentialBinaryOperation,

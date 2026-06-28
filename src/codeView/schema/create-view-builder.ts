@@ -1,11 +1,11 @@
 import type { OperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import { CreateViewNode } from '../../shared/operation-node/create-view-node.js'
 import { parseColumnName } from '../../shared/parser/reference-parser.js'
-import { ImmediateValueTransformer } from '../../plugin/immediate-value/immediate-value-transformer.js'
+import { ImmediateValueTransformer } from '../../shared/plugin/immediate-value/immediate-value-transformer.js'
 import type { RawBuilder } from '../raw-builder/raw-builder.js'
 import type { SelectQueryBuilder } from '../query-builder/select-query-builder.js'
-import type { Compilable } from '../../util/compilable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 export class CreateViewBuilder implements OperationNodeSource {

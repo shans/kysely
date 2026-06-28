@@ -1,4 +1,4 @@
-import { isObject, isString } from '../../util/object-utils.js'
+import { isObject, isString } from '../util/object-utils.js'
 
 export type OperationNodeKind =
   | 'IdentifierNode'

@@ -30,7 +30,7 @@ import {
   parseCommonTableExpression,
 } from '../shared/parser/with-parser.js'
 import { WithNode } from '../shared/operation-node/with-node.js'
-import { freeze } from '../util/object-utils.js'
+import { freeze } from '../shared/util/object-utils.js'
 import type { InsertResult } from '../codeView/query-builder/insert-result.js'
 import type { DeleteResult } from '../codeView/query-builder/delete-result.js'
 import type { UpdateResult } from '../codeView/query-builder/update-result.js'

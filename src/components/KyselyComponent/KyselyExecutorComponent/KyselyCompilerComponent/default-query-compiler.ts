@@ -51,7 +51,7 @@ import {
   isNull,
   isDate,
   isBigInt,
-} from '../../../../util/object-utils.js'
+} from '../../../../shared/util/object-utils.js'
 import type { CompiledQuery } from '../../../../types/query-compiler/compiled-query.js'
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
 import type { HavingNode } from '../../../../shared/operation-node/having-node.js'

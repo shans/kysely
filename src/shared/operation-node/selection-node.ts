@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { AliasNode } from './alias-node.js'
 import type { OperationNode } from './operation-node.js'
 import { ReferenceNode } from './reference-node.js'

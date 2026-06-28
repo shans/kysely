@@ -1,5 +1,5 @@
 import type { QueryResult } from '../../types/driver/database-connection.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 
 /**
  * Similar to {@link QueryResult} but for read-only queries.

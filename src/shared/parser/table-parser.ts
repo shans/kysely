@@ -1,4 +1,4 @@
-import { isReadonlyArray, isString } from '../../util/object-utils.js'
+import { isReadonlyArray, isString } from '../util/object-utils.js'
 import { AliasNode } from '../../shared/operation-node/alias-node.js'
 import { TableNode } from '../../shared/operation-node/table-node.js'
 import {

@@ -17,7 +17,7 @@ import {
   type ExtractTypeFromStringReference,
 } from '../../shared/parser/reference-parser.js'
 import { parseSelectAll } from '../../shared/parser/select-parser.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 import type {
   IsNever,
   ShallowDehydrateObject,
@@ -26,9 +26,9 @@ import type {
 } from '../../types/util/type-utils.js'
 import { AggregateFunctionBuilder } from './aggregate-function-builder.js'
 import type { SelectQueryBuilderExpression } from './select-query-builder-expression.js'
-import { isString } from '../../util/object-utils.js'
+import { isString } from '../../shared/util/object-utils.js'
 import { parseTable } from '../../shared/parser/table-parser.js'
-import type { Selectable, SelectType } from '../../util/column-type.js'
+import type { Selectable, SelectType } from '../../types/util/column-type.js'
 
 /**
  * Helpers for type safe SQL function calls.

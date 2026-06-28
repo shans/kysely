@@ -41,7 +41,7 @@ import type {
   UpdateObjectFactory,
 } from '../../shared/parser/update-set-parser.js'
 import type { ValueExpression } from '../../shared/parser/value-parser.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import type {
   ShallowRecord,
   SqlBool,
@@ -57,8 +57,8 @@ import type {
 import type { MultiTableReturningInterface } from './returning-interface.js'
 import type { MergeResult } from './merge-result.js'
 import { UpdateQueryBuilder } from './update-query-builder.js'
-import type { Compilable } from '../../util/compilable.js'
-import type { Executable } from '../../util/executable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
+import type { Executable } from '../../types/util/executable.js'
 
 export class MergeQueryBuilder<DB, TT extends keyof DB, O>
   implements MultiTableReturningInterface<DB, TT, O>, OutputInterface<DB, TT, O>

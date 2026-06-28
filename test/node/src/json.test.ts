@@ -12,22 +12,22 @@ import {
   jsonArrayFrom as pg_jsonArrayFrom,
   jsonObjectFrom as pg_jsonObjectFrom,
   jsonBuildObject as pg_jsonBuildObject,
-} from '../../../dist/helpers/postgres.js'
+} from '../../../dist/codeView/helpers/postgres.js'
 import {
   jsonArrayFrom as mysql_jsonArrayFrom,
   jsonObjectFrom as mysql_jsonObjectFrom,
   jsonBuildObject as mysql_jsonBuildObject,
-} from '../../../dist/helpers/mysql.js'
+} from '../../../dist/codeView/helpers/mysql.js'
 import {
   jsonArrayFrom as mssql_jsonArrayFrom,
   jsonObjectFrom as mssql_jsonObjectFrom,
   jsonBuildObject as mssql_jsonBuildObject,
-} from '../../../dist/helpers/mssql.js'
+} from '../../../dist/codeView/helpers/mssql.js'
 import {
   jsonArrayFrom as sqlite_jsonArrayFrom,
   jsonObjectFrom as sqlite_jsonObjectFrom,
   jsonBuildObject as sqlite_jsonBuildObject,
-} from '../../../dist/helpers/sqlite.js'
+} from '../../../dist/codeView/helpers/sqlite.js'
 
 import {
   destroyTest,

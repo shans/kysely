@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { OperationNode } from './operation-node.js'
 import type { PrimitiveValueListNode } from './primitive-value-list-node.js'
 import type { ValueListNode } from './value-list-node.js'

@@ -4,7 +4,7 @@ import type {
   SchemaMetadata,
   TableMetadata,
 } from '../../../../types/dialect/database-introspector.js'
-import type { Kysely } from '../../../../transaction-types.js'
+import type { Kysely } from '../../../../types/transaction-types.js'
 import {
   DEFAULT_MIGRATION_LOCK_TABLE,
   DEFAULT_MIGRATION_TABLE,

@@ -12,7 +12,7 @@ import {
 } from '../../shared/parser/binary-operation-parser.js'
 import type { OperandExpression } from '../../shared/parser/expression-parser.js'
 import type { ReferenceExpression } from '../../shared/parser/reference-parser.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 import type { SqlBool } from '../../types/util/type-utils.js'
 import type {
   AliasableExpression,

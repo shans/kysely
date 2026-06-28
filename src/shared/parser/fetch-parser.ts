@@ -1,5 +1,5 @@
 import { type FetchModifier, FetchNode } from '../../shared/operation-node/fetch-node.js'
-import { isBigInt, isNumber } from '../../util/object-utils.js'
+import { isBigInt, isNumber } from '../util/object-utils.js'
 
 export function parseFetch(
   rowCount: number | bigint,

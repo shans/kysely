@@ -3,7 +3,7 @@ import {
   expressionBuilder,
   type ExpressionBuilder,
 } from '../../codeView/expression/expression-builder.js'
-import { isFunction } from '../../util/object-utils.js'
+import { isFunction } from '../util/object-utils.js'
 import {
   parseReferenceExpressionOrList,
   type ReferenceExpression,

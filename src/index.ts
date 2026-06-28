@@ -3,13 +3,13 @@
  * @mergeModuleWith <project>
  */
 
-import type { KyselyTypeError } from './util/type-error.js'
+import type { KyselyTypeError } from './types/util/type-error.js'
 
 export { Kysely } from './api.js'
-export type { KyselyProps, KyselyConfig, Transaction, ConnectionBuilder, TransactionBuilder, ControlledTransactionBuilder, ControlledTransaction, Command } from './transaction-types.js'
-export { isKyselyProps } from './transaction-types.js'
+export type { KyselyProps, KyselyConfig, Transaction, ConnectionBuilder, TransactionBuilder, ControlledTransactionBuilder, ControlledTransaction, Command } from './types/transaction-types.js'
+export { isKyselyProps } from './types/transaction-types.js'
 export * from './codeView/QueryCreator.js'
-export * from './query-finalizer.js'
+export * from './codeView/QueryFinalizer.js'
 
 export * from './codeView/expression/expression.js'
 export {
@@ -44,10 +44,10 @@ export * from './codeView/query-builder/order-by-item-builder.js'
 export * from './codeView/raw-builder/raw-builder.js'
 export * from './codeView/raw-builder/sql.js'
 
-export type * from './query-executor/query-executor.js'
+export type * from './types/query-executor/query-executor.js'
 export * from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/DefaultQueryExecutor.js'
-export * from './query-executor/noop-query-executor.js'
-export type * from './query-executor/query-executor-provider.js'
+export * from './shared/query-executor/noop-query-executor.js'
+export type * from './types/query-executor/query-executor-provider.js'
 
 export * from './components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent/default-query-compiler.js'
 export * from './types/query-compiler/compiled-query.js'
@@ -125,13 +125,13 @@ export * from './components/KyselyComponent/KyselyExecutorComponent/KyselyCompil
 export type * from './types/query-compiler/query-compiler.js'
 
 export type * from './types/plugin/kysely-plugin.js'
-export * from './plugin/camel-case/camel-case-plugin.js'
-export * from './plugin/deduplicate-joins/deduplicate-joins-plugin.js'
-export * from './plugin/with-schema/with-schema-plugin.js'
-export * from './plugin/parse-json-results/parse-json-results-plugin.js'
-export * from './plugin/handle-empty-in-lists/handle-empty-in-lists-plugin.js'
-export * from './plugin/handle-empty-in-lists/handle-empty-in-lists.js'
-export * from './plugin/safe-null-comparison/safe-null-comparison-plugin.js'
+export * from './shared/plugin/camel-case/camel-case-plugin.js'
+export * from './shared/plugin/deduplicate-joins/deduplicate-joins-plugin.js'
+export * from './shared/plugin/with-schema/with-schema-plugin.js'
+export * from './shared/plugin/parse-json-results/parse-json-results-plugin.js'
+export * from './shared/plugin/handle-empty-in-lists/handle-empty-in-lists-plugin.js'
+export * from './shared/plugin/handle-empty-in-lists/handle-empty-in-lists.js'
+export * from './shared/plugin/safe-null-comparison/safe-null-comparison-plugin.js'
 
 export * from './shared/operation-node/add-column-node.js'
 export * from './shared/operation-node/add-constraint-node.js'
@@ -245,11 +245,11 @@ export * from './shared/operation-node/alter-type-node.js'
 export * from './shared/operation-node/add-value-node.js'
 export * from './shared/operation-node/rename-value-node.js'
 
-export type * from './util/column-type.js'
-export * from './util/compilable.js'
-export type * from './util/explainable.js'
-export type * from './util/streamable.js'
-export type * from './util/executable.js'
+export type * from './types/util/column-type.js'
+export * from './shared/util/compilable.js'
+export type * from './types/util/explainable.js'
+export type * from './types/util/streamable.js'
+export type * from './types/util/executable.js'
 export type * from './types/util/log.js'
 export { Log, LOG_LEVELS } from './shared/util/log.js'
 export type {
@@ -275,11 +275,11 @@ export type {
   StringsWhenDataTypeNotAvailable,
   UnknownRow,
 } from './types/util/type-utils.js'
-export type * from './util/infer-result.js'
-export { logOnce } from './util/log-once.js'
+export type * from './types/util/infer-result.js'
+export { logOnce } from './shared/util/log-once.js'
 export type { QueryId } from './types/util/query-id.js'
 export { createQueryId } from './shared/util/query-id.js'
-export type { KyselyTypeError } from './util/type-error.js'
+export type { KyselyTypeError } from './types/util/type-error.js'
 export type {
   AbortableOperationOptions,
   AbortableQueryOptions,

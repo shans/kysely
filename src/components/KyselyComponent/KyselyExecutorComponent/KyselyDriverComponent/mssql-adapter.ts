@@ -1,4 +1,4 @@
-import type { Kysely } from '../../../../transaction-types.js'
+import type { Kysely } from '../../../../types/transaction-types.js'
 import { DEFAULT_MIGRATION_TABLE } from '../../../../migration/migrator.js'
 import { sql } from '../../../../codeView/raw-builder/sql.js'
 import { DialectAdapterBase } from './dialect-adapter-base.js'

@@ -2,7 +2,7 @@ import { AliasNode } from '../../shared/operation-node/alias-node.js'
 import { ColumnNode } from '../../shared/operation-node/column-node.js'
 import { ReferenceNode } from '../../shared/operation-node/reference-node.js'
 import { TableNode } from '../../shared/operation-node/table-node.js'
-import { isReadonlyArray, isString } from '../../util/object-utils.js'
+import { isReadonlyArray, isString } from '../util/object-utils.js'
 import type {
   AnyColumn,
   AnyColumnWithTable,
@@ -15,7 +15,7 @@ import {
   isExpressionOrFactory,
 } from './expression-parser.js'
 import type { DynamicReferenceBuilder } from '../../codeView/dynamic/dynamic-reference-builder.js'
-import type { SelectType } from '../../util/column-type.js'
+import type { SelectType } from '../../types/util/column-type.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
 import type { Expression } from '../../codeView/expression/expression.js'

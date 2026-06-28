@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import { FromNode } from './from-node.js'
 import type { GroupByItemNode } from './group-by-item-node.js'
 import { GroupByNode } from './group-by-node.js'

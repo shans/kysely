@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { OperationNode } from './operation-node.js'
 import type { OverNode } from './over-node.js'
 import { WhereNode } from './where-node.js'

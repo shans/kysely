@@ -1,5 +1,5 @@
 import type { OperationNode } from './operation-node.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { ConstraintNode } from './constraint-node.js'
 
 export interface AddConstraintNode extends OperationNode {

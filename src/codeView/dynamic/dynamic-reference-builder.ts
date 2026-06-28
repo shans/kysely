@@ -4,7 +4,7 @@ import {
 } from '../../shared/operation-node/operation-node-source.js'
 import type { SimpleReferenceExpressionNode } from '../../shared/operation-node/simple-reference-expression-node.js'
 import { parseSimpleReferenceExpression } from '../../shared/parser/reference-parser.js'
-import { isObject, isString } from '../../util/object-utils.js'
+import { isObject, isString } from '../../shared/util/object-utils.js'
 
 export class DynamicReferenceBuilder<
   R extends string = never,

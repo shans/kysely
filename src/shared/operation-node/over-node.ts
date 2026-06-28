@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { OperationNode } from './operation-node.js'
 import type { OrderByItemNode } from './order-by-item-node.js'
 import { OrderByNode } from './order-by-node.js'

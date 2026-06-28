@@ -1,4 +1,4 @@
-import { isFunction, isObject } from '../util/object-utils.js'
+import { isFunction, isObject } from '../shared/util/object-utils.js'
 import type { Migration, MigrationProvider } from './migrator.js'
 
 /**

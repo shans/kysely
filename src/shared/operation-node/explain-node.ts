@@ -1,5 +1,5 @@
-import type { ExplainFormat } from '../../util/explainable.js'
-import { freeze } from '../../util/object-utils.js'
+import type { ExplainFormat } from '../../types/util/explainable.js'
+import { freeze } from '../util/object-utils.js'
 import type { OperationNode } from './operation-node.js'
 
 export interface ExplainNode extends OperationNode {

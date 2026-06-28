@@ -7,7 +7,7 @@ import type {
   Kysely,
   Transaction,
   TransactionBuilder,
-} from '../../transaction-types.js'
+} from '../../types/transaction-types.js'
 import type {
   ReleaseSavepoint,
   RollbackToSavepoint,
@@ -18,7 +18,7 @@ import type {
   AbortableOperationOptions,
   AbortableQueryOptions,
 } from '../../types/util/abort.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 import type { DrainOuterGeneric } from '../../types/util/type-utils.js'
 import type { ReadonlyCompiledQuery } from './readonly-compiled-query.js'
 import type { ReadonlyQueryResult } from './readonly-database-connection.js'

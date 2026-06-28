@@ -2,7 +2,7 @@ import type { OperationNode } from './operation-node.js'
 import type { ColumnNode } from './column-node.js'
 import type { TableNode } from './table-node.js'
 import { SelectAllNode } from './select-all-node.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 
 export interface ReferenceNode extends OperationNode {
   readonly kind: 'ReferenceNode'

@@ -4,9 +4,9 @@
 // InflightQueryAbortStrategy) are erased at compile time and live in
 // types/util/abort.ts. This file imports InflightQueryAbortStrategy for use
 // in getInflightQueryAbortHandler's parameter list.
-import { Deferred } from '../../util/deferred.js'
+import { Deferred } from './deferred.js'
 import type { DatabaseConnection } from '../../types/driver/database-connection.js'
-import { getMessage } from '../../util/object-utils.js'
+import { getMessage } from './object-utils.js'
 import type {
   AbortableOperationOptions,
   AbortableQueryOptions,

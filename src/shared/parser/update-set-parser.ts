@@ -4,8 +4,8 @@ import {
   expressionBuilder,
   type ExpressionBuilder,
 } from '../../codeView/expression/expression-builder.js'
-import type { UpdateType } from '../../util/column-type.js'
-import { isFunction } from '../../util/object-utils.js'
+import type { UpdateType } from '../../types/util/column-type.js'
+import { isFunction } from '../util/object-utils.js'
 import { parseValueExpression, type ValueExpression } from './value-parser.js'
 import {
   type ExtractRawTypeFromReferenceExpression,

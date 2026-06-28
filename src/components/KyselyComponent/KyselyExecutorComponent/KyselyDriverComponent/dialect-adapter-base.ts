@@ -1,4 +1,4 @@
-import type { Kysely } from '../../../../transaction-types.js'
+import type { Kysely } from '../../../../types/transaction-types.js'
 import type { DialectAdapter, MigrationLockOptions } from '../../../../types/dialect/dialect-adapter.js'
 
 /**

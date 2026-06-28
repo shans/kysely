@@ -10,7 +10,7 @@ import {
   parseOrderedColumnName,
 } from '../../shared/parser/reference-parser.js'
 import { parseTable } from '../../shared/parser/table-parser.js'
-import { freeze, isString } from '../../util/object-utils.js'
+import { freeze, isString } from '../../shared/util/object-utils.js'
 import type { Expression } from '../expression/expression.js'
 import {
   type ComparisonOperatorExpression,
@@ -19,8 +19,8 @@ import {
 import { QueryNode } from '../../shared/operation-node/query-node.js'
 import type { ExpressionBuilder } from '../expression/expression-builder.js'
 import type { ShallowRecord, SqlBool } from '../../types/util/type-utils.js'
-import { ImmediateValueTransformer } from '../../plugin/immediate-value/immediate-value-transformer.js'
-import type { Compilable } from '../../util/compilable.js'
+import { ImmediateValueTransformer } from '../../shared/plugin/immediate-value/immediate-value-transformer.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 export class CreateIndexBuilder<C = never>

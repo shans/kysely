@@ -18,7 +18,7 @@ import {
   type UpdateObjectExpression,
   parseUpdateObjectExpression,
 } from '../../shared/parser/update-set-parser.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import { OnDuplicateKeyNode } from '../../shared/operation-node/on-duplicate-key-node.js'
 import type {
   ReturningAllRow,
@@ -39,14 +39,14 @@ import {
   type OnConflictUpdateBuilder,
 } from './on-conflict-builder.js'
 import { OnConflictNode } from '../../shared/operation-node/on-conflict-node.js'
-import type { Selectable } from '../../util/column-type.js'
+import type { Selectable } from '../../types/util/column-type.js'
 import type { Expression } from '../expression/expression.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 import { parseTop } from '../../shared/parser/top-parser.js'
-import type { Compilable } from '../../util/compilable.js'
-import type { Executable } from '../../util/executable.js'
-import type { Streamable } from '../../util/streamable.js'
-import type { Explainable } from '../../util/explainable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
+import type { Executable } from '../../types/util/executable.js'
+import type { Streamable } from '../../types/util/streamable.js'
+import type { Explainable } from '../../types/util/explainable.js'
 import type {
   OutputCallback,
   OutputExpression,

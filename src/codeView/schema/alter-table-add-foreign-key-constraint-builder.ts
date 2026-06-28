@@ -2,12 +2,12 @@ import { AddConstraintNode } from '../../shared/operation-node/add-constraint-no
 import { AlterTableNode } from '../../shared/operation-node/alter-table-node.js'
 import type { OperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
 import type { OnModifyForeignAction } from '../../shared/operation-node/references-node.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import type {
   ForeignKeyConstraintBuilder,
   ForeignKeyConstraintBuilderInterface,
 } from './foreign-key-constraint-builder.js'
-import type { Compilable } from '../../util/compilable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 export class AlterTableAddForeignKeyConstraintBuilder

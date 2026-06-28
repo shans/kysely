@@ -46,10 +46,10 @@
       "types@<5.4": "./outdated-typescript.d.ts",
       "default": "./dist/index.js"
     },
-    "./helpers/mssql": "./dist/helpers/mssql.js",
-    "./helpers/mysql": "./dist/helpers/mysql.js",
-    "./helpers/postgres": "./dist/helpers/postgres.js",
-    "./helpers/sqlite": "./dist/helpers/sqlite.js",
+    "./helpers/mssql": "./dist/codeView/helpers/mssql.js",
+    "./helpers/mysql": "./dist/codeView/helpers/mysql.js",
+    "./helpers/postgres": "./dist/codeView/helpers/postgres.js",
+    "./helpers/sqlite": "./dist/codeView/helpers/sqlite.js",
     "./component": "./dist/component/index.js",
     "./migration": "./dist/migration/index.js",
     "./readonly": "./dist/readonly/index.js"

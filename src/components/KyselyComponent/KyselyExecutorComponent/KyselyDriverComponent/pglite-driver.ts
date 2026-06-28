@@ -8,10 +8,10 @@ import type { CompiledQuery } from '../../../../types/query-compiler/compiled-qu
 import type { QueryCompiler } from '../../../../types/query-compiler/query-compiler.js'
 import { waitOrAbort } from '../../../../shared/util/abort.js'
 import type { AbortableOperationOptions } from '../../../../types/util/abort.js'
-import { Deferred } from '../../../../util/deferred.js'
-import { freeze, isFunction } from '../../../../util/object-utils.js'
+import { Deferred } from '../../../../shared/util/deferred.js'
+import { freeze, isFunction } from '../../../../shared/util/object-utils.js'
 import { createQueryId } from '../../../../shared/util/query-id.js'
-import { extendStackTrace } from '../../../../util/stack-trace-utils.js'
+import { extendStackTrace } from '../../../../shared/util/stack-trace-utils.js'
 import type {
   PGlite,
   PGliteDialectConfig,

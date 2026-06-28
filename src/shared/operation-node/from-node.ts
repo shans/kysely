@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { OperationNode } from './operation-node.js'
 
 export interface FromNode extends OperationNode {

@@ -2,7 +2,7 @@
 // survive TypeScript compilation and belong in shared/. The type aliases and
 // interfaces (LogLevel, Logger, LogConfig, QueryLogEvent, ErrorLogEvent, LogEvent)
 // are erased at compile time and live in types/util/log.ts.
-import { freeze, isFunction } from '../../util/object-utils.js'
+import { freeze, isFunction } from './object-utils.js'
 import type {
   LogLevel,
   Logger,

@@ -1,7 +1,7 @@
 import { AddValueNode } from '../../shared/operation-node/add-value-node.js'
 import { ValueNode } from '../../shared/operation-node/value-node.js'
 import { AlterTypeNode } from '../../shared/operation-node/alter-type-node.js'
-import { QueryFinalizer } from '../../query-finalizer.js'
+import { QueryFinalizer } from '../QueryFinalizer.js'
 
 export class AlterTypeAddValueBuilder<
   const V extends string,

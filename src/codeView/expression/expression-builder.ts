@@ -49,7 +49,7 @@ import {
 } from '../../shared/parser/value-parser.js'
 import { CaseBuilder } from '../query-builder/case-builder.js'
 import { CaseNode } from '../../shared/operation-node/case-node.js'
-import { isReadonlyArray, isUndefined } from '../../util/object-utils.js'
+import { isReadonlyArray, isUndefined } from '../../shared/util/object-utils.js'
 import { JSONPathBuilder } from '../query-builder/json-path-builder.js'
 import type { OperandExpression } from '../../shared/parser/expression-parser.js'
 import { BinaryOperationNode } from '../../shared/operation-node/binary-operation-node.js'
@@ -65,9 +65,9 @@ import type {
   ValTuple5,
 } from '../../shared/parser/tuple-parser.js'
 import { TupleNode } from '../../shared/operation-node/tuple-node.js'
-import type { Selectable } from '../../util/column-type.js'
+import type { Selectable } from '../../types/util/column-type.js'
 import { JSONPathNode } from '../../shared/operation-node/json-path-node.js'
-import type { KyselyTypeError } from '../../util/type-error.js'
+import type { KyselyTypeError } from '../../types/util/type-error.js'
 import {
   type DataTypeExpression,
   parseDataTypeExpression,

@@ -5,7 +5,7 @@ import { DropColumnNode } from '../../shared/operation-node/drop-column-node.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'
 import type { OperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
 import { RenameColumnNode } from '../../shared/operation-node/rename-column-node.js'
-import { freeze, isString, noop } from '../../util/object-utils.js'
+import { freeze, isString, noop } from '../../shared/util/object-utils.js'
 import {
   ColumnDefinitionBuilder,
   type ColumnDefinitionBuilderCallback,
@@ -59,7 +59,7 @@ import {
   DropColumnBuilder,
   type DropColumnBuilderCallback,
 } from './drop-column-builder.js'
-import type { Compilable } from '../../util/compilable.js'
+import type { Compilable } from '../../shared/util/compilable.js'
 import type { AbortableQueryOptions } from '../../types/util/abort.js'
 
 /**

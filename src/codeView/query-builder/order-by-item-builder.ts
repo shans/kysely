@@ -3,7 +3,7 @@ import type { OperationNodeSource } from '../../shared/operation-node/operation-
 import { OrderByItemNode } from '../../shared/operation-node/order-by-item-node.js'
 import { RawNode } from '../../shared/operation-node/raw-node.js'
 import type { Collation } from '../../shared/parser/collate-parser.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 
 export class OrderByItemBuilder implements OperationNodeSource {
   readonly #props: OrderByItemBuilderProps

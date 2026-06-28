@@ -13,7 +13,7 @@ import {
   type PartitionByExpression,
   type PartitionByExpressionOrList,
 } from '../../shared/parser/partition-by-parser.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import type { OrderByInterface } from './order-by-interface.js'
 
 export class OverBuilder<DB, TB extends keyof DB>

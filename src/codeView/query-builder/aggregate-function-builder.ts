@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../../shared/util/object-utils.js'
 import { AggregateFunctionNode } from '../../shared/operation-node/aggregate-function-node.js'
 import { AliasNode } from '../../shared/operation-node/alias-node.js'
 import { IdentifierNode } from '../../shared/operation-node/identifier-node.js'

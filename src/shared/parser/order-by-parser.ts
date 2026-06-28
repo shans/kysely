@@ -7,7 +7,7 @@ import type { OperationNode } from '../../shared/operation-node/operation-node.j
 import { OrderByItemNode } from '../../shared/operation-node/order-by-item-node.js'
 import { RawNode } from '../../shared/operation-node/raw-node.js'
 import { OrderByItemBuilder } from '../../codeView/query-builder/order-by-item-builder.js'
-import { logOnce } from '../../util/log-once.js'
+import { logOnce } from '../util/log-once.js'
 import {
   type ExpressionOrFactory,
   isExpressionOrFactory,

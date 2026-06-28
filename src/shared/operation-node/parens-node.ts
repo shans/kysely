@@ -1,5 +1,5 @@
 import type { OperationNode } from './operation-node.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 
 export interface ParensNode extends OperationNode {
   readonly kind: 'ParensNode'

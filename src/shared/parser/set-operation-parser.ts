@@ -7,7 +7,7 @@ import {
   type SetOperator,
   SetOperationNode,
 } from '../../shared/operation-node/set-operation-node.js'
-import { isFunction, isReadonlyArray } from '../../util/object-utils.js'
+import { isFunction, isReadonlyArray } from '../util/object-utils.js'
 import { parseExpression } from './expression-parser.js'
 
 export type SetOperandExpression<DB, O> =

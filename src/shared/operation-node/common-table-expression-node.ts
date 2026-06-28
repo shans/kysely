@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { CommonTableExpressionNameNode } from './common-table-expression-name-node.js'
 import type { OperationNode } from './operation-node.js'
 

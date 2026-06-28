@@ -1,4 +1,4 @@
-import { isFunction, isReadonlyArray, isString } from '../../util/object-utils.js'
+import { isFunction, isReadonlyArray, isString } from '../util/object-utils.js'
 import type { AliasedSelectQueryBuilder } from '../../codeView/query-builder/select-query-builder.js'
 import { SelectionNode } from '../../shared/operation-node/selection-node.js'
 import type {
@@ -18,7 +18,7 @@ import {
   type AliasedExpressionOrFactory,
   parseAliasedExpression,
 } from './expression-parser.js'
-import type { SelectType } from '../../util/column-type.js'
+import type { SelectType } from '../../types/util/column-type.js'
 import { parseTable } from './table-parser.js'
 import type { AliasedExpression } from '../../codeView/expression/expression.js'
 import {

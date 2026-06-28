@@ -1,4 +1,4 @@
-import type { Kysely } from '../../../../transaction-types.js'
+import type { Kysely } from '../../../../types/transaction-types.js'
 import type {
   DatabaseIntrospector,
   DatabaseMetadataOptions,
@@ -9,7 +9,7 @@ import {
   DEFAULT_MIGRATION_LOCK_TABLE,
   DEFAULT_MIGRATION_TABLE,
 } from '../../../../migration/migrator.js'
-import { freeze } from '../../../../util/object-utils.js'
+import { freeze } from '../../../../shared/util/object-utils.js'
 
 export class MssqlIntrospector implements DatabaseIntrospector {
   readonly #db: Kysely<MssqlSysTables>

@@ -3,7 +3,7 @@ import {
   isRootOperationNode,
   type RootOperationNode,
 } from '../../shared/operation-node/root-operation-node.js'
-import { freeze, isObject, isString } from '../../util/object-utils.js'
+import { freeze, isObject, isString } from '../../shared/util/object-utils.js'
 import type { QueryId } from '../util/query-id.js'
 import { createQueryId } from '../../shared/util/query-id.js'
 

@@ -7,7 +7,7 @@ import type {
   SelectCallback,
   SelectExpression,
 } from '../../shared/parser/select-parser.js'
-import type { Selectable } from '../../util/column-type.js'
+import type { Selectable } from '../../types/util/column-type.js'
 
 export interface ReturningInterface<DB, TB extends keyof DB, O> {
   /**

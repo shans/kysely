@@ -14,11 +14,11 @@ import type {
 } from '../../types/driver/database-connection.js'
 import type { CompiledQuery } from '../../types/query-compiler/compiled-query.js'
 import type { KyselyPlugin } from '../../types/plugin/kysely-plugin.js'
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { QueryId } from '../../types/util/query-id.js'
 import type { DialectAdapter } from '../../types/dialect/dialect-adapter.js'
-import type { QueryExecutor } from '../../query-executor/query-executor.js'
-import { provideControlledConnection } from '../../util/provide-controlled-connection.js'
+import type { QueryExecutor } from '../../types/query-executor/query-executor.js'
+import { provideControlledConnection } from '../util/provide-controlled-connection.js'
 import type {
   AbortableOperationOptions,
   AbortableQueryOptions,
@@ -30,7 +30,7 @@ import {
   printBackgroundFail,
   throwReasonWithTiming,
 } from '../util/abort.js'
-import { Deferred } from '../../util/deferred.js'
+import { Deferred } from '../util/deferred.js'
 import type { RootOperationNode } from '../../shared/operation-node/root-operation-node.js'
 
 const NO_PLUGINS: ReadonlyArray<KyselyPlugin> = freeze([])

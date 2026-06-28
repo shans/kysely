@@ -1,4 +1,4 @@
-import { freeze } from '../../util/object-utils.js'
+import { freeze } from '../util/object-utils.js'
 import type { ColumnDefinitionNode } from './column-definition-node.js'
 import type { OperationNode } from './operation-node.js'
 

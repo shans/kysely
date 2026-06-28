@@ -4,14 +4,14 @@ import type { InsertQueryBuilder } from '../../codeView/query-builder/insert-que
 import { CommonTableExpressionNameNode } from '../../shared/operation-node/common-table-expression-name-node.js'
 import type { QueryCreator } from '../../codeView/QueryCreator.js'
 import { createQueryCreator } from './parse-utils.js'
-import { isFunction } from '../../util/object-utils.js'
+import { isFunction } from '../util/object-utils.js'
 import {
   CTEBuilder,
   type CTEBuilderCallback,
 } from '../../codeView/query-builder/cte-builder.js'
 import { CommonTableExpressionNode } from '../../shared/operation-node/common-table-expression-node.js'
 import { isOperationNodeSource } from '../../shared/operation-node/operation-node-source.js'
-import type { Compilable } from '../../util/compilable.js'
+import type { Compilable } from '../util/compilable.js'
 import type { Expression } from '../../codeView/expression/expression.js'
 import type { ShallowRecord } from '../../types/util/type-utils.js'
 import type { OperationNode } from '../../shared/operation-node/operation-node.js'
