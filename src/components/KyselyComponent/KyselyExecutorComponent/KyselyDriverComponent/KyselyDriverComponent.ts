@@ -3,7 +3,6 @@ import type { KyselyDriverShape } from './KyselyDriverShape.js'
 
 export type { KyselyDriverShape }
 export type { TxAction, ConnAction, CompiledStreamPayload } from './KyselyDriverShape.js'
-export { KyselyBuiltinDriverSlot } from './KyselyBuiltinDriverSlot.js'
 export { KyselyCustomDriverSlot } from './KyselyCustomDriverSlot.js'
 
 const driverInputAccessors = {

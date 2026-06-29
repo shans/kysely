@@ -1,15 +1,14 @@
-import type { Driver } from '../../types/driver/driver.js'
-import type { Kysely } from '../../types/transaction-types.js'
-import type { QueryCompiler } from '../../types/query-compiler/query-compiler.js'
-import type { DatabaseIntrospector } from '../../types/dialect/database-introspector.js'
-import type { DialectAdapter } from '../../types/dialect/dialect-adapter.js'
-import type { Dialect } from '../../types/dialect/dialect.js'
-import { MssqlAdapter } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-adapter.js'
-import type { MssqlDialectConfig } from '../../types/dialect/mssql-dialect-config.js'
-import type { KyselyDialectConfig } from '../../types/dialect/dialect-config.js'
-import { MssqlDriver } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-driver.js'
-import { MssqlIntrospector } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-introspector.js'
-import { MssqlQueryCompiler } from '../../components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent/mssql-query-compiler.js'
+import type { Driver } from '../../../types/driver/driver.js'
+import type { Kysely } from '../../../types/transaction-types.js'
+import type { QueryCompiler } from '../../../types/query-compiler/query-compiler.js'
+import type { DatabaseIntrospector } from '../../../types/dialect/database-introspector.js'
+import type { DialectAdapter } from '../../../types/dialect/dialect-adapter.js'
+import type { Dialect } from '../../../types/dialect/dialect.js'
+import { MssqlAdapter } from '../../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-adapter.js'
+import type { MssqlDialectConfig } from '../../../types/dialect/mssql-dialect-config.js'
+import { MssqlDriver } from '../../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-driver.js'
+import { MssqlIntrospector } from '../../../components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-introspector.js'
+import { MssqlQueryCompiler } from '../../../components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent/mssql-query-compiler.js'
 
 /**
  * MS SQL Server dialect that uses the [tedious](https://tediousjs.github.io/tedious)
@@ -55,11 +54,6 @@ export class MssqlDialect implements Dialect {
 
   constructor(config: MssqlDialectConfig) {
     this.#config = config
-  }
-
-  get dialectConfig(): KyselyDialectConfig | undefined {
-    if (Object.getPrototypeOf(this) !== MssqlDialect.prototype) return undefined
-    return { dialectName: 'mssql', ...this.#config }
   }
 
   createDriver(): Driver {

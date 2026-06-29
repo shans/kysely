@@ -2,7 +2,6 @@ import { ComponentHole } from '../../../channels/component-hole.js'
 import type { KyselyCompilerShape } from './KyselyCompilerComponent/KyselyCompilerShape.js'
 
 export type { KyselyCompilerShape }
-export { KyselyBuiltinCompilerSlot } from './KyselyCompilerComponent/KyselyBuiltinCompilerSlot.js'
 export { KyselyCustomCompilerSlot } from './KyselyCompilerComponent/KyselyCustomCompilerSlot.js'
 
 const compilerInputAccessors = {

@@ -9,20 +9,14 @@
 // (transformQuery before sending, transformResult after receiving) per tactic 07.
 
 import { KyselyComponent, type TxAction, type StreamAction, type StreamStartPayload } from './components/KyselyComponent/KyselyComponent.js'
-import { KyselyBuiltinCompilerSlot, KyselyCustomCompilerSlot } from './components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent.js'
-import { KyselyBuiltinDriverSlot, KyselyCustomDriverSlot } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/KyselyDriverComponent.js'
-import { SqliteAdapter } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/sqlite-adapter.js'
-import { PostgresAdapter } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/postgres-adapter.js'
-import { MysqlAdapter } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mysql-adapter.js'
-import { MssqlAdapter } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/mssql-adapter.js'
-import { PGliteAdapter } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/pglite-adapter.js'
+import { KyselyCustomCompilerSlot } from './components/KyselyComponent/KyselyExecutorComponent/KyselyCompilerComponent.js'
+import { KyselyCustomDriverSlot } from './components/KyselyComponent/KyselyExecutorComponent/KyselyDriverComponent/KyselyDriverComponent.js'
 import type { RootOperationNodeRaw } from './codeView/RootOperationNode.js'
 import type { CompiledQuery } from './types/query-compiler/compiled-query.js'
 import type { QueryResult } from './types/driver/database-connection.js'
 import type { DialectAdapter } from './types/dialect/dialect-adapter.js'
 import type { KyselyPlugin } from './types/plugin/kysely-plugin.js'
 import type { Dialect } from './types/dialect/dialect.js'
-import type { KyselyDialectConfig } from './types/dialect/dialect-config.js'
 import type { LogConfig } from './types/util/log.js'
 import { QueryNode } from './shared/operation-node/query-node.js'
 import { asAsyncFunction, asFunction } from './channels/channel.js'
@@ -43,16 +37,6 @@ interface ApiConfig {
   readonly dialect: Dialect
   readonly log?: LogConfig
   readonly plugins?: readonly KyselyPlugin[]
-}
-
-function createAdapter(dialectConfig: KyselyDialectConfig): DialectAdapter {
-  switch (dialectConfig.dialectName) {
-    case 'sqlite':   return new SqliteAdapter()
-    case 'postgres': return new PostgresAdapter()
-    case 'mysql':    return new MysqlAdapter()
-    case 'mssql':    return new MssqlAdapter()
-    case 'pglite':   return new PGliteAdapter()
-  }
 }
 
 // Shim QueryExecutor returned by db.getExecutor() — used by sql`...`.execute(db)
@@ -582,16 +566,10 @@ function createApiObject(
 }
 
 function createKyselyInstance(config: ApiConfig): any {
-  const dialectConfig = config.dialect.dialectConfig
   const log = config.log
 
-  const DriverClass = dialectConfig
-    ? class extends KyselyBuiltinDriverSlot { constructor() { super(dialectConfig!, log) } }
-    : class extends KyselyCustomDriverSlot  { constructor() { super(config.dialect, log) } }
-
-  const CompilerClass = dialectConfig
-    ? class extends KyselyBuiltinCompilerSlot { constructor() { super(dialectConfig!.dialectName) } }
-    : class extends KyselyCustomCompilerSlot  { constructor() { super(config.dialect.createQueryCompiler()) } }
+  const DriverClass   = class extends KyselyCustomDriverSlot   { constructor() { super(config.dialect, log) } }
+  const CompilerClass = class extends KyselyCustomCompilerSlot { constructor() { super(config.dialect.createQueryCompiler()) } }
 
   const component = new KyselyComponent({ DriverClass, CompilerClass, plugins: config.plugins })
   const builderDb = new KyselyBuilder<any>()
@@ -637,7 +615,7 @@ function createKyselyInstance(config: ApiConfig): any {
     connEnd,
   }
 
-  const adapter = dialectConfig ? createAdapter(dialectConfig) : config.dialect.createAdapter()
+  const adapter = config.dialect.createAdapter()
   executorShim = new ComponentQueryExecutor(ctx, adapter, config.plugins ?? [])
 
   return createApiObject(builderDb, ctx)

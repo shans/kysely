@@ -3,7 +3,6 @@ import type { Kysely } from '../transaction-types.js'
 import type { QueryCompiler } from '../query-compiler/query-compiler.js'
 import type { DatabaseIntrospector } from './database-introspector.js'
 import type { DialectAdapter } from './dialect-adapter.js'
-import type { KyselyDialectConfig } from './dialect-config.js'
 
 /**
  * A Dialect is the glue between Kysely and the underlying database engine.
@@ -13,15 +12,6 @@ import type { KyselyDialectConfig } from './dialect-config.js'
  * in the {@link KyselyConfig.dialect} property.
  */
 export interface Dialect {
-  /**
-   * Returns the dialect's configuration as a plain tagged-union value.
-   * Built-in dialects provide this so the component system can instantiate
-   * implementations internally. Custom dialects may omit it — the component
-   * system falls back to calling the factory methods (createDriver etc.) in
-   * that case.
-   */
-  readonly dialectConfig?: KyselyDialectConfig
-
   /**
    * Creates a driver for the dialect.
    */
